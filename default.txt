@@ -1,7 +1,7 @@
 bpm 120 || beats 8 || swing 50 ||;
-bpm 150 || beats 8 || swing 50 ||;
-bpm 90 || beats 8 || swing 50 ||;
--empty-;
+bpm 159 || beats 8 || swing 50 ||;
+bpm 80 || beats 8 || swing 50 ||;
+bpm 144 || beats 8 || swing 50 ||;
 -empty-;
 -empty-;
 -empty-;

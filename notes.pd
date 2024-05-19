@@ -1,0 +1,13 @@
+#N canvas 827 239 527 327 12;
+#X text 189 140 synth control;
+#X text 189 173 MIDI CC;
+#X text 189 209 PGM change \; - A stop message followed by a PGM \, then start \, could act as an interrupt \, allowing for changing patterns mid sequence like you can with MCL/MD. However this could introduce a lag between? \; - This could also take the form of a 'translation layer' for MCL to send PGM change messages that interrupt the MnM \; - It could also take the form of a sync function that pulls MnM back into sync during any given moment;
+#X text 189 354 Parameter adjustment via CC \; - All parameters are available \; - NRPN - Finer control?;
+#X text 189 414 Rapid tempo fluctuations \; - Providing MnM sync is possible \, this may take the form of fluctuating only the MnM \; - To do MD this would need to happen through MCL somehow \; - Keeping MCL from adjusting the MnM tempo to match its clock would require turning off external transport in MnM global settings via sysex beforehand;
+#X text 760 209 On Pi \, a large amount of storage is possible;
+#X text 760 173 Sampler device;
+#X text 189 555 sysex;
+#X text 189 587 Getting & setting information at any given moment about the following relevant items is possible: \; - Kit names \; - Getting current kid ID \; - Getting current pattern ID \; - Pattern loading \; - Kit loading \; - Saving kits \; - Assigning machines \; - Bus routing \; - Global settings \; - Tempo \; - Getting / setting Poly mode status;
+#X text 760 309 - PD could add notes randomly to any given track \, or take over sequencing entirely \; - Param locks from PD may be possible if the MIDI spec is fast enough \; - Need a way to make sequencing more erratic and chaotic like the other well ventured electronic music programmers;
+#X text 758 275 Sequencing;
+#X text 760 140 more power to PD;
