@@ -1,5 +1,5 @@
 #N canvas 827 239 527 327 12;
-#X text 189 140 synth control;
+#X text 760 103 synth control;
 #X text 189 173 MIDI CC;
 #X text 189 209 PGM change \; - A stop message followed by a PGM \, then start \, could act as an interrupt \, allowing for changing patterns mid sequence like you can with MCL/MD. However this could introduce a lag between? \; - This could also take the form of a 'translation layer' for MCL to send PGM change messages that interrupt the MnM \; - It could also take the form of a sync function that pulls MnM back into sync during any given moment;
 #X text 189 354 Parameter adjustment via CC \; - All parameters are available \; - NRPN - Finer control?;
