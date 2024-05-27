@@ -9,4 +9,4 @@ echo "Restarting emsys.service..."
 sudo systemctl restart emsys.service
 
 echo "Current status of emsys.service:"
-sudo systemctl status emsys.service
+sudo journalctl -u emsys.service -f
