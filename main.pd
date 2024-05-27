@@ -1,9 +1,9 @@
 #N canvas 827 239 527 327 12;
-#X obj 629 100 print;
-#X obj 629 28 loadbang;
-#X msg 629 62 emsys;
-#X obj 513 62 midiin;
-#X obj 513 105 print;
+#X obj 250 125 print;
+#X obj 250 53 loadbang;
+#X msg 250 87 emsys;
+#X obj 134 87 midiin;
+#X obj 134 130 print MIDI;
 #X connect 1 0 2 0;
 #X connect 2 0 0 0;
 #X connect 3 0 4 0;
