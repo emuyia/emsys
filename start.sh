@@ -6,7 +6,10 @@
 # Wait for Pd to start
 sleep 5
 
-# Connect Elektron TM-1 to Pure Data
+# Connect MiniLab 3 to Pure Data
+aconnect 32:0 128:0
+
+# Connect TM-1 to Pure Data
 aconnect 28:0 128:0
 
 # Wait for Pd to run indefinitely
