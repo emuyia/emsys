@@ -1,1 +1,6 @@
 #N canvas 827 239 527 327 12;
+#X obj 119 139 print;
+#X obj 119 67 loadbang;
+#X msg 119 101 Hello world;
+#X connect 1 0 2 0;
+#X connect 2 0 0 0;
