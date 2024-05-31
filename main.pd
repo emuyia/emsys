@@ -27,6 +27,13 @@
 #X obj 710 57 notein;
 #X msg 710 148 note: \$1 \, vel: \$2 \, ch: \$3;
 #X obj 710 109 pack f f f;
+#X obj 614 495 midi.clock 120;
+#X msg 614 541 248;
+#X obj 546 672 midiout;
+#X obj 546 521 tgl 25 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1 0 1;
+#X obj 546 586 gate 0;
+#X floatatom 546 630 5 0 0 0 - - - 12;
+#X msg 667 597 250;
 #X connect 1 0 23 0;
 #X connect 3 0 2 0;
 #X connect 4 0 2 0;
@@ -56,3 +63,9 @@
 #X connect 25 2 27 2;
 #X connect 26 0 24 0;
 #X connect 27 0 26 0;
+#X connect 28 0 29 0;
+#X connect 29 0 32 1;
+#X connect 31 0 32 0;
+#X connect 32 0 33 0;
+#X connect 33 0 30 0;
+#X connect 34 0 30 0;
