@@ -1,2 +1,2 @@
 # emsys
- A live modular audio patch sequencer.
+ A bespoke live music sequencing companion to MCL built in Pd for Raspberry Pi.
