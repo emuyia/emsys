@@ -1,0 +1,14 @@
+#N canvas 281 290 749 422 12;
+#X obj 193 98 saw~ 250;
+#X obj 186 192 dac~, f 7;
+#X obj 378 140 midiin;
+#X obj 381 223 print MIDI;
+#X obj 407 179 bng 20 250 50 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000;
+#X obj 274 94 tgl 20 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000 0 1;
+#X obj 229 135 *~ 1, f 6;
+#X connect 0 0 6 0;
+#X connect 2 0 3 0;
+#X connect 2 0 4 0;
+#X connect 5 0 6 1;
+#X connect 6 0 1 0;
+#X connect 6 0 1 1;
