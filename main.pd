@@ -1,4 +1,4 @@
-#N canvas 1440 900 1920 978 12;
+#N canvas 0 32 1680 950 12;
 #X obj 95 371 midiout;
 #X msg 71 300 250;
 #X obj 369 680 knob 75 30 300 0 120 empty empty #191919 #696969 #e1e1e1 1 0 0 0 1 270 0 0 30;
