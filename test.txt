@@ -1,0 +1,4 @@
+md 32 mnm 36 rep 4 len 32 tin 0;
+md 33 mnm 36 rep 8 len 32 tin 0;
+md 34 mnm 36 rep 8 len 32 tin 1;
+.;
