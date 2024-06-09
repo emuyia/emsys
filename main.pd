@@ -237,6 +237,8 @@
 #X text 701 1042 bug: (untested) disabled for now as i dont have mnm with me for further tests, f 12;
 #X text 212 630 note: dont write or store within the patch because this seems to create garbled characters that mess up the [list] and [route] parsing. just read and edit files in a separate editor, f 31;
 #X text 1271 122 note: only progress set when end of 'repeats' is cleared (onebang) \, then trigger change on load beat, f 30;
+#X obj 64 259 dac~, f 9;
+#X obj 64 227 adc~ 3 4;
 #X connect 1 0 26 0;
 #X connect 2 0 26 0;
 #X connect 3 0 1 0;
@@ -443,3 +445,5 @@
 #X connect 181 0 17 0;
 #X connect 185 0 146 0;
 #X connect 188 0 141 0;
+#X connect 193 0 192 0;
+#X connect 193 1 192 1;
