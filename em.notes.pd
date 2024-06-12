@@ -9,3 +9,4 @@
 #X text 33 13 PROPOSED FEATURES: \; - Song mode \; - Transport interrupts \; - Tempo desync (lp) \; - Tempo manipulation (lp) \; - "Perf drift" \; - Complex generative melodies & chords for MnM \; - Conditional trigs for MnM \; - Pd sampler;
 #X text 363 266 Tempo manipulation concepts: \; Tempo changes could be sequenced from Pd and stored along with segment information to have deliberate 'slow downs' or 'speed ups' mid-sequence. May be necessary to follow with transport interrupts;
 #X text 803 302 Pd sampler features: \; - Load from Pi's disk \; - Inspired by UW machines but with expanded capability \; - Melodic mode as well as chopped up mode - many parameters & axes for control \; - Sequence and control stored as segment data;
+#X coords 0 0 1 1 3069 1391 2 26 8;
