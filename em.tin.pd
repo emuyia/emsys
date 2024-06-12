@@ -24,11 +24,11 @@
 #X obj 605 468 bng 25 250 50 0 empty empty downbeat 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
 #X obj 136 498 avg;
 #X msg 209 460 clear;
-#X obj 358 191 loadbang;
+#X obj 317 124 loadbang;
 #X obj 354 269 tgl 31 0 empty empty Calibrate -16 -9 0 15 #7e0a0e #fffded #e1e1e1 0 1;
 #X msg 392 216 0;
 #X obj 252 373 sel 1;
-#X msg 360 216 1;
+#X msg 319 149 1;
 #X obj 252 303 metro 500;
 #X obj 252 403 delay 5000;
 #X obj 136 568 / 2;
@@ -70,6 +70,7 @@
 #X obj 184 209 r avg_beat_time;
 #X obj 798 329 s rolling_beat_time;
 #X obj 209 184 r rolling_beat_time;
+#X obj 335 213 spigot;
 #X connect 0 0 23 0;
 #X connect 1 0 32 0;
 #X connect 2 0 0 1;
@@ -103,7 +104,7 @@
 #X connect 27 0 26 0;
 #X connect 28 0 24 0;
 #X connect 28 0 31 0;
-#X connect 29 0 26 0;
+#X connect 29 0 71 1;
 #X connect 30 0 48 0;
 #X connect 31 0 27 0;
 #X connect 32 0 33 1;
@@ -122,6 +123,7 @@
 #X connect 44 0 12 0;
 #X connect 44 0 42 0;
 #X connect 45 0 44 0;
+#X connect 45 0 71 0;
 #X connect 46 0 58 0;
 #X connect 47 0 34 1;
 #X connect 49 0 3 0;
@@ -142,4 +144,5 @@
 #X connect 66 0 14 0;
 #X connect 68 0 9 0;
 #X connect 70 0 13 0;
-#X coords 0 0 1 1 167 151 2 339 249;
+#X connect 71 0 26 0;
+#X coords 0 0 1 1 166 150 2 339 249;
