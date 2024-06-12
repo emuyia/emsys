@@ -1,8 +1,9 @@
 #N canvas 0 32 1680 950 12;
 #X text 1321 2326 ., f 3;
 #X obj 551 240 em.transport;
-#X obj 314 387 em.tin;
-#X obj 197 226 em.debug;
+#X obj 314 396 em.tin;
+#X obj 195 240 em.debug;
 #X obj 314 240 em.set;
-#X text 840 322 bug: rep 2 only repeats once \, but a value higher than 2 repeats as expected. or what might be going on is that it passes the rep value to the following segment \, for some reason, f 27;
-#X coords 0 0 1 1 437 327 2 301 228;
+#X text 829 292 todo: make the megaCMD MIDI device be picked up automatically, f 31;
+#X text 819 363 todo: have the 'continue' transport function play nice with the beat counter;
+#X coords 0 0 1 1 387 384 2 301 228;

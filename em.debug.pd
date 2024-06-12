@@ -17,12 +17,12 @@
 #X obj 393 281 tgl 20 0 empty empty debug\ rt\ MIDI 0 -10 0 12 #000000 #dfdfdf #ba51a8 0 1;
 #X obj 256 60 midirealtimein;
 #X obj 258 102 sel 248;
-#X obj 423 68 sysexin;
-#X obj 416 183 print from-sysex;
+#X obj 422 39 sysexin;
+#X obj 415 154 print from-sysex;
 #X obj 674 21 pgmin;
 #X obj 671 88 print from-midi;
 #X obj 262 188 print from-midi_rt;
-#X obj 422 139 spigot;
+#X obj 421 110 spigot;
 #X obj 393 318 tgl 20 0 empty empty debug\ sysex 0 -10 0 12 #000000 #dfdfdf #ba51a8 0 1;
 #X obj 385 534 dac~, f 17;
 #X obj 415 436 adc~ 3 4;
@@ -57,4 +57,4 @@
 #X connect 28 0 25 1;
 #X connect 29 0 25 0;
 #X connect 30 0 27 0;
-#X coords 0 0 1 1 87 170 2 388 217;
+#X coords 0 0 1 1 88 186 1 388 200;
