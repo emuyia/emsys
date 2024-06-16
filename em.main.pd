@@ -1,4 +1,4 @@
-#N canvas 0 32 1680 950 12;
+#N canvas 1761 1011 1440 836 12;
 #X text 1321 2326 ., f 3;
 #X obj 530 233 em.transport;
 #X obj 304 385 em.tin;
@@ -6,4 +6,5 @@
 #X obj 304 230 em.set;
 #X text 829 362 todo: have the 'continue' transport function play nice with the beat counter, f 36;
 #X text 829 292 concern: make sure megaCMD is picked up automatically on rpi when patch loads, f 31;
+#X text 878 516 finding: pgmout and midiout etc. can specify channels of specific devices by going above 16 this is why 48 works on RPi but it's 16 on plugdata (although there are other reasons why it feels like that shouldn't be the case \, but whatever);
 #X coords 0 0 1 1 454 365 2 301 228;
