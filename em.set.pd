@@ -85,7 +85,7 @@
 #X obj 165 1443 s seg_repeat_num;
 #X obj 409 164 r seg_repeat_num;
 #X floatatom 255 294 10 0 0 2 rep\ no. - - 12;
-#X obj 322 248 bng 25 250 50 0 empty empty open -1 -8 0 12 #e3dfd9 #5a5a5a #000000;
+#X obj 322 248 bng 25 250 50 0 empty empty open -1 -8 0 12 #e3dfd9 #5a5a5a #6b6b6b;
 #X msg 154 142 set \$1;
 #N canvas 733 172 450 300 open_mset 0;
 #X obj 55 101 pdcontrol;
@@ -179,6 +179,7 @@
 #X obj 345 547 shell;
 #X obj 292 248 bng 25 250 50 0 empty empty edit 0 -7 0 14 #e3dfd9 #5a5a5a #5a5a5a;
 #X obj 345 515 prepend xdg-open;
+#X obj 409 281 r reset;
 #X connect 1 0 0 0;
 #X connect 1 0 117 0;
 #X connect 2 0 33 0;
@@ -314,4 +315,5 @@
 #X connect 127 0 130 0;
 #X connect 129 0 127 0;
 #X connect 130 0 128 0;
+#X connect 131 0 93 0;
 #X coords 0 0 1 1 223 149 1 134 215;

@@ -1,5 +1,22 @@
 md A01 mnm A01 rep 2 len 12 tin 0;
 md A02 mnm A02 rep 1 len 12 tin 1;
-md A03 mnm A03 rep 1 len 12 tin 0;
-md A04 mnm A04 rep 2 len 12 tin 0;
-md A05 mnm A05 rep 4 len 12 tin 0;
+md A02 mnm A03 rep 1 len 12 tin 0;
+md A03 mnm A04 rep 2 len 12 tin 0;
+md A04 mnm A04 rep 1 len 12 tin 0;
+md A05 mnm A05 rep 2 len 12 tin 0;
+md A05 mnm A06 rep 2 len 12 tin 0;
+md A07 mnm A07 rep 2 len 12 tin 0;
+md A08 mnm A08 rep 2 len 12 tin 0;
+md A09 mnm A09 rep 2 len 16 tin 0;
+md A10 mnm A10 rep 2 len 16 tin 0;
+md A11 mnm A11 rep 2 len 16 tin 0;
+md A12 mnm A12 rep 2 len 16 tin 0;
+md A13 mnm A13 rep 2 len 16 tin 0;
+md A14 mnm A14 rep 2 len 16 tin 1;
+md B01 mnm B01 rep 2 len 16 tin 0;
+md B02 mnm B02 rep 2 len 16 tin 0;
+md B03 mnm B03 rep 2 len 16 tin 0;
+md B04 mnm B04 rep 2 len 16 tin 0;
+md B05 mnm B05 rep 2 len 16 tin 0;
+md B06 mnm B06 rep 2 len 16 tin 0;
+
