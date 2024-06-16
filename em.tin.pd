@@ -1,18 +1,18 @@
 #N canvas 733 172 450 300 8;
 #X obj 112 461 realtime;
-#X floatatom 385 261 9 0 0 2 Latency - - 10;
+#X floatatom 385 255 9 0 0 2 Latency - - 10;
 #X obj 125 411 onebang;
 #X obj 108 375 bng 25 250 50 0 empty empty empty 17 7 0 10 #191919 #ffffff #ffffff;
 #X obj 760 298 realtime;
 #X obj 761 267 t, f 9;
 #X obj 556 538 del;
-#X obj 395 302 bng 33 75 50 0 empty empty Beat\ 1? -8 -10 0 15 #ff8bd9 #000000 #e1e1e1;
+#X obj 395 296 bng 33 75 50 0 empty empty Beat\ 1? -1 -10 0 10 #ff8bd9 #000000 #e110d1;
 #X obj 760 372 avg;
-#X floatatom 348 388 16 0 0 2 Avg\ beat\ time - - 12;
+#X floatatom 348 382 16 0 0 2 Avg\ beat\ time - - 12;
 #X msg 694 372 clear;
 #X msg 556 615 250;
 #X obj 485 769 midiout;
-#X floatatom 348 354 16 0 0 2 Rolling\ beat\ time - - 12;
+#X floatatom 348 348 16 0 0 2 Rolling\ beat\ time - - 12;
 #X obj 682 213 sel 0;
 #X obj 656 247 gate 1;
 #X obj 651 213 tgl 25 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1 0 1;
@@ -24,7 +24,7 @@
 #X obj 605 468 bng 25 250 50 0 empty empty downbeat 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
 #X obj 112 498 avg;
 #X msg 185 460 clear;
-#X obj 354 257 tgl 22 0 empty empty Calibrate -11 -9 0 11 #7e0a0e #fffded #e1e1e1 0 1;
+#X obj 354 251 tgl 22 0 empty empty Calibrate -6 -7 0 8 #7e0a0e #fffded #b20020 0 1;
 #X msg 389 183 0;
 #X obj 228 373 sel 1;
 #X obj 228 303 metro 500;
@@ -35,7 +35,7 @@
 #X msg 614 616 252;
 #X obj 531 662 f;
 #X obj 485 697 gate 0, f 10;
-#X obj 350 302 tgl 31 0 empty empty Interrupt -12 -9 0 14 #c69825 #e1e1e1 #e1e1e1 0 1;
+#X obj 350 296 tgl 31 0 empty empty Interrupt -5 -9 0 11 #c69825 #e1e1e1 #e19d00 0 1;
 #X msg 443 48 1;
 #X msg 425 166 0;
 #X obj 409 99 gate 0;
@@ -153,4 +153,4 @@
 #X connect 73 0 71 0;
 #X connect 75 0 7 0;
 #X connect 76 0 75 0;
-#X coords 0 0 1 1 98 191 1 339 223;
+#X coords 0 0 1 1 105 186 1 339 223;
