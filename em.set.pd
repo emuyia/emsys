@@ -41,7 +41,7 @@
 #X msg 540 556 stop;
 #X msg 398 1443 stop;
 #X obj 182 582 text define set;
-#X symbolatom 136 250 34 0 0 2 Set\ Name: - - 16;
+#X symbolatom 136 250 29 0 0 2 Set\ Name: - - 16;
 #X obj 285 582 print;
 #X obj 136 76 bng 25 250 50 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
 #X obj 182 406 list fromsymbol;
@@ -85,7 +85,7 @@
 #X obj 165 1443 s seg_repeat_num;
 #X obj 409 164 r seg_repeat_num;
 #X floatatom 255 294 10 0 0 2 rep\ no. - - 12;
-#X obj 320 241 bng 32 250 50 0 empty empty open -1 14 0 15 #e3dfd9 #5a5a5a #000000;
+#X obj 322 248 bng 25 250 50 0 empty empty open -1 -8 0 12 #e3dfd9 #5a5a5a #000000;
 #X msg 154 142 set \$1;
 #N canvas 733 172 450 300 open_mset 0;
 #X obj 55 101 pdcontrol;
@@ -175,6 +175,10 @@
 #X obj 296 977 bank2pgm;
 #X obj 716 1182 del 50;
 #X text 145 986 done: mset format for pgm in elektron bank format, f 21;
+#X obj 345 487 symbol;
+#X obj 345 547 shell;
+#X obj 292 248 bng 25 250 50 0 empty empty edit 0 -7 0 14 #e3dfd9 #5a5a5a #5a5a5a;
+#X obj 345 515 prepend xdg-open;
 #X connect 1 0 0 0;
 #X connect 1 0 117 0;
 #X connect 2 0 33 0;
@@ -283,6 +287,7 @@
 #X connect 87 0 42 0;
 #X connect 88 0 50 0;
 #X connect 88 0 96 0;
+#X connect 88 0 127 1;
 #X connect 88 1 87 0;
 #X connect 89 0 44 0;
 #X connect 90 0 39 0;
@@ -306,4 +311,7 @@
 #X connect 124 0 7 0;
 #X connect 125 0 70 0;
 #X connect 125 0 71 0;
+#X connect 127 0 130 0;
+#X connect 129 0 127 0;
+#X connect 130 0 128 0;
 #X coords 0 0 1 1 223 149 1 134 215;
