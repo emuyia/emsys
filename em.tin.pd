@@ -76,7 +76,6 @@
 #X text 99 632 fix: prevent interrupts being sent when MCL is being told to load a new track group (via pgm), f 18;
 #X obj 587 787 bng 25 250 50 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
 #X obj 587 738 sel 250;
-#X text 354 797 finding: looks like monomachine plays nice with this. no concerns., f 39;
 #X obj 329 154 r tintin;
 #X connect 0 0 23 0;
 #X connect 2 0 0 1;
@@ -154,5 +153,5 @@
 #X connect 73 0 71 0;
 #X connect 75 0 7 0;
 #X connect 76 0 75 0;
-#X connect 78 0 36 0;
+#X connect 77 0 36 0;
 #X coords 0 0 1 1 105 186 1 339 223;
