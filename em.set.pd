@@ -41,7 +41,7 @@
 #X msg 540 556 stop;
 #X msg 398 1443 stop;
 #X obj 182 582 text define set;
-#X symbolatom 136 250 29 0 0 2 Set\ Name: - - 16;
+#X symbolatom 136 250 17 0 0 2 Set\ Name: - - 16;
 #X obj 285 582 print;
 #X obj 136 76 bng 25 250 50 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
 #X obj 182 406 list fromsymbol;
@@ -146,7 +146,7 @@
 #X obj 432 397 del 500;
 #X obj 432 369 bng 25 250 50 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
 #X obj 716 1152 r reset_set;
-#X obj 256 316 hsl 50 17 0 4 0 0 empty empty empty -2 -8 0 10 #000000 #ffffff #e1e1e1 0 1;
+#X obj 256 316 hsl 50 17 0 1 0 0 empty empty empty -2 -8 0 10 #000000 #ffffff #e1e1e1 0 1;
 #X obj 589 134 t b f;
 #X msg 570 195 range \$1 \$2;
 #X obj 570 164 pack 0 127, f 16;
@@ -183,6 +183,13 @@
 #X obj 228 1307 onebang, f 16;
 #X obj 287 1278 r downbeat;
 #X text 105 1232 fix: make it so that progressing to the next rep requires the downbeat to have triggered first. this prevents reps from being lapsed when playback is restarted for whatever reason, f 23;
+#X obj 156 839 s current_seg_id;
+#X obj 156 811 + 1;
+#X obj 420 212 r current_seg_id;
+#X floatatom 231 251 4 0 0 2 seg\ id - - 12;
+#X obj 305 34 r reset_set;
+#X obj 305 64 text size set;
+#X floatatom 267 251 5 0 0 2 of - - 12;
 #X connect 1 0 0 0;
 #X connect 1 0 117 0;
 #X connect 2 0 33 0;
@@ -190,6 +197,7 @@
 #X connect 2 0 78 0;
 #X connect 2 1 12 0;
 #X connect 3 0 2 0;
+#X connect 3 0 136 0;
 #X connect 4 0 33 0;
 #X connect 5 0 6 0;
 #X connect 5 0 14 0;
@@ -321,4 +329,8 @@
 #X connect 131 0 93 0;
 #X connect 132 0 15 0;
 #X connect 133 0 132 1;
+#X connect 136 0 135 0;
+#X connect 137 0 138 0;
+#X connect 139 0 140 0;
+#X connect 140 0 141 0;
 #X coords 0 0 1 1 223 149 1 134 215;
