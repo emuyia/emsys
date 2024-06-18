@@ -16,7 +16,7 @@
 #X obj 264 948 bng 25 250 50 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
 #X obj 297 1365 counter 0 0 3;
 #X obj 364 1244 - 1;
-#X floatatom 297 1401 6 0 0 0 repeat\ no. - - 16;
+#X floatatom 318 1404 6 0 0 0 repeat\ no. - - 16;
 #X obj 282 1639 sel 3;
 #X obj 546 1046 f;
 #X obj 627 987 bng 25 250 50 0 empty empty pgmout\ bang 27 12 0 10 #191919 #e1e1e1 #be5000;
@@ -63,7 +63,7 @@
 #X obj 360 916 print seg;
 #X obj 282 1669 s seg_last;
 #X obj 690 529 r seg_last;
-#X obj 270 1322 r beat1;
+#X obj 228 1278 r beat1;
 #X obj 489 1251 s tin?;
 #X obj 409 1251 s beat_len;
 #X msg 620 323 symbol sets/;
@@ -157,7 +157,7 @@
 #X obj 179 1684 print seg_last;
 #X obj 328 1556 print seg_start;
 #X obj 259 1127 print rep_incoming;
-#X obj 126 1270 print seg_len_set_-1;
+#X obj 180 1198 print seg_len_set_-1;
 #X obj 544 1556 print seg_end;
 #X obj 722 569 print load;
 #X obj 264 1559 f;
@@ -180,6 +180,9 @@
 #X obj 292 248 bng 25 250 50 0 empty empty edit 0 -7 0 14 #e3dfd9 #5a5a5a #5a5a5a;
 #X obj 345 515 prepend xdg-open;
 #X obj 409 281 r reset;
+#X obj 228 1307 onebang, f 16;
+#X obj 287 1278 r downbeat;
+#X text 105 1232 fix: make it so that progressing to the next rep requires the downbeat to have triggered first. this prevents reps from being lapsed when playback is restarted for whatever reason, f 23;
 #X connect 1 0 0 0;
 #X connect 1 0 117 0;
 #X connect 2 0 33 0;
@@ -270,7 +273,7 @@
 #X connect 60 0 70 0;
 #X connect 60 0 71 0;
 #X connect 63 0 34 1;
-#X connect 64 0 15 0;
+#X connect 64 0 132 0;
 #X connect 67 0 68 0;
 #X connect 68 0 69 1;
 #X connect 69 0 49 0;
@@ -316,4 +319,6 @@
 #X connect 129 0 127 0;
 #X connect 130 0 128 0;
 #X connect 131 0 93 0;
+#X connect 132 0 15 0;
+#X connect 133 0 132 1;
 #X coords 0 0 1 1 223 149 1 134 215;

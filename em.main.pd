@@ -6,7 +6,7 @@
 #X obj 304 230 em.set;
 #X text 829 291 concern: make sure megaCMD is picked up automatically on rpi when patch loads \, and that pgmout / midiout channels are set accordingly, f 59;
 #X text 829 363 todo: a way to not abandon a tin that's been set just because the current segment can't alow it - remember that the user wants it until available. plus \, some kind of way to indicate whether a tin will go through on the current segment;
-#X text 829 461 bug: triggering transport play messages skips through the seg's reps;
-#X text 829 499 todo: a UI indicator for the current seg ID \, and how many segs are left in total;
-#X text 829 547 todo: a way to fast forward or rewind segments (probably best to trigger a tin with it too so that sync issues are mitigated). this is probably best achieved by utilising a UI indicator that shows the current segment's ID \, and allows you to change that number manually;
+#X text 829 450 todo: a UI indicator for the current seg ID \, and how many segs are left in total;
+#X text 829 498 todo: a way to fast forward or rewind segments (probably best to trigger a tin with it too so that sync issues are mitigated). this is probably best achieved by utilising a UI indicator that shows the current segment's ID \, and allows you to change that number manually;
+#X text 829 584 todo: add internal clock just for the sake of testing without the synths / ext clock;
 #X coords 0 0 1 1 468 199 2 301 228;
