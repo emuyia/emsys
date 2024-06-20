@@ -4,8 +4,9 @@
 #X obj 655 230 em.tin;
 #X obj 178 241 em.debug;
 #X obj 304 230 em.set;
-#X text 815 412 concern: make sure megaCMD is picked up automatically on rpi when patch loads \, and that pgmout / midiout channels are set accordingly, f 59;
-#X text 815 259 todo: a way to fast forward or rewind segments (probably best to trigger a tin with it too so that sync issues are mitigated). this is probably best achieved by utilising a UI indicator that shows the current segment's ID \, and allows you to change that number manually;
-#X text 815 345 todo: add internal clock just for the sake of testing without the synths. seq24 isn't good for testing because you have to set it up every time \, and it has differing transport behaviour.;
-#X text 815 204 todo: some kind of way to indicate whether a tin will go through on the current segment;
+#X text 802 391 concern: make sure megaCMD is picked up automatically on rpi when patch loads \, and that pgmout / midiout channels are set accordingly, f 59;
+#X text 802 324 todo: add internal clock just for the sake of testing without the synths. seq24 isn't good for testing because you have to set it up every time \, and it has differing transport behaviour.;
+#X text 802 273 todo: some kind of way to indicate whether a tin will go through on the current segment;
+#X text 802 454 concern: make sure that the hold function is behaving as expected against the scheduling of segs \, reps and tins;
+#X text 802 207 potential bug: make sure that at the start of playing a freshly loaded set \, the first segment isn't playing an extra rep that it shouldn't (one extra before lapsing the first rep);
 #X coords 0 0 1 1 466 192 2 301 228;

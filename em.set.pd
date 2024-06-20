@@ -174,7 +174,7 @@
 #X obj 237 1227 r downbeat;
 #X obj 156 839 s current_seg_id;
 #X obj 156 811 + 1;
-#X obj 420 212 r current_seg_id;
+#X obj 420 195 r current_seg_id;
 #X floatatom 225 251 5 0 0 2 seg\ $ - - 12;
 #X obj 305 34 r reset_set;
 #X obj 305 64 text size set;
@@ -198,6 +198,15 @@
 #X text 128 1154 make it so that holding will change the behaviour of reps such that if the last rep is reached \, stay at the last rep while hold is active, f 42;
 #X obj 74 1189 t b f f;
 #X text 7 1337 potential bug: strange behaviour where activating hold will not allow reps to lapse as per intended behaviour \, but when you open the em.set patch the behaviour fixes itself...? verify this..., f 37;
+#X obj 413 629 r set_seg;
+#X obj 413 659 - 1;
+#X msg 413 683 set \$1;
+#X obj 31 316 s set_seg;
+#X msg 420 224 set \$1;
+#X msg 360 195 set \$1;
+#X obj 23 360 s set_rep;
+#X obj 297 1282 r set_rep;
+#X msg 297 1311 set \$1;
 #X connect 1 0 0 0;
 #X connect 1 0 107 0;
 #X connect 2 0 33 0;
@@ -292,8 +301,8 @@
 #X connect 77 0 80 0;
 #X connect 78 0 79 0;
 #X connect 80 0 78 0;
-#X connect 82 0 83 0;
-#X connect 82 0 96 0;
+#X connect 82 0 155 0;
+#X connect 83 0 156 0;
 #X connect 84 0 86 0;
 #X connect 85 0 41 0;
 #X connect 86 0 49 0;
@@ -308,6 +317,7 @@
 #X connect 93 0 91 0;
 #X connect 94 0 93 0;
 #X connect 95 0 115 0;
+#X connect 96 0 156 0;
 #X connect 97 0 99 0;
 #X connect 97 1 99 1;
 #X connect 98 0 96 0;
@@ -329,7 +339,8 @@
 #X connect 122 0 141 0;
 #X connect 123 0 122 1;
 #X connect 125 0 124 0;
-#X connect 126 0 127 0;
+#X connect 126 0 154 0;
+#X connect 127 0 153 0;
 #X connect 128 0 129 0;
 #X connect 129 0 130 0;
 #X connect 131 0 136 0;
@@ -351,4 +362,12 @@
 #X connect 148 0 140 0;
 #X connect 148 1 145 0;
 #X connect 148 2 142 0;
+#X connect 150 0 151 0;
+#X connect 151 0 152 0;
+#X connect 152 0 23 0;
+#X connect 154 0 127 0;
+#X connect 155 0 83 0;
+#X connect 155 0 96 0;
+#X connect 157 0 158 0;
+#X connect 158 0 15 0;
 #X coords 0 0 1 1 223 149 1 134 215;
