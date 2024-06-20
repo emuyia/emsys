@@ -36,9 +36,9 @@
 #X obj 622 633 f;
 #X obj 594 675 gate 0, f 10;
 #X obj 350 296 tgl 31 0 empty empty Interrupt -5 -9 0 11 #c69825 #e1e1e1 #e19d00 0 1;
-#X msg 428 125 1;
+#X msg 474 75 1;
 #X msg 470 277 0;
-#X obj 401 151 gate 0;
+#X obj 426 173 gate 0;
 #X obj 658 744 print interrupt;
 #X obj 573 708 gate 1;
 #X obj 743 473 r load;
@@ -52,9 +52,9 @@
 #X obj 633 312 r mcl_stop;
 #X obj 71 213 r mcl_stop;
 #X text 802 93 bug: if tempo is changed during avg beat time calculation then transport interrupt will likely fail to be on time, f 19;
-#X obj 425 100 r seg_last;
+#X obj 471 50 r seg_last;
 #X obj 636 355 r beat1;
-#X obj 385 125 r tin?;
+#X obj 410 130 r tin?;
 #X obj 671 433 r downbeat;
 #X obj 827 236 r beat_counter;
 #X obj 826 425 s avg_beat_time;
@@ -80,6 +80,13 @@
 #X obj 816 695 print MD_PGM_CHANGE;
 #X obj 872 733 print SEG_START;
 #X text 217 598 possible bug: weirdness with predicted beat 1 not starting at the right time? verify this with actual set up when I'm home \, rather than seq24. i think it appears like it's not working simply because the stop signal isn't being received by seq24. but verify to be safe \, or create own clock within puredata instead of seq24 to be sure., f 44;
+#X msg 204 134 color #C69825;
+#X msg 204 108 color #B39598;
+#X obj 450 104 gate 1;
+#X obj 373 26 r seg_hold;
+#X obj 373 56 == 0;
+#X obj 450 26 loadmess 1;
+#X text 503 74 only activate tin on seg_last if the current seg is tin=1 \, and also \, if seg_hold is not on, f 26;
 #X connect 0 0 23 0;
 #X connect 2 0 0 1;
 #X connect 3 0 2 1;
@@ -110,7 +117,7 @@
 #X connect 25 0 27 0;
 #X connect 26 0 25 0;
 #X connect 27 0 29 0;
-#X connect 27 0 24 0 32.................cA...n9+++eW....p++++mK....;
+#X connect 27 0 24 0 32.................F....79+++uA....u++++qK....;
 #X connect 28 0 43 0;
 #X connect 29 0 26 0;
 #X connect 30 0 62 0;
@@ -121,7 +128,7 @@
 #X connect 34 0 35 1;
 #X connect 35 0 41 1;
 #X connect 36 0 35 0;
-#X connect 37 0 39 1;
+#X connect 37 0 83 1;
 #X connect 38 0 36 0;
 #X connect 39 0 36 0;
 #X connect 41 0 12 0;
@@ -159,4 +166,10 @@
 #X connect 74 0 7 0;
 #X connect 75 0 77 0;
 #X connect 77 1 36 0;
+#X connect 81 0 36 0;
+#X connect 82 0 36 0;
+#X connect 83 0 39 1;
+#X connect 84 0 85 0;
+#X connect 85 0 83 0;
+#X connect 86 0 83 0;
 #X coords 0 0 1 1 105 186 1 339 223;
