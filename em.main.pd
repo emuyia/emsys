@@ -9,4 +9,5 @@
 #X text 802 273 todo: some kind of way to indicate whether a tin will go through on the current segment;
 #X text 802 454 concern: make sure that the hold function is behaving as expected against the scheduling of segs \, reps and tins;
 #X text 802 207 potential bug: make sure that at the start of playing a freshly loaded set \, the first segment isn't playing an extra rep that it shouldn't (one extra before lapsing the first rep);
+#X text 796 497 possible bug: seg length is not updated at the start of a freshly loaded set? (look at the bar on transport showing the steps - it runs over?);
 #X coords 0 0 1 1 466 192 2 301 228;

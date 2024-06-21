@@ -35,7 +35,7 @@
 #X msg 658 599 252;
 #X obj 622 633 f;
 #X obj 594 675 gate 0, f 10;
-#X obj 350 296 tgl 31 0 empty empty Interrupt -5 -9 0 11 #c69825 #e1e1e1 #e19d00 0 1;
+#X obj 350 296 tgl 31 0 empty empty Interrupt -5 -9 0 11 #000000 #e1e1e1 #e19d00 0 1;
 #X msg 474 75 1;
 #X msg 470 277 0;
 #X obj 426 173 gate 0;
@@ -81,12 +81,12 @@
 #X obj 872 733 print SEG_START;
 #X text 217 598 possible bug: weirdness with predicted beat 1 not starting at the right time? verify this with actual set up when I'm home \, rather than seq24. i think it appears like it's not working simply because the stop signal isn't being received by seq24. but verify to be safe \, or create own clock within puredata instead of seq24 to be sure., f 44;
 #X msg 204 134 color #C69825;
-#X msg 204 108 color #B39598;
 #X obj 450 104 gate 1;
 #X obj 373 26 r seg_hold;
 #X obj 373 56 == 0;
 #X obj 450 26 loadmess 1;
 #X text 503 74 only activate tin on seg_last if the current seg is tin=1 \, and also \, if seg_hold is not on, f 26;
+#X msg 204 108 color #000000;
 #X connect 0 0 23 0;
 #X connect 2 0 0 1;
 #X connect 3 0 2 1;
@@ -128,7 +128,7 @@
 #X connect 34 0 35 1;
 #X connect 35 0 41 1;
 #X connect 36 0 35 0;
-#X connect 37 0 83 1;
+#X connect 37 0 82 1;
 #X connect 38 0 36 0;
 #X connect 39 0 36 0;
 #X connect 41 0 12 0;
@@ -158,8 +158,10 @@
 #X connect 67 0 68 0;
 #X connect 68 0 72 0;
 #X connect 68 0 78 0;
+#X connect 68 0 87 0;
 #X connect 69 0 71 0;
 #X connect 69 0 79 0;
+#X connect 69 0 81 0;
 #X connect 70 0 41 0;
 #X connect 71 0 70 0;
 #X connect 72 0 70 0;
@@ -167,9 +169,9 @@
 #X connect 75 0 77 0;
 #X connect 77 1 36 0;
 #X connect 81 0 36 0;
-#X connect 82 0 36 0;
-#X connect 83 0 39 1;
-#X connect 84 0 85 0;
-#X connect 85 0 83 0;
-#X connect 86 0 83 0;
+#X connect 82 0 39 1;
+#X connect 83 0 84 0;
+#X connect 84 0 82 0;
+#X connect 85 0 82 0;
+#X connect 87 0 36 0;
 #X coords 0 0 1 1 105 186 1 339 223;
