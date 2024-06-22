@@ -54,7 +54,7 @@
 #X obj 1122 374 s beat_counter;
 #X obj 404 279 r mcl_4pulse;
 #X obj 445 303 r load;
-#X obj 260 330 hsl 108 17 0 12 0 0 empty empty empty -2 -8 0 10 #000000 #ffffff #e1e1e1 0 1;
+#X obj 260 330 hsl 108 17 0 16 0 0 empty empty empty -2 -8 0 10 #000000 #ffffff #e1e1e1 0 1;
 #X obj 62 282 t b f;
 #X msg 43 343 range \$1 \$2;
 #X obj 43 312 pack 0 127, f 16;
@@ -77,6 +77,7 @@
 #X obj 240 659 notein, f 20;
 #X obj 240 688 stripnote, f 12;
 #X text 102 614 ext controllers:;
+#X text 47 -89 todo: add internal clock just for the sake of testing without the synths. seq24 isn't good for testing because you have to set it up every time \, and it has differing transport behaviour.;
 #X connect 1 0 6 0;
 #X connect 2 0 6 0;
 #X connect 3 0 1 0;
