@@ -78,6 +78,7 @@
 #X text 102 614 ext controllers:;
 #X text 47 -89 todo: add internal clock just for the sake of testing without the synths. seq24 isn't good for testing because you have to set it up every time \, and it has differing transport behaviour.;
 #X obj 626 770 s manual_tin;
+#X obj 295 791 s seg_hold;
 #X connect 1 0 6 0;
 #X connect 2 0 6 0;
 #X connect 3 0 1 0;
@@ -144,6 +145,7 @@
 #X connect 67 0 64 0;
 #X connect 67 1 65 0;
 #X connect 67 2 68 0;
+#X connect 73 1 79 0;
 #X connect 73 2 72 0;
 #X connect 73 3 69 0;
 #X connect 73 4 71 0;
