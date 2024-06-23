@@ -4,11 +4,10 @@
 #X obj 554 344 em.tin;
 #X obj 299 359 em.debug;
 #X obj 299 224 em.set;
-#X text 854 298 concern: make sure megaCMD is picked up automatically on rpi when patch loads \, and that pgmout / midiout channels are set accordingly, f 59;
-#X text 854 238 potential bug: make sure that at the start of playing a freshly loaded set \, the first segment isn't playing an extra rep that it shouldn't (one extra before lapsing the first rep);
-#X text 854 208 bug: the edit button stopped working lol;
-#X text 854 358 concern: make sure that pi can run this patch properly - especially when it comes to running with pdnext (and any inconsistencies that may bring with my work in plug data);
-#X text 854 418 concern: stress test tin feature;
-#X text 854 448 bug: once again \, triggering play transport (<) causes rep to lapse;
-#X text 854 478 todo: add internal clock just for the sake of testing without the synths. seq24 isn't good for testing because you have to set it up every time \, and it has differing transport behaviour.;
+#X text 749 283 concern: make sure megaCMD is picked up automatically on rpi when patch loads \, and that pgmout / midiout channels are set accordingly, f 59;
+#X text 749 223 potential bug: make sure that at the start of playing a freshly loaded set \, the first segment isn't playing an extra rep that it shouldn't (one extra before lapsing the first rep);
+#X text 749 193 bug: the edit button stopped working lol;
+#X text 749 343 concern: make sure that pi can run this patch properly - especially when it comes to running with pdnext (and any inconsistencies that may bring with my work in plug data);
+#X text 749 403 concern: stress test tin feature;
+#X text 749 433 todo: add internal clock just for the sake of testing without the synths. seq24 isn't good for testing because you have to set it up every time \, and it has differing transport behaviour.;
 #X coords 0 0 1 1 390 205 0;

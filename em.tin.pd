@@ -19,8 +19,8 @@
 #X obj 644 134 t, f 9;
 #X msg 614 179 0;
 #X obj 644 179 bng 25 250 50 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
-#X msg 644 44 1;
-#X obj 644 -16 loadbang;
+#X msg 569 29 1;
+#X obj 569 -31 loadbang;
 #X obj 119 134 avg;
 #X msg 239 104 clear;
 #X obj 449 254 tgl 16 0 calibrating calibrate ~ 5 7 0 11 #7e0a0e #fffded #fff7fb 0 1;
@@ -42,9 +42,9 @@
 #X obj 629 449 r load;
 #X obj 359 -1 s stop;
 #X obj 164 29 r mcl_start;
-#X obj 674 14 r mcl_start;
+#X obj 599 -1 r mcl_start;
 #X obj 524 194 r mcl_start;
-#X obj 659 -1 r mcl_stop;
+#X obj 584 -16 r mcl_stop;
 #X obj 524 179 r mcl_stop;
 #X obj 149 14 r mcl_stop;
 #X obj 524 209 r beat1;
@@ -105,6 +105,7 @@
 #X obj 209 239 r resat;
 #X obj 704 719 r seg_tin;
 #X obj 119 449 r seg_tin;
+#X obj 644 29 route range;
 #X connect 1 0 22 0;
 #X connect 3 0 1 1;
 #X connect 4 0 3 1;
@@ -159,7 +160,7 @@
 #X connect 48 0 10 0;
 #X connect 49 0 31 0;
 #X connect 50 0 6 0;
-#X connect 50 0 14 0;
+#X connect 50 0 106 0;
 #X connect 54 0 11 0;
 #X connect 55 0 56 0;
 #X connect 56 0 57 0;
@@ -212,4 +213,5 @@
 #X connect 103 0 92 0;
 #X connect 104 0 75 0;
 #X connect 105 0 38 0;
+#X connect 106 1 14 0;
 #X coords 0 0 1 1 119 60 1 346 255;
