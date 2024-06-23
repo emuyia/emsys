@@ -27,7 +27,7 @@
 #X obj -331 509 f;
 #X obj -526 884 sel 0;
 #X obj -526 854 change;
-#X obj -526 944 s stop;
+#X obj -586 974 s stop;
 #X obj -526 914 onebang;
 #X obj -466 254 list split 2;
 #X obj -271 -61 onebang, f 15;
@@ -68,7 +68,7 @@
 #X obj 284 239 bng 31 250 50 0 open_mset_btn empty 開 4 16 0 28 #696969 #000000 #fffbfb;
 #X msg 809 374 set \$1;
 #X obj 254 299 bng 31 250 50 0 resat reset ⟳ 2 14 0 35 #cb0006 #fff1e7 #e1dac6;
-#X obj 137 314 hsl 86 16 0 1 0 0 set_rep set_rep_ui empty -2 -8 0 10 #000000 #ffffff #e1e1e1 0 1;
+#X obj 137 314 hsl 86 16 0 2 0 0 set_rep set_rep_ui empty -2 -8 0 10 #000000 #ffffff #e1e1e1 0 1;
 #X obj 164 -46 t b f;
 #X msg 164 14 range \$1 \$2;
 #X obj 164 -16 pack 0 127, f 16;
@@ -227,6 +227,9 @@
 #X obj 284 299 bng 31 250 50 0 set_reloaded set_reload ⟳ 2 14 0 35 #696969 #fff1e7 #fdfff4;
 #X obj 629 479 r set_reloaded;
 #X obj 629 509 bng 25 250 50 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
+#X msg -526 944 end reached;
+#X obj -616 59 bng 25 250 50 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
+#X obj -526 974 print sys;
 #X connect 2 0 78 0;
 #X connect 2 0 123 0;
 #X connect 3 0 30 0;
@@ -268,7 +271,7 @@
 #X connect 25 0 158 0;
 #X connect 26 0 29 0;
 #X connect 27 0 26 0;
-#X connect 29 0 28 0;
+#X connect 29 0 202 0;
 #X connect 30 0 6 0;
 #X connect 30 1 5 0;
 #X connect 31 0 98 1;
@@ -408,4 +411,6 @@
 #X connect 198 0 43 0;
 #X connect 200 0 201 0;
 #X connect 201 0 198 0;
+#X connect 202 0 204 0;
+#X connect 203 0 111 0;
 #X coords 0 0 1 1 182 121 2 134 224;
