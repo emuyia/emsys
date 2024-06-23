@@ -6,4 +6,6 @@
 #X obj 304 230 em.set;
 #X text 798 317 concern: make sure megaCMD is picked up automatically on rpi when patch loads \, and that pgmout / midiout channels are set accordingly, f 59;
 #X text 798 240 potential bug: make sure that at the start of playing a freshly loaded set \, the first segment isn't playing an extra rep that it shouldn't (one extra before lapsing the first rep);
+#X text 811 193 bug: the edit button stopped working lol;
+#X text 807 376 concern: make sure that pi can run this patch properly - especially when it comes to running with pdnext (and any inconsistencies that may bring with my work in plug data);
 #X coords 0 0 1 1 466 192 2 301 228;

@@ -1,4 +1,4 @@
-md 33 mnm 36 rep 2 len 16 tin 1;
-md 34 mnm 37 rep 2 len 16 tin 0;
-md 35 mnm 38 rep 1 len 16 tin 0;
-md 35 mnm 39 rep 2 len 16 tin 0;
+md B01 mnm B04 rep 2 len 16 tin 1;
+md B02 mnm B05 rep 2 len 16 tin 0;
+md B03 mnm B06 rep 1 len 16 tin 0;
+md B03 mnm B07 rep 2 len 16 tin 0;

@@ -53,7 +53,7 @@
 #X obj 636 355 r beat1;
 #X obj 671 433 r downbeat;
 #X obj 827 236 r beat_counter;
-#X obj 826 425 s avg_beat_time;
+#X obj 840 419 s avg_beat_time;
 #X obj 170 352 r avg_beat_time;
 #X obj 864 334 s rolling_beat_time;
 #X obj 195 327 r rolling_beat_time;
@@ -100,7 +100,7 @@
 #X obj 722 811 r rep_last;
 #X obj 316 535 r rep_last;
 #X obj 218 511 r seg_held;
-#X obj 527 131 r reset_set;
+#X obj 527 117 r reset_set;
 #X obj 527 175 s tin_toggle;
 #X msg 529 153 0;
 #X obj 613 175 s seg_hold;
@@ -111,6 +111,8 @@
 #X obj 948 539 sel 1, f 7;
 #X obj 948 569 bng 35 250 249 0 empty empty tempo\ change\ detection 41 13 0 14 #191919 #e1e1e1 #e1e1e1;
 #X text 988 412 fix: do tempo change detection and reset [avg] calculation to rolling time so that it catches up and the tempo change is smooth between interrupts;
+#X obj 498 94 r stop_press;
+#X msg 615 153 0;
 #X connect 0 0 23 0;
 #X connect 2 0 0 1;
 #X connect 3 0 2 1;
@@ -210,12 +212,14 @@
 #X connect 99 0 37 0;
 #X connect 100 0 72 0;
 #X connect 101 0 103 0;
+#X connect 101 0 113 0;
 #X connect 103 0 102 0;
-#X connect 103 0 104 0;
 #X connect 105 0 107 0;
 #X connect 106 0 105 0;
 #X connect 107 0 108 0;
 #X connect 108 0 109 0;
 #X connect 109 0 110 0;
 #X connect 109 0 10 0;
+#X connect 112 0 103 0;
+#X connect 113 0 104 0;
 #X coords 0 0 1 1 105 186 1 339 223;
