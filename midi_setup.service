@@ -1,0 +1,14 @@
+[Unit]
+Description=MIDI Connections Service
+After=network.target
+
+[Service]
+ExecStart=/home/patch/repos/emsys/midi_setup.sh
+WorkingDirectory=/home/patch/repos/emsys
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=patch
+
+[Install]
+WantedBy=multi-user.target

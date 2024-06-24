@@ -1,4 +1,4 @@
-#N canvas 1440 900 1920 978 8;
+#N canvas 1799 1070 1079 633 8;
 #X obj -136 524 pgmout 15;
 #X obj -241 449 f;
 #X obj -466 209 text get set, f 21;
@@ -62,12 +62,12 @@
 #X obj -586 284 s current_seg;
 #X obj 284 -76 r current_seg;
 #X msg 284 -21 set \$1;
-#X symbolatom 129 338 45 0 0 0 - seg_info_ui - 10;
+#X symbolatom 128 320 45 0 0 0 - seg_info_ui - 10;
 #X obj 284 -47 tosymbol;
 #X obj 301 280 bng 31 250 50 0 open_mset_btn empty 開 4 16 0 23 #696969 #000000 #fffbfb;
 #X msg 809 374 set \$1;
 #X obj 231 280 bng 31 250 50 0 resat reset ⟳ 5 14 0 35 #cb0006 #fff1e7 #e1dac6;
-#X obj 134 319 hsl 260 16 0 1 0 0 set_rep set_rep_ui empty -2 -8 0 8 #000000 #ffffff #e1e1e1 0 1;
+#X obj 318 253 hsl 80 16 0 1 0 0 set_rep set_rep_ui empty -2 -8 0 8 #000000 #ffffff #e1e1e1 0 1;
 #X obj 164 -46 t b f;
 #X msg 164 14 range \$1 \$2;
 #X obj 164 -16 pack 0 127, f 16;
@@ -438,4 +438,4 @@
 #X connect 215 0 202 1;
 #X connect 215 0 208 1;
 #X connect 215 1 20 3;
-#X coords 0 0 1 1 300 145 1 125 220;
+#X coords 0 0 1 1 280 125 1 125 220;
