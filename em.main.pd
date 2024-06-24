@@ -8,4 +8,5 @@
 #X text 734 283 concern: make sure that pi can run this patch properly - especially when it comes to running with pdnext (and any inconsistencies that may bring with my work in plug data);
 #X text 734 343 concern: stress test tin feature;
 #X text 734 373 todo: add internal clock just for the sake of testing without the synths. seq24 isn't good for testing because you have to set it up every time \, and it has differing transport behaviour.;
+#X text 708 458 todo: make tin shorter?;
 #X coords 0 0 1 1 390 205 0;
