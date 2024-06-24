@@ -34,7 +34,7 @@
 #X msg 584 569 252;
 #X obj 539 599 f;
 #X obj 449 629 gate 0, f 10;
-#X obj 344 269 tgl 46 0 tin_toggled tin_toggle 断 5 24 0 41 #c69825 #e1e1e1 #ff00e7 0 1;
+#X obj 344 269 tgl 46 0 tin_toggled tin_toggle 断 5 24 0 41 #000000 #ff8efb #ff00e7 0 1;
 #X msg 224 419 1;
 #X msg 541 854 0;
 #X obj 119 494 gate 0;
@@ -106,7 +106,7 @@
 #X obj 704 569 r rep0;
 #X obj 584 419 r tinbeat;
 #X obj 554 449 / 2;
-#X obj 389 269 bng 16 40 40 0 empty tin_stop_indicator empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
+#X obj 389 269 bng 16 40 40 0 empty tin_stop_indicator 止 3 8 0 10 #696969 #ff0005 #e1e1e1;
 #X obj 434 749 s tin_stop_indicator, f 24;
 #X obj 419 704 sel 250 252;
 #X text 884 73 todo: upgrade the beat time calculation with 8pulse for tighter accuracy / compatibility with tempo changes. although \, this is definitely acceptable as it is too.;
