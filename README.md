@@ -1,4 +1,4 @@
 # emsys
- A bespoke live music sequencing companion to MCL built in Pd for Raspberry Pi.
+A bespoke live music companion to MCL built in Pd for RPi.
 
-![alt text](res/em.main.png)
+![alt text](res/emsys.png)
