@@ -14,6 +14,9 @@ case $ACTION in
     reboot)
         COMMAND="sudo reboot"
         ;;
+    shutdown)
+        COMMAND="sudo shutdown now"
+        ;;
     reopen)
         COMMAND="killall pd || true && sleep 1 && export DISPLAY=:0.0 && ~/repos/emsys/emsys.sh &"
         ;;
