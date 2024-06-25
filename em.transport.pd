@@ -186,8 +186,8 @@
 #X msg 644 -61 stop;
 #X obj 599 29 change;
 #X obj 599 -91 t, f 12;
-#X obj 361 331 tgl 31 0 empty clock_indicator C 7 16 0 25 #583463 #64ff70 #cb60e1 0 1;
-#X obj 599 59 s clock_indicator;
+#X obj 361 331 tgl 31 0 empty clock_active C 7 16 0 25 #583463 #64ff70 #cb60e1 0 1;
+#X obj 599 59 s clock_active;
 #X connect 1 0 6 0;
 #X connect 2 0 6 0;
 #X connect 6 0 0 0;
@@ -234,7 +234,6 @@
 #X connect 43 0 42 0;
 #X connect 44 0 41 0;
 #X connect 50 1 54 0;
-#X connect 50 2 49 0;
 #X connect 50 3 46 0;
 #X connect 50 4 48 0;
 #X connect 50 5 47 0;
@@ -308,6 +307,7 @@
 #X connect 121 0 123 1;
 #X connect 122 0 121 0;
 #X connect 123 0 15 1;
+#X connect 123 0 136 0;
 #X connect 124 0 122 0;
 #X connect 125 0 128 1;
 #X connect 126 0 129 1;

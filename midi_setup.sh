@@ -37,9 +37,9 @@ while true; do
 
     # Check if clients are found
     if [[ -z $MINILAB3_CLIENT || -z $MEGACMD_CLIENT || -z $PD_CLIENT ]]; then
-        echo "One or more MIDI devices not found. Retrying in 5 seconds."
-        sleep 5
-        continue
+        echo "One or more MIDI devices not found."
+        #sleep 5
+        #continue
     fi
 
     # Get port numbers for Minilab3
@@ -50,9 +50,9 @@ while true; do
 
     # Check if port numbers are found
     if [[ -z $MINILAB3_MIDI ]]; then
-        echo "One or more Minilab3 ports not found. Retrying in 5 seconds."
-        sleep 5
-        continue
+        echo "One or more Minilab3 ports not found."
+        #sleep 5
+        #continue
     fi
 
     # Define the port numbers for Pure Data
