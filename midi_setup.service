@@ -1,5 +1,5 @@
 [Unit]
-Description=MIDI Connections Service
+Description=emsys
 After=network.target
 
 [Service]

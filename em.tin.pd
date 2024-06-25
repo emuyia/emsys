@@ -109,6 +109,7 @@
 #X obj 434 749 s tin_stop_indicator, f 24;
 #X obj 419 704 sel 250 252;
 #X text 884 73 todo: upgrade the beat time calculation with 8pulse for tighter accuracy / compatibility with tempo changes. although \, this is definitely acceptable as it is too.;
+#X obj 314 29 loadmess 1;
 #X connect 0 0 21 0;
 #X connect 2 0 0 1;
 #X connect 3 0 2 1;
@@ -219,4 +220,5 @@
 #X connect 105 0 6 1;
 #X connect 108 0 95 0;
 #X connect 108 1 107 0;
+#X connect 110 0 93 0;
 #X coords 0 0 1 1 170 80 1 340 250;

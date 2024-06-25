@@ -2,9 +2,14 @@
 #X text 1269 2291 ., f 3;
 #X obj 284 1 em.transport;
 #X obj 1 128 em.tin;
-#X obj 373 181 em.debug;
 #X obj 1 1 em.set;
-#X text 522 8 concern: make sure megaCMD is picked up automatically on rpi when patch loads \, and that pgmout / midiout channels are set accordingly, f 59;
-#X text 522 68 concern: make sure that pi can run this patch properly - especially when it comes to running with pdnext (and any inconsistencies that may bring with my work in plug data);
-#X text 522 128 concern: tins seem to still go through on mcl loads sometimes \, or just miss sending the stop signal... either way \, sometimes i hear 'doubled up' kicks in the patterns indicating the stop signal is not going through. not sure why this is happening.;
+#X text 524 13 concern: tins seem to still go through on mcl loads sometimes \, or just miss sending the stop signal... either way \, sometimes i hear 'doubled up' kicks in the patterns indicating the stop signal is not going through. not sure why this is happening.;
+#X text 524 88 todo: make it so that the pi runs this patch automatically with all the prerequisites it needs to work out of the box;
+#X obj -1 254 em.dev;
+#X obj -91 44 loadmess 1;
+#X msg -91 104 \; pd dsp \$1, f 11;
+#X obj -91 74 pipe 250;
+#X text 524 133 bug: starting up on the pi \, the midi latency calibration gets really fucked up during the lag spike of connecting the midi devices \, causing mistimed tins;
+#X connect 7 0 9 0;
+#X connect 9 0 8 0;
 #X coords 0 -1 1 1 500 240 2 0 0;

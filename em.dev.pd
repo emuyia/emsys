@@ -10,7 +10,14 @@
 #X obj 434 344 loadmess 0;
 #X obj 434 374 s debug_audio_ui;
 #X obj 359 299 r debug_audio_ui_out;
-#X obj 411 224 tgl 31 0 internal_clock_toggle empty 内 3 16 0 25 #ffffff #42ffe7 #000000 0 1;
+#X obj 412 224 tgl 31 0 internal_clock_toggle empty 内 3 16 0 25 #ffffff #42ffe7 #000000 0 1;
+#X obj 599 374 em.remote;
+#X obj 449 224 bng 31 250 50 0 remote.reboot empty reboot 0 -6 0 10 #191919 #e1e1e1 #e1e1e1;
+#X obj 599 314 r remote.reboot;
+#X msg 599 344 reboot;
+#X obj 487 224 bng 31 250 50 0 remote.reopen empty reopen 0 -6 0 10 #191919 #e1e1e1 #e1e1e1;
+#X obj 704 314 r remote.reopen;
+#X msg 704 344 reopen, f 9;
 #X connect 0 0 2 0;
 #X connect 2 0 1 0;
 #X connect 4 0 7 0;
@@ -20,4 +27,8 @@
 #X connect 8 0 9 0;
 #X connect 10 0 7 0;
 #X connect 10 0 6 0;
-#X coords 0 0 1 1 122 55 1 373 207;
+#X connect 14 0 15 0;
+#X connect 15 0 12 0;
+#X connect 17 0 18 0;
+#X connect 18 0 12 0;
+#X coords 0 0 1 1 309 56 1 373 207;

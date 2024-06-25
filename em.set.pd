@@ -57,8 +57,8 @@
 #X obj 254 119 pgm2bank;
 #X obj 254 149 s md_bank_label;
 #X obj 419 149 s mnm_bank_label;
-#X symbolatom 155 275 4 0 0 0 MD md_bank_label - 12;
-#X symbolatom 157 297 4 0 0 0 MnM mnm_bank_label - 12;
+#X symbolatom 155 275 5 0 0 0 MD md_bank_label - 12;
+#X symbolatom 157 297 5 0 0 0 MnM mnm_bank_label - 12;
 #X obj -586 284 s current_seg;
 #X obj 284 -76 r current_seg;
 #X msg 284 -21 set \$1;
