@@ -233,7 +233,7 @@
 #X obj -691 -91 r stopped;
 #X obj -691 -16 tgl 25 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1 0 1;
 #X obj -701 109 s tin_toggle;
-#X msg -697 84 0;
+#X msg -716 74 0;
 #X listbox 149 279 42 0 0 0 curr seg_info_ui - 10;
 #X obj 289 -21 list;
 #X obj 289 -51 r rep0;
@@ -297,7 +297,7 @@
 #X obj -596 -16 pipe 250;
 #X msg -566 -46 clear;
 #X obj -611 -76 t i b;
-#X obj -706 134 s seg_hold;
+#X obj -781 109 s seg_hold;
 #X connect 1 0 74 0;
 #X connect 1 0 117 0;
 #X connect 2 0 29 0;
