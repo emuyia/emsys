@@ -1,6 +1,6 @@
 #N canvas 2038 974 1024 344 12;
 #X text 1269 2291 ., f 3;
-#X obj 284 1 em.transport;
+#X obj 289 1 em.transport;
 #X obj 1 128 em.tin;
 #X obj 1 1 em.set;
 #X text 524 13 concern: tins seem to still go through on mcl loads sometimes \, or just miss sending the stop signal... either way \, sometimes i hear 'doubled up' kicks in the patterns indicating the stop signal is not going through. not sure why this is happening.;
