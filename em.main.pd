@@ -35,6 +35,8 @@
 #X text -114 563 potential solution: MIDI clock from Monomachine?? :) \; that way I can control tempo and poly mode / whatever other sysex stuff all on the mono \, which is in most need of customisation anyway, f 47;
 #X text -116 642 this unfortunately sacrifices storing tempo changes in MCL - that would need to be something stored here instead... which is \, doable? but offloads even more to here \, which is concerning for stability's sake;
 #X text -117 715 although \, that could have an advantage... controlling tempo from here means there doesn't have to be any sudden tempo changes and ergo.. desync. I could introduce a feature where the segment data steers the tempo with [line] but does not override the tempo detected at any given moment - which would make tempo changes more gradual.;
+#X text 684 241 new seg data proposal \; - bpm xxx \; - poly 0/1 \; \; other: \; - mnmsq <name> \; - pdsn <name> \; - pdsq <name>;
+#X text 682 392 inter-patch communication between sq and sn modules \; - idk;
 #X connect 6 0 7 0;
 #X connect 7 0 13 0;
 #X connect 10 0 11 0;
