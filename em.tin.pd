@@ -32,7 +32,7 @@
 #X msg 584 569 252;
 #X obj 539 599 f;
 #X obj 449 629 gate 0, f 10;
-#X obj 344 269 tgl 37 0 tin_toggled tin_toggle 断 5 20 0 27 #c69825 #ff8efb #ff00e7 0 1;
+#X obj 344 269 tgl 37 0 tin_toggled tin_toggle 断 5 20 0 27 #c69825 #ff0023 #ff00e7 0 1;
 #X msg 224 419 1;
 #X msg 541 854 0;
 #X obj 119 494 gate 0;

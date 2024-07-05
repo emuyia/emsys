@@ -27,16 +27,13 @@
 #X obj 265 430 selector 2;
 #X obj 338 430 selector 2;
 #X obj 299 367 tgl 25 0 empty empty stripnote -8 -9 0 10 #191919 #e1e1e1 #e1e1e1 0 1;
-#X obj -101 444 midiout;
-#X msg -102 414 240 0 32 60 3 0 113 32 \$1 247;
-#X obj -101 380 tgl 25 0 empty empty poly 3 -8 0 10 #191919 #e1e1e1 #e1e1e1 0 1;
-#X text -62 365 mnm syx init: 240 \, 0 \, 32 \, 60 \, 3 \, 0 ... 247 \; poly mode command: 113 \, 32 \, 0 / 1;
 #X text -111 473 problem: this seems to not work with USB FWD 2... which is weird because USB FWD worked for sysex messages to MD (USB FWD: 1). if worst comes to worst \, I could solve this by using the MIDI merge box... but I want to avoid that., f 45;
 #X text -114 563 potential solution: MIDI clock from Monomachine?? :) \; that way I can control tempo and poly mode / whatever other sysex stuff all on the mono \, which is in most need of customisation anyway, f 47;
 #X text -116 642 this unfortunately sacrifices storing tempo changes in MCL - that would need to be something stored here instead... which is \, doable? but offloads even more to here \, which is concerning for stability's sake;
 #X text -117 715 although \, that could have an advantage... controlling tempo from here means there doesn't have to be any sudden tempo changes and ergo.. desync. I could introduce a feature where the segment data steers the tempo with [line] but does not override the tempo detected at any given moment - which would make tempo changes more gradual.;
 #X text 684 241 new seg data proposal \; - bpm xxx \; - poly 0/1 \; \; other: \; - mnmsq <name> \; - pdsn <name> \; - pdsq <name>;
 #X text 682 392 inter-patch communication between sq and sn modules \; - idk;
+#X text -102 443 poly mode...;
 #X connect 6 0 7 0;
 #X connect 7 0 13 0;
 #X connect 10 0 11 0;
@@ -58,6 +55,4 @@
 #X connect 26 0 17 1;
 #X connect 27 0 26 2;
 #X connect 27 0 25 2;
-#X connect 29 0 28 0;
-#X connect 30 0 29 0;
 #X coords 0 -1 1 1 494 252 2 0 0;
