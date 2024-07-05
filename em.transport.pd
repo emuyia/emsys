@@ -133,7 +133,7 @@
 #X obj 734 899 s tempo_ui;
 #X obj 884 794 r tempo_ui_out;
 #X obj 839 524 r tempo_ui_out;
-#X obj 914 689 s tempo_indicator;
+#X obj 913 693 s tempo_indicator;
 #X obj 914 554 r tempo_ui;
 #X obj 914 614 avg;
 #X msg 1004 584 clear;
