@@ -26,11 +26,13 @@ while true; do
     # Dynamically find the clients
     MINILAB3_CLIENT=$(get_client_number "Minilab3")
     PISOUND_CLIENT=$(get_client_number "pisound")
+    THRU_CLIENT=$(get_client_number "Midi Through")
     PD_CLIENT=$(get_client_number "Pure Data")
 
     # Log the found client numbers
     echo "Minilab3 Client: $MINILAB3_CLIENT"
     echo "Pisound Client: $PISOUND_CLIENT"
+    echo "Thru Client: $THRU_CLIENT"
     echo "Pure Data Client: $PD_CLIENT"
 
     # Hardcoded port numbers based on consistent mapping
@@ -38,29 +40,30 @@ while true; do
     MINILAB3_MIDI_IN_PORT=0
     PISOUND_MIDI_OUT_PORT=0
     PISOUND_MIDI_IN_PORT=0
+    THRU_MIDI_IN_PORT=0
+    THRU_MIDI_OUT_PORT=0
     PD_MIDI_IN_1=0
     PD_MIDI_OUT_1=3
     PD_MIDI_IN_2=1
     PD_MIDI_OUT_2=4
+    PD_MIDI_IN_3=2
+    PD_MIDI_OUT_3=5
 
     # Check if all necessary clients are found
-    if [[ -z $MINILAB3_CLIENT || -z $PISOUND_CLIENT || -z $PD_CLIENT ]]; then
+    if [[ -z $MINILAB3_CLIENT || -z $PISOUND_CLIENT || -z $PD_CLIENT || -z $THRU_CLIENT ]]; then
         echo "One or more MIDI clients not found. Retrying..."
         sleep 5
         continue
     fi
 
-    # Connect Pisound IN to PD IN 1
     connect_ports $PISOUND_CLIENT $PISOUND_MIDI_IN_PORT $PD_CLIENT $PD_MIDI_IN_1
-    
-    # Connect PD OUT 1 to Pisound OUT
     connect_ports $PD_CLIENT $PD_MIDI_OUT_1 $PISOUND_CLIENT $PISOUND_MIDI_OUT_PORT
-    
-    # Connect Minilab MIDI OUT to PD IN 2
+
     connect_ports $MINILAB3_CLIENT $MINILAB3_MIDI_OUT_PORT $PD_CLIENT $PD_MIDI_IN_2
-    
-    # Connect PD OUT 2 to Minilab MIDI IN
     connect_ports $PD_CLIENT $PD_MIDI_OUT_2 $MINILAB3_CLIENT $MINILAB3_MIDI_IN_PORT
+
+    connect_ports $THRU_CLIENT $THRU_MIDI_OUT_PORT $PD_CLIENT $PD_MIDI_IN_3
+    connect_ports $PD_CLIENT $PD_MIDI_OUT_3 $THRU_CLIENT $THRU_MIDI_IN_PORT
 
     # Wait before rechecking connections
     sleep 5
