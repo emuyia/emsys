@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# sudo ln -s /home/patch/repos/emsys/midi_setup.service /etc/systemd/system/midi_setup.service
-# sudo systemctl daemon-reload && sudo systemctl enable midi_setup && sudo systemctl start midi_setup
-
 # Function to get the client number by name
 get_client_number() {
     aconnect -i | grep -B1 "$1" | grep -v "ctl" | grep "client" | awk '{print $2}' | tr -d ':'
