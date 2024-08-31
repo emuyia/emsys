@@ -1,0 +1,16 @@
+# sudo ln -s /home/patch/repos/emsys/seq66.service /etc/systemd/system/seq66.service
+# sudo systemctl daemon-reload && sudo systemctl enable seq66 && sudo systemctl start seq66
+
+[Unit]
+Description=seq66
+
+[Service]
+ExecStart=/usr/local/bin/seq66cli
+WorkingDirectory=/home/patch/repos/emsys/
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=patch
+
+[Install]
+WantedBy=multi-user.target
