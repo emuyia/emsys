@@ -1,5 +1,6 @@
 # Auto detect text files and perform LF normalization
 * text=auto
 *.pd linguist-language=Pure Data
-*.pd linguist-detectable
-*.sh linguist-vendored
+*.pd linguist-detectable=true
+*.sh linguist-detectable=false
+*.py linguist-detectable=false
