@@ -3,7 +3,7 @@
 
 [Unit]
 Description=emsys_clock
-After=network.target
+After=sound.target midi.target
 
 [Service]
 Type=simple
