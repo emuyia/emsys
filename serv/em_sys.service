@@ -1,22 +1,19 @@
-# sudo ln -s /home/patch/repos/emsys/serv/em_sys.service /etc/systemd/system/em_sys.service
-# sudo systemctl daemon-reload && sudo systemctl enable em_sys && sudo systemctl restart em_sys
+# sudo ln -s /home/patch/repos/emsys/serv/em_sys.service /home/patch/.config/systemd/user/em_sys.service
+# systemctl --user daemon-reload && systemctl --user enable em_sys && systemctl --user start em_sys
 
 [Unit]
 Description=em_sys
-After=sound.target midi.target jack.service
-Requires=jack.service
+After=sound.target midi.target
 
 [Service]
 Type=simple
-User=patch
-Environment="JACK_PROMISCUOUS_SERVER=jack"
-Environment="DISPLAY=:0"
+EnvironmentFile=/home/patch/.myenv
 WorkingDirectory=/home/patch/repos/emsys
 ExecStartPre=/usr/bin/sleep 10
-ExecStart=/home/patch/Applications/pdnext/bin/pd -jack -rt -nogui /home/patch/repos/emsys/test_midi.pd
+ExecStart=/home/patch/repos/emsys/serv/em_sys.sh
 Restart=always
 LimitMEMLOCK=infinity
-LimitRTPRIO=99
+LimitRTPRIO=98
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target

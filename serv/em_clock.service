@@ -9,12 +9,10 @@ Requires=jack.service
 [Service]
 Type=simple
 User=patch
-Environment="JACK_PROMISCUOUS_SERVER=jack"
-Environment="DISPLAY=:0"
 WorkingDirectory=/home/patch/repos/emsys
-#ExecStartPre=/usr/bin/sleep 90
+# ExecStartPre=/usr/bin/sleep 5
 ExecStart=/home/patch/repos/emsys/.venv/bin/python3 /home/patch/repos/emsys/serv/em_clock.py 'Midi Through' 'Pure Data Midi-Out 1'
-#Restart=always
+Restart=always
 LimitMEMLOCK=infinity
 LimitRTPRIO=99
 
