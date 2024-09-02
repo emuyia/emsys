@@ -1,0 +1,17 @@
+# sudo ln -s /home/patch/repos/emsys/serv/em_midisetup.service /etc/systemd/system/em_midisetup.service
+# sudo systemctl daemon-reload && sudo systemctl enable em_midisetup && sudo systemctl restart em_midisetup
+
+[Unit]
+Description=emsys
+After=network.target
+
+[Service]
+ExecStart=/home/patch/repos/emsys/serv/em_midisetup.sh
+WorkingDirectory=/home/patch/repos/emsys
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=patch
+
+[Install]
+WantedBy=multi-user.target
