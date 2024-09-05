@@ -12,8 +12,8 @@ WorkingDirectory=/home/patch/repos/emsys
 ExecStartPre=/usr/bin/sleep 10
 ExecStart=/home/patch/repos/emsys/serv/em_sys.sh
 Restart=always
-LimitMEMLOCK=infinity
-LimitRTPRIO=98
+#LimitMEMLOCK=infinity
+#LimitRTPRIO=98
 
 [Install]
 WantedBy=default.target

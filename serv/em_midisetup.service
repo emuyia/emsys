@@ -1,17 +1,19 @@
-# sudo ln -s /home/patch/repos/emsys/serv/em_midisetup.service /etc/systemd/system/em_midisetup.service
-# sudo systemctl daemon-reload && sudo systemctl enable em_midisetup && sudo systemctl restart em_midisetup
+# sudo ln -s /home/patch/repos/emsys/serv/em_midisetup.service /home/patch/.config/systemd/user/em_midisetup.service
+# systemctl --user daemon-reload && systemctl --user enable em_midisetup && systemctl --user start em_midisetup
 
 [Unit]
-Description=emsys
-After=network.target
+Description=em_midisetup
+After=sound.target midi.target
 
 [Service]
+Type=simple
+EnvironmentFile=/home/patch/.myenv
 ExecStart=/home/patch/repos/emsys/serv/em_midisetup.sh
 WorkingDirectory=/home/patch/repos/emsys
 StandardOutput=inherit
 StandardError=inherit
 Restart=always
-User=patch
+#User=patch
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target

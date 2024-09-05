@@ -1,20 +1,19 @@
-# sudo ln -s /home/patch/repos/emsys/serv/em_clock.service /etc/systemd/system/em_clock.service
-# sudo systemctl daemon-reload && sudo systemctl enable em_clock && sudo systemctl restart em_clock
+# sudo ln -s /home/patch/repos/emsys/serv/em_clock.service /home/patch/.config/systemd/user/em_clock.service
+# systemctl --user daemon-reload && systemctl --user enable em_clock && systemctl --user start em_clock
 
 [Unit]
 Description=emsys_clock
-After=sound.target midi.target jack.service
-Requires=jack.service
+After=sound.target midi.target
 
 [Service]
 Type=simple
-User=patch
+EnvironmentFile=/home/patch/.myenv
 WorkingDirectory=/home/patch/repos/emsys
-# ExecStartPre=/usr/bin/sleep 5
-ExecStart=/home/patch/repos/emsys/.venv/bin/python3 /home/patch/repos/emsys/serv/em_clock.py 'Midi Through' 'Pure Data Midi-Out 1'
+ExecStartPre=/usr/bin/sleep 10
+ExecStart=/home/patch/repos/emsys/.venv/bin/python /home/patch/repos/emsys/serv/em_clock.py 'Midi Through' 'Pure Data Midi-Out 1'
 Restart=always
-LimitMEMLOCK=infinity
-LimitRTPRIO=99
+#LimitMEMLOCK=infinity
+#LimitRTPRIO=99
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target
