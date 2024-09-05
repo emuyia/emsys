@@ -1,0 +1,7 @@
+#N canvas 2749 1545 520 310 12;
+#X obj 32 104 midiout 3;
+#X msg 31 68 240 0 32 107 127 66 2 2 64 106 33 247;
+#X obj 31 32 loadbang;
+#X text 100 30 required for init ml3_text;
+#X connect 1 0 0 0;
+#X connect 2 0 1 0;
