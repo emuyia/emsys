@@ -8,7 +8,7 @@
 #X msg 366 390 240 0 32 107 127 66 2 2 22 \$1 \$2 \$3 \$4 247;
 #X msg 383 277 0 0 0;
 #X obj 362 354 prepend 4;
-#X text 347 21 set button colours (rgb);
+#X text 762 25 set button colours (rgb);
 #X obj 355 314 list-apply / 2;
 #X obj 79 67 tosymbol;
 #X obj 81 99 sel clear;
@@ -30,6 +30,9 @@
 #X obj 364 247 list;
 #X msg 886 154 128 0 225;
 #X obj 450 114 sel red orange yellow green cyan blue purple white;
+#X text 447 20 colour (word);
+#X text 270 21 btn (0-11);
+#X text 127 23 on/off (0/1) or 'clear';
 #X connect 0 0 2 0;
 #X connect 1 0 8 0;
 #X connect 2 0 1 0;
