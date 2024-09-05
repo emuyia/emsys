@@ -2,17 +2,41 @@
     "version": "2.0.0",
     "tasks": [
       {
-        "label": "SSH to Patchbox",
+        "label": "Pd over SSH",
         "type": "shell",
         "command": "ssh -X patch@patchbox.local '~/Applications/pdnext/bin/pd &'",
-        "problemMatcher": []
+        "problemMatcher": [],
+        "presentation": {
+          "echo": true,
+          "reveal": "never",
+          "focus": false,
+          "panel": "dedicated",
+          "showReuseMessage": true,
+          "clear": false
+        }
       },
       {
-        "label": "Restart Patchbox",
+        "label": "Reboot",
         "type": "shell",
-        "command": "ssh -X patch@patchbox.local 'reboot",
-        "problemMatcher": []
+        "command": "ssh -X patch@patchbox.local 'sudo reboot'",
+        "problemMatcher": [],
+        "presentation": {
+          "echo": true,
+          "reveal": "never",
+          "focus": false,
+          "panel": "dedicated",
+          "showReuseMessage": true,
+          "clear": false
+        }
+      },
+      {
+        "label": "SSH",
+        "type": "shell",
+        "command": "ssh -X patch@patchbox.local",
+        "problemMatcher": [],
+        "presentation": {
+          "panel": "new",
+        }
       }
     ]
   }
-  
