@@ -41,7 +41,7 @@ while True:
     for client_name, client_num in client_cache.items():
         print(f"{client_name}: {client_num}")
 
-    # Hardcoded port numbers
+    # Hardcoded port numbers - assumes we have Pd ports set to 4/4
     CLK_OUT, CLK_IN, PS_OUT, PS_IN, ML3_OUT, ML3_IN = 0, 0, 0, 0, 0, 0
     PD_IN_1, PD_IN_2, PD_IN_3, PD_OUT_1, PD_OUT_2, PD_OUT_3 = 0, 1, 2, 4, 5, 6
 
@@ -101,5 +101,7 @@ while True:
     else:
         print("All clients connected successfully.")
 
+    print("====")
+    
     # Wait before rechecking connections
     time.sleep(5)

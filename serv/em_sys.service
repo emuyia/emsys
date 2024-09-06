@@ -1,6 +1,3 @@
-# ln -s /home/patch/repos/emsys/serv/em_sys.service /home/patch/.config/systemd/user/em_sys.service
-# systemctl --user daemon-reload && systemctl --user enable em_sys && systemctl --user restart em_sys
-
 [Unit]
 Description=em_sys
 After=sound.target midi.target
@@ -11,7 +8,7 @@ EnvironmentFile=/home/patch/.myenv
 WorkingDirectory=/home/patch/repos/emsys
 ExecStartPre=/usr/bin/sleep 10
 ExecStart=/home/patch/repos/emsys/serv/em_sys.sh
-Restart=yes
+Restart=always
 #LimitMEMLOCK=infinity
 #LimitRTPRIO=98
 

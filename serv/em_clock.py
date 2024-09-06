@@ -1,6 +1,6 @@
 from time import perf_counter, sleep
 from multiprocessing import Process, Value, freeze_support
-import mido
+import mido # type: ignore
 
 
 class MidiClockGen:
@@ -17,20 +17,18 @@ class MidiClockGen:
 
     @staticmethod
     def _midi_clock_generator(out_port, pulse_rate, run):
-        midi_output = mido.open_output(out_port, virtual=True)
+        midi_output = mido.open_output(out_port, virtual=True)  # Ensure the virtual port is created
         clock_tick = mido.Message('clock')
-
-        next_tick_time = perf_counter()
-
         while run.value:
             midi_output.send(clock_tick)
             t1 = perf_counter()
 
-            # Sleep and log timing details for debugging
-            sleep(pulse_rate.value)
+            sleep(pulse_rate.value * 0.8)  # Sleep for 80% of the pulse rate duration
             t2 = perf_counter()
 
-            #print(f"Pulse sent. Expected interval: {pulse_rate.value:.6f}s, Actual interval: {t2 - t1:.6f}s")
+            while (t2 - t1) < pulse_rate.value:
+                t2 = perf_counter()
+
 
     def launch_process(self, out_port):
         if self.midi_process:

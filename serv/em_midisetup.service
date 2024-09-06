@@ -1,6 +1,3 @@
-# ln -s /home/patch/repos/emsys/serv/em_midisetup.service /home/patch/.config/systemd/user/em_midisetup.service
-# systemctl --user daemon-reload && systemctl --user enable em_midisetup && systemctl --user restart em_midisetup
-
 [Unit]
 Description=em_midisetup
 After=sound.target midi.target
@@ -12,7 +9,7 @@ ExecStart=/home/patch/repos/emsys/.venv/bin/python /home/patch/repos/emsys/serv/
 WorkingDirectory=/home/patch/repos/emsys
 StandardOutput=inherit
 StandardError=inherit
-Restart=yes
+Restart=always
 #User=patch
 
 [Install]
