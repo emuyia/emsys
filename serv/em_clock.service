@@ -1,5 +1,5 @@
-# sudo ln -s /home/patch/repos/emsys/serv/em_clock.service /home/patch/.config/systemd/user/em_clock.service
-# systemctl --user daemon-reload && systemctl --user enable em_clock && systemctl --user start em_clock
+# ln -s /home/patch/repos/emsys/serv/em_clock.service /home/patch/.config/systemd/user/em_clock.service
+# systemctl --user daemon-reload && systemctl --user enable em_clock && systemctl --user restart em_clock
 
 [Unit]
 Description=emsys_clock
@@ -10,8 +10,8 @@ Type=simple
 EnvironmentFile=/home/patch/.myenv
 WorkingDirectory=/home/patch/repos/emsys
 ExecStartPre=/usr/bin/sleep 10
-ExecStart=/home/patch/repos/emsys/.venv/bin/python /home/patch/repos/emsys/serv/em_clock.py 'Midi Through' 'Pure Data Midi-Out 1'
-Restart=always
+ExecStart=/home/patch/repos/emsys/.venv/bin/python /home/patch/repos/emsys/serv/em_clock.py
+Restart=yes
 #LimitMEMLOCK=infinity
 #LimitRTPRIO=99
 

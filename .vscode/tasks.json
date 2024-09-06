@@ -37,6 +37,20 @@
         "presentation": {
           "panel": "new",
         }
+      },
+      {
+        "label": "Restart systemctl services",
+        "type": "shell",
+        "command": "ssh -X patch@patchbox.local 'systemctl --user daemon-reload && systemctl --user enable em_clock; systemctl --user restart em_clock; systemctl --user enable em_sys; systemctl --user restart em_sys; systemctl --user enable em_midisetup; systemctl --user restart em_midisetup'",
+        "problemMatcher": [],
+        "presentation": {
+          "echo": true,
+          "reveal": "never",
+          "focus": false,
+          "panel": "dedicated",
+          "showReuseMessage": true,
+          "clear": false
+        }
       }
     ]
   }
