@@ -39,15 +39,6 @@
         }
       },
       {
-        "label": "startx",
-        "type": "shell",
-        "command": "ssh patch@patchbox.local 'startx'",
-        "problemMatcher": [],
-        "presentation": {
-          "panel": "new",
-        }
-      },
-      {
         "label": "Restart em_clock service",
         "type": "shell",
         "command": "ssh patch@patchbox.local 'systemctl --user daemon-reload && systemctl --user restart em_clock'",
