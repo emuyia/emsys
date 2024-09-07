@@ -1,4 +1,0 @@
-md B01 mnm B04 rep 2 len 16 tin 1;
-md B02 mnm B05 rep 2 len 16 tin 0;
-md B03 mnm B06 rep 1 len 16 tin 0;
-md B03 mnm B07 rep 2 len 16 tin 0;
