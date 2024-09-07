@@ -1,4 +1,4 @@
-#N canvas 1887 1139 750 555 12;
+#N canvas 1828 1122 750 555 12;
 #X msg 78 328 \; pd dsp 1;
 #X obj 78 288 loadbang;
 #X obj 175 366 dac~;
@@ -8,7 +8,7 @@
 #X text 202 304 test click;
 #X obj 335 207 em.set.bpm;
 #X obj 334 149 em.set.load;
-#X obj 336 115 em.set;
+#X obj 332 116 em.set;
 #X obj 249 115 em.ctl;
 #X obj 138 114 em.transport;
 #X text 371 332 add debug messaging;
