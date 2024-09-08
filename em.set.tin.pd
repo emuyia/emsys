@@ -45,6 +45,8 @@
 #X text 357 487 once 250 is sent \, turn off tin again \, only if tin=1 \, it's the last rep \, and we haven't touched the manual tin ctl, f 22;
 #X text 442 164 don't let transport messages through to md/mnm if pgm change is occurring. turn back on at the start of next segment. this is because of a bug that overwhelms MCL if you do transport & pgm at the same time., f 31;
 #X text 176 67 tin: send stop signal to md/mnm just before next rep to fix desync or interrupt mismatching scale length patterns, f 32;
+#X obj 65 492 s tin.tinning;
+#X obj 72 447 sel 250;
 #X connect 0 0 1 0;
 #X connect 1 0 3 0;
 #X connect 2 0 1 1;
@@ -58,6 +60,7 @@
 #X connect 9 0 8 0;
 #X connect 10 0 18 0;
 #X connect 10 0 19 0;
+#X connect 10 0 47 0;
 #X connect 11 0 10 0;
 #X connect 12 0 11 0;
 #X connect 13 0 11 0;
@@ -88,3 +91,4 @@
 #X connect 39 0 40 0;
 #X connect 40 0 21 0;
 #X connect 41 0 21 0;
+#X connect 47 0 46 0;
