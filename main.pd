@@ -1,4 +1,4 @@
-#N canvas 2387 1268 928 555 12;
+#N canvas 2373 1299 928 555 12;
 #X msg 78 328 \; pd dsp 1;
 #X obj 78 288 loadbang;
 #X obj 175 366 dac~;
@@ -15,12 +15,11 @@
 #X text 370 300 TODO:;
 #X obj 335 177 em.set.tin;
 #X obj 337 236 em.set.ui;
-#X text 368 392 implement bpm ramps;
-#X text 392 358 make sure poly works;
-#X text 391 375 check things stay in sync well enough;
-#X text 368 412 port over march set and use it to test;
-#X text 365 441 if happy \, proceed to arrange material for new set \, and worry about new features if time is available by the time the structure is down, f 45;
+#X text 370 360 implement bpm ramps;
+#X text 370 442 port over march set and use it to test;
+#X text 367 470 if happy \, proceed to arrange material for new set \, and worry about new features if time is available by the time the structure is down, f 45;
 #X text 481 206 maybe: make it so that instead of holding onto a tin through MD pgm changes until a slot opens up \, automatically add a rep so that it can perform the tin as soon as possible rather than waiting;
+#X text 404 388 make sure things stay sorta in sync across ramps? or think of way to account for it. tempo changes and desync kind of sucks here;
 #X connect 1 0 0 0;
 #X connect 3 0 4 0;
 #X connect 4 0 2 0;

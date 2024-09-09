@@ -77,7 +77,7 @@
 #X obj 1268 833 f;
 #X obj 815 729 r s.do_pgm_out;
 #X obj 896 760 bng 20 250 50 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000;
-#X obj 1326 760 r s.first_rep;
+#X obj 1328 770 r s.first_rep;
 #X obj 1164 777 sel 0;
 #X obj 1211 777 sel 0;
 #X obj 1259 777 change;
@@ -142,7 +142,7 @@
 #X obj 1179 644 s s.end;
 #X obj 410 1196 r s.end;
 #X msg 354 1303 end reached;
-#X obj 359 1259 print s;
+#X obj 423 1352 print s;
 #X obj 273 1259 s t.stop;
 #X text 164 1258 optional: stop transport at end of set automatically, f 14;
 #X text 143 1134 reset onebang status (and thereby 'end of set' status) when set is reset, f 17;
@@ -154,12 +154,12 @@
 #X floatatom 400 1018 5 0 0 0 - - - 0;
 #X obj 1122 514 bng 20 250 50 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000;
 #X obj 442 1058 bng 20 250 50 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000;
-#X obj 958 947 s s.seg_reps_lookahead;
+#X obj 952 958 s s.seg_reps_lookahead;
 #X text 3100 832 comment;
 #X obj 1020 1018 s s.seg_tin_lookahead;
 #X obj 987 985 s s.loop_len_lookahead;
 #X obj 1052 1058 s s.seg_bpm_target_lookahead;
-#X obj 1074 1076 s s.seg_bpm_rtime_lookahead;
+#X obj 1024 1091 s s.seg_bpm_rtime_lookahead;
 #X obj 1074 1125 s s.seg_poly_lookahead;
 #X obj 1038 910 s t.length;
 #X obj 1461 718 tgl 20 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000 0 1;
@@ -186,6 +186,7 @@
 #X connect 4 0 79 0;
 #X connect 4 0 159 0;
 #X connect 5 0 160 0;
+#X connect 5 0 80 0;
 #X connect 6 0 68 1;
 #X connect 7 0 69 1;
 #X connect 8 0 6 0;

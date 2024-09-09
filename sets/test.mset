@@ -1,5 +1,5 @@
-md A01 mnm A01 rep 1 len 12 tin 1 bpm 120 bpmr 4 poly 0;
-md A02 mnm A02 rep 1 len 12 tin 1 bpm 150 bpmr 10 poly 0;
+md A01 mnm A01 rep 1 len 12 tin 1 bpm 120 bpmr 0 poly 0;
+md A02 mnm A02 rep 1 len 12 tin 1 bpm 150 bpmr 7 poly 1;
 md A02 mnm A03 rep 1 len 12 tin 0 bpm 0 bpmr 0 poly 0;
 md A03 mnm A04 rep 1 len 12 tin 0 bpm 80 bpmr 10 poly 0;
 md A04 mnm A04 rep 1 len 12 tin 0 bpm 0 bpmr 0 poly 1;
