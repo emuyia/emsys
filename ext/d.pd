@@ -1,0 +1,6 @@
+#N canvas 0 0 450 300 12;
+#X obj 84 152 print \$1;
+#X obj 84 81 inlet;
+#X obj 86 113 tosymbol;
+#X connect 1 0 2 0;
+#X connect 2 0 0 0;

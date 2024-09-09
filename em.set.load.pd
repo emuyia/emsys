@@ -1,4 +1,4 @@
-#N canvas 1440 28 1600 840 12;
+#N canvas 1949 1186 1063 538 12;
 #X obj 177 83 loadbang;
 #X obj 117 379 text define boot;
 #X obj 220 145 del 50;
@@ -17,6 +17,8 @@
 #X text 319 175 load mset file from boot.txt \, and load .mset file into [text define set], f 24;
 #X msg 138 341 read boot.set;
 #X msg 96 309 write boot.set;
+#X obj 494 309 symbol;
+#X obj 494 340 s s.mset_name;
 #X connect 0 0 2 0;
 #X connect 0 0 16 0;
 #X connect 2 0 3 0;
@@ -26,6 +28,7 @@
 #X connect 5 0 7 0;
 #X connect 5 1 6 0;
 #X connect 5 1 12 0;
+#X connect 5 1 18 0;
 #X connect 7 0 8 0;
 #X connect 7 0 9 0;
 #X connect 8 0 9 0;
@@ -36,3 +39,4 @@
 #X connect 13 0 14 0;
 #X connect 16 0 1 0;
 #X connect 17 0 1 0;
+#X connect 18 0 19 0;

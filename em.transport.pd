@@ -1,4 +1,4 @@
-#N canvas 2011 1235 1277 628 12;
+#N canvas 1646 1002 1277 628 12;
 #X obj 228 197 midirealtimein;
 #X obj 344 448 counter 0 0 15;
 #X obj 326 511 s t.count;

@@ -1,4 +1,4 @@
-#N canvas 1828 1122 750 555 12;
+#N canvas 1808 261 750 555 12;
 #X msg 78 328 \; pd dsp 1;
 #X obj 78 288 loadbang;
 #X obj 175 366 dac~;
@@ -17,6 +17,7 @@
 #X text 385 441 thoroughly test;
 #X text 370 300 TODO:;
 #X obj 335 177 em.set.tin;
+#X obj 337 236 em.set.ui;
 #X connect 1 0 0 0;
 #X connect 3 0 4 0;
 #X connect 4 0 2 0;
