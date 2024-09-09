@@ -33,6 +33,7 @@ while True:
         "CLK_OUT_CLIENT": get_client_number_cache("RtMidiOut Client", input=True),
         "CLK_IN_CLIENT": get_client_number_cache("RtMidiIn Client", input=False),
         "PS_CLIENT": get_client_number_cache("pisound"),
+        "MCL_CLIENT": get_client_number_cache("MegaCMD"),
         "ML3_CLIENT": get_client_number_cache("Minilab3"),
         "PD_CLIENT": get_client_number_cache("Pure Data")
     }
@@ -42,8 +43,8 @@ while True:
         print(f"{client_name}: {client_num}")
 
     # Hardcoded port numbers - assumes we have Pd ports set to 4/4
-    CLK_OUT, CLK_IN, PS_OUT, PS_IN, ML3_OUT, ML3_IN = 0, 0, 0, 0, 0, 0
-    PD_IN_1, PD_IN_2, PD_IN_3, PD_OUT_1, PD_OUT_2, PD_OUT_3 = 0, 1, 2, 4, 5, 6
+    CLK_OUT, CLK_IN, PS_OUT, PS_IN, ML3_OUT, ML3_IN, MCL_OUT, MCL_IN = 0, 0, 0, 0, 0, 0, 0, 0
+    PD_IN_1, PD_IN_2, PD_IN_3, PD_IN_4, PD_OUT_1, PD_OUT_2, PD_OUT_3, PD_OUT_4 = 0, 1, 2, 3, 4, 5, 6, 7
 
     # Get all current connections once per loop
     connections = get_all_connections()
@@ -90,6 +91,18 @@ while True:
     # Minilab3 to Pd 3 (note/CC/transport ctl)
     if client_cache["ML3_CLIENT"] and client_cache["PD_CLIENT"]:
         connect_ports(connections, client_cache["ML3_CLIENT"], ML3_OUT, client_cache["PD_CLIENT"], PD_IN_3)
+    else:
+        missing_clients.append("Minilab3 to Pure Data")
+
+    # MCL to Pd 4 (external hardware - extra functionality)
+    if client_cache["MCL_CLIENT"] and client_cache["PD_CLIENT"]:
+        connect_ports(connections, client_cache["MCL_CLIENT"], MCL_OUT, client_cache["PD_CLIENT"], PD_IN_4)
+    else:
+        missing_clients.append("Minilab3 to Pure Data")
+    
+    # MCL to Pd 4 (external hardware - extra functionality)
+    if client_cache["MCL_CLIENT"] and client_cache["PD_CLIENT"]:
+        connect_ports(connections, client_cache["PD_CLIENT"], PD_OUT_4, client_cache["MCL_CLIENT"], MCL_IN)
     else:
         missing_clients.append("Minilab3 to Pure Data")
 

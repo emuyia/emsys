@@ -1,4 +1,4 @@
-#N canvas 1808 261 857 555 12;
+#N canvas 2387 1268 928 555 12;
 #X msg 78 328 \; pd dsp 1;
 #X obj 78 288 loadbang;
 #X obj 175 366 dac~;
@@ -20,6 +20,7 @@
 #X text 391 375 check things stay in sync well enough;
 #X text 368 412 port over march set and use it to test;
 #X text 365 441 if happy \, proceed to arrange material for new set \, and worry about new features if time is available by the time the structure is down, f 45;
+#X text 481 206 maybe: make it so that instead of holding onto a tin through MD pgm changes until a slot opens up \, automatically add a rep so that it can perform the tin as soon as possible rather than waiting;
 #X connect 1 0 0 0;
 #X connect 3 0 4 0;
 #X connect 4 0 2 0;
