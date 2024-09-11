@@ -1,4 +1,4 @@
-#N canvas 1562 997 1604 815 12;
+#N canvas 2292 928 1068 396 12;
 #X obj 1030 644 route md mnm rep len tin bpm bpmr poly;
 #X floatatom 1021 759 5 0 0 0 - - - 0;
 #X floatatom 1074 760 5 0 0 0 - - - 0;
@@ -57,14 +57,14 @@
 #X obj 704 379 b;
 #X msg 593 421 0;
 #X obj 550 465 s s.hold;
-#X msg 799 219 clear;
-#X obj 769 250 pipe 250;
-#X obj 769 299 - 1;
+#X msg 841 265 clear;
+#X obj 792 297 pipe 250;
+#X obj 750 294 - 1;
 #X obj 620 465 s tin.toggle;
 #X obj 704 428 del 100;
-#X obj 769 152 r s.seek_seg;
+#X obj 763 219 r s.seek_seg;
 #X text 852 378 send pgm out on the load of the last rep of the current segment. or on reset \, or 100ms after manually seeking to a seg, f 22;
-#X text 740 84 lets user seek to a specific seg \, with a 250 pipe to buff out spamming value changes, f 23;
+#X text 761 154 lets user seek to a specific seg \, with a 250 pipe to buff out spamming value changes, f 23;
 #X text 470 276 if we seek a seg \, & we're live \, turn off hold & tin \, and queue up seg change at counter. if we're stopped \, don't worry about hold & tin as their states are inconsequential \, and set counter output immediately, f 28;
 #X text 391 514 sending out data about the current & next seg \, and if the set is at the start, f 19;
 #X obj 926 808 f;
@@ -103,7 +103,7 @@
 #X obj 482 760 r t.beat1;
 #X obj 482 809 onebang;
 #X obj 564 760 r s.start;
-#X obj 769 201 t f b;
+#X obj 792 248 t f b;
 #X obj 641 760 r t.downbeat;
 #X obj 472 947 counter 0 0 3;
 #X obj 528 1018 s s.current_rep;
@@ -147,7 +147,7 @@
 #X text 164 1258 optional: stop transport at end of set automatically, f 14;
 #X text 143 1134 reset onebang status (and thereby 'end of set' status) when set is reset, f 17;
 #X text 410 1104 hack: if last segment has only 1 rep \, make sure we still detect the end of the set by setting [change] to -1, f 29;
-#X text 1252 946 segment data key: - md & mnm: pgms to load on mnm & md synths - rep: how many times to repeat the segment - len: the loop length of the segment - tin: whether to jumpstart the transport at the end of the segment \, either to interrupt a md/mnm pattern with an misaligned scale length \, or to fix clock desync issues - bpm: target bpm for current seg to ramp up to - bpmr: ramp time of the bpm target (s) - poly: whether to activate mnm poly mode, f 81;
+#X text 1252 947 segment data key: - md & mnm: pgms to load on mnm & md synths - rep: how many times to repeat the segment - len: the loop length of the segment - tin: whether to jumpstart the transport at the end of the segment \, either to interrupt a md/mnm pattern with an misaligned scale length \, or to fix clock desync issues - bpm: target bpm for current seg to ramp up to - bpmr: ramp time of the bpm target (s) - poly: whether to activate mnm poly mode, f 81;
 #X obj 610 833 r s.current_seg_data;
 #X obj 610 882 bng 20 250 50 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000;
 #X obj 1316 485 s s.num_of_segs;
@@ -169,6 +169,8 @@
 #X floatatom 823 988 5 0 0 0 - - - 0;
 #X obj 864 972 pgmout 64;
 #X obj 1373 858 midiout 4;
+#X floatatom 766 330 5 0 0 0 - - - 0;
+#X obj 579 201 loadbang;
 #X connect 0 0 8 0;
 #X connect 0 1 9 0;
 #X connect 0 2 1 0;
@@ -249,10 +251,10 @@
 #X connect 56 0 57 0;
 #X connect 56 0 61 0;
 #X connect 58 0 59 0;
-#X connect 59 0 60 0;
 #X connect 60 0 54 1;
+#X connect 60 0 170 0;
 #X connect 62 0 36 0;
-#X connect 63 0 104 0;
+#X connect 63 0 60 0;
 #X connect 68 0 82 0;
 #X connect 68 0 84 0;
 #X connect 69 0 83 0;
@@ -336,3 +338,4 @@
 #X connect 164 0 165 0;
 #X connect 164 0 166 0;
 #X connect 167 0 168 0;
+#X connect 171 0 49 0;
