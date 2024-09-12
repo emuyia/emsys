@@ -1,0 +1,27 @@
+MIDI
+    PORTS
+        TURBO 1: 8x
+        TURBO 2: 1x
+        TURBO USB: 1x
+        DRIVER 2: GENER
+        CTRL PORT: 2
+    SYNC
+        CLOCK RECV: 2
+        TRANS RECV: 2
+        CLOCK SEND: 2
+        TRANS SEND: 2
+    ROUTING
+        MIDI 1 FWD: OFF
+        MIDI 2 FWD: OFF
+        USB FWD: 2
+        CC LOOP: OFF
+    PROGRAM
+        PRG MODE: BASIC
+        PRG IN: 15
+        PRG OUT: --
+    MD MIDI
+        CHRO CHAN: 11
+        POLY CHAN: 12
+        TRIG CHAN: 13
+    GENERAL MIDI
+        MUTE CC: --

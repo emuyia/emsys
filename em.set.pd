@@ -1,4 +1,4 @@
-#N canvas 2292 928 1068 396 12;
+#N canvas 1440 928 1920 976 12;
 #X obj 1030 644 route md mnm rep len tin bpm bpmr poly;
 #X floatatom 1021 759 5 0 0 0 - - - 0;
 #X floatatom 1074 760 5 0 0 0 - - - 0;
