@@ -4,7 +4,7 @@
       {
         "label": "Pd over SSH",
         "type": "shell",
-        "command": "ssh -X patch@patchbox.local 'systemctl --user stop em_sys; ~/Applications/pdnext/bin/pd &'",
+        "command": "ssh -X patch@patchbox.local 'systemctl --user stop em_sys; ~/Applications/pdnext/bin/pd ~/repos/emsys/main.pd &'",
         "problemMatcher": [],
         "presentation": {
           "echo": true,
@@ -52,20 +52,20 @@
           "clear": false
         }
       },
-      {
-        "label": "Restart em_sys service",
-        "type": "shell",
-        "command": "ssh patch@patchbox.local 'systemctl --user daemon-reload && systemctl --user restart em_sys'",
-        "problemMatcher": [],
-        "presentation": {
-          "echo": true,
-          "reveal": "never",
-          "focus": false,
-          "panel": "dedicated",
-          "showReuseMessage": true,
-          "clear": false
-        }
-      },
+      //{
+      //  "label": "Restart em_sys service",
+      //  "type": "shell",
+      //  "command": "ssh patch@patchbox.local 'systemctl --user daemon-reload && systemctl --user restart em_sys'",
+      //  "problemMatcher": [],
+      //  "presentation": {
+      //    "echo": true,
+      //    "reveal": "never",
+      //    "focus": false,
+      //    "panel": "dedicated",
+      //    "showReuseMessage": true,
+      //    "clear": false
+      //  }
+      //},
       {
         "label": "Restart em_midisetup service",
         "type": "shell",
@@ -94,20 +94,20 @@
           "clear": false
         }
       },
-      {
-        "label": "Enable em_sys service",
-        "type": "shell",
-        "command": "ssh patch@patchbox.local 'ln -s /home/patch/repos/emsys/serv/em_sys.service /home/patch/.config/systemd/user/em_sys.service && systemctl --user daemon-reload && systemctl --user enable em_sys'",
-        "problemMatcher": [],
-        "presentation": {
-          "echo": true,
-          "reveal": "never",
-          "focus": false,
-          "panel": "dedicated",
-          "showReuseMessage": true,
-          "clear": false
-        }
-      },
+      //{
+      //  "label": "Enable em_sys service",
+      //  "type": "shell",
+      //  "command": "ssh patch@patchbox.local 'ln -s /home/patch/repos/emsys/serv/em_sys.service /home/patch/.config/systemd/user/em_sys.service && systemctl --user daemon-reload && systemctl --user enable em_sys'",
+      //  "problemMatcher": [],
+      //  "presentation": {
+      //    "echo": true,
+      //    "reveal": "never",
+      //    "focus": false,
+      //    "panel": "dedicated",
+      //    "showReuseMessage": true,
+      //    "clear": false
+      //  }
+      //},
       {
         "label": "Enable em_clock service",
         "type": "shell",
@@ -153,7 +153,7 @@
       {
         "label": "Restart all services",
         "type": "shell",
-        "command": "ssh patch@patchbox.local 'systemctl --user daemon-reload && systemctl --user restart em_clock; systemctl --user restart em_sys; systemctl --user restart em_midisetup'",
+        "command": "ssh patch@patchbox.local 'systemctl --user daemon-reload && systemctl --user restart em_clock; systemctl --user restart em_midisetup'",
         "problemMatcher": [],
         "presentation": {
           "echo": true,
@@ -167,7 +167,7 @@
       {
         "label": "Enable all services",
         "type": "shell",
-        "command": "ssh patch@patchbox.local 'ln -s /home/patch/repos/emsys/serv/em_clock.service /home/patch/.config/systemd/user/em_clock.service; ln -s /home/patch/repos/emsys/serv/em_sys.service /home/patch/.config/systemd/user/em_sys.service; ln -s /home/patch/repos/emsys/serv/em_midisetup.service /home/patch/.config/systemd/user/em_midisetup.service; systemctl --user daemon-reload; systemctl --user enable em_clock; systemctl --user enable em_sys; systemctl --user enable em_midisetup'",
+        "command": "ssh patch@patchbox.local 'ln -s /home/patch/repos/emsys/serv/em_clock.service /home/patch/.config/systemd/user/em_clock.service; ln -s /home/patch/repos/emsys/serv/em_midisetup.service /home/patch/.config/systemd/user/em_midisetup.service; systemctl --user daemon-reload; systemctl --user enable em_clock; systemctl --user enable em_midisetup'",
         "problemMatcher": [],
         "presentation": {
           "echo": true,
