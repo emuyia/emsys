@@ -1,0 +1,17 @@
+md G03 mnm G05 rep 2 len 16 tin 0 bpm 148 bpmr 0 poly 0;
+md G03 mnm G06 rep 3 len 16 tin 0 bpm 148 bpmr 0 poly 0;
+md G03 mnm G07 rep 1 len 32 tin 0 bpm 148 bpmr 0 poly 0;
+md G03 mnm G08 rep 2 len 32 tin 0 bpm 148 bpmr 0 poly 0;
+md G03 mnm G08 rep 1 len 8 tin 1 bpm 148 bpmr 0 poly 0;
+md G03 mnm G09 rep 1 len 16 tin 1 bpm 78 bpmr 10 poly 0;
+md G04 mnm G10 rep 1 len 16 tin 1 bpm 104 bpmr 45 poly 0;
+md G04 mnm G11 rep 1 len 16 tin 0 bpm 104 bpmr 0 poly 0;
+md G04 mnm G12 rep 1 len 16 tin 0 bpm 104 bpmr 0 poly 0;
+md H02 mnm G13 rep 1 len 16 tin 0 bpm 104 bpmr 0 poly 0;
+md H02 mnm G14 rep 1 len 16 tin 0 bpm 95 bpmr 10 poly 0;
+md H03 mnm G14 rep 2 len 16 tin 0 bpm 90 bpmr 10 poly 0;
+md H04 mnm G14 rep 2 len 16 tin 0 bpm 85 bpmr 10 poly 0;
+md H05 mnm G15 rep 2 len 16 tin 0 bpm 83 bpmr 10 poly 0;
+md H06 mnm G16 rep 2 len 16 tin 0 bpm 83 bpmr 0 poly 0;
+md H06 mnm H01 rep 2 len 16 tin 0 bpm 83 bpmr 0 poly 0;
+md H07 mnm H02 rep 1 len 8 tin 0 bpm 60 bpmr 25 poly 0;
