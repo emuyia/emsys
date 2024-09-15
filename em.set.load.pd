@@ -1,4 +1,4 @@
-#N canvas 1728 1080 1063 538 12;
+#N canvas 151 982 1063 538 12;
 #X obj 177 83 loadbang;
 #X obj 117 379 text define boot;
 #X msg 220 182 0;
@@ -20,6 +20,8 @@
 #X obj 494 340 s s.mset_name;
 #X obj 220 145 del 1100;
 #X obj 124 204 del 1000;
+#X obj 546 259 r s.get_mset_name;
+#X obj 601 339 s s.rec_mset_name;
 #X connect 0 0 19 0;
 #X connect 0 0 20 0;
 #X connect 2 0 3 0;
@@ -40,5 +42,7 @@
 #X connect 15 0 1 0;
 #X connect 16 0 1 0;
 #X connect 17 0 18 0;
+#X connect 17 0 22 0;
 #X connect 19 0 2 0;
 #X connect 20 0 15 0;
+#X connect 21 0 17 0;
