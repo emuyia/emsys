@@ -1,7 +1,7 @@
-#N canvas 1440 928 1920 976 12;
+#N canvas 1440 28 1600 840 12;
 #N canvas 0 50 450 250 (subpatch) 0;
 #X array mnm_seq 8 float 3;
-#A 0 35 41 36 39 43 47 38 52;
+#A 0 20 25 51 17 20 58 17 15;
 #X coords 0 64 8 0 1471 550 1 0 0;
 #X restore 37 113 graph;
 #X floatatom 2206 645 5 0 0 0 - - - 0;
@@ -44,7 +44,7 @@
 #X obj 2207 675 + 1;
 #N canvas 0 50 450 250 (subpatch) 0;
 #X array mnm_chance 8 float 3;
-#A 0 84 85 88 82 75 71 70 102;
+#A 0 67 65 59 61 67 75 68 70;
 #X coords 0 100 8 0 1471 165 1 0 0;
 #X restore 36 706 graph;
 #X obj 2367 949 random 100;
@@ -206,7 +206,6 @@
 #X connect 31 0 16 2;
 #X connect 32 0 16 2;
 #X connect 33 0 117 1;
-#X connect 33 0 23 0;
 #X connect 34 0 143 0;
 #X connect 35 0 34 1;
 #X connect 36 0 22 0;
