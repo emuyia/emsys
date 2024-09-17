@@ -73,9 +73,9 @@
 #X obj 1033 437 - 1;
 #X floatatom 954 505 5 0 0 0 - - - 0;
 #X obj 46 380 s t.16n_db;
-#X obj 951 537 s t.count16_db;
+#X obj 950 541 s t.count16_db;
 #X obj 945 435 r t.16n_db;
-#X text 925 568 lags slightly behind to compensate for midi latency, f 21;
+#X text 924 608 lags slightly behind to compensate for midi latency, f 21;
 #X connect 0 0 23 1;
 #X connect 0 0 52 0;
 #X connect 1 0 3 0;
