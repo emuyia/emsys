@@ -1,4 +1,4 @@
-#N canvas 2042 978 1063 538 12;
+#N canvas 1987 1291 1063 538 12;
 #X obj 226 51 r s.seg_bpm_target;
 #X obj 224 87 change;
 #X obj 244 256 pack f f f;
@@ -19,6 +19,9 @@
 #X obj 234 217 f;
 #X text 82 161 wait until beat1 to begin ramp, f 11;
 #X obj 669 64 r s.seg_bpm_rtime;
+#X msg 372 55 set -1;
+#X obj 440 40 r ctl.manual_tempo_change;
+#X obj 442 71 bng 20 250 50 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000;
 #X connect 0 0 1 0;
 #X connect 1 0 13 0;
 #X connect 2 0 3 0;
@@ -37,3 +40,6 @@
 #X connect 15 0 16 0;
 #X connect 16 0 17 0;
 #X connect 17 0 2 0;
+#X connect 20 0 1 0;
+#X connect 21 0 22 0;
+#X connect 22 0 20 0;

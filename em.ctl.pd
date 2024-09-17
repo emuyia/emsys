@@ -1,4 +1,4 @@
-#N canvas 1440 928 1920 976 12;
+#N canvas 1441 972 1277 628 12;
 #X obj 61 185 midiout 3;
 #X msg 60 149 240 0 32 107 127 66 2 2 64 106 33 247;
 #X obj 60 113 loadbang;
@@ -270,6 +270,8 @@
 #X obj 1185 633 spigot;
 #X obj 1188 664 sel 0;
 #X msg 1192 692 0;
+#X obj 1158 535 loadmess 0;
+#X obj 585 1068 s ctl.manual_tempo_change;
 #X connect 1 0 0 0;
 #X connect 2 0 1 0;
 #X connect 4 0 7 0;
@@ -546,6 +548,7 @@
 #X connect 252 0 257 0;
 #X connect 253 0 257 0;
 #X connect 254 0 255 0;
+#X connect 254 0 272 0;
 #X connect 256 0 254 0;
 #X connect 257 0 256 0;
 #X connect 259 0 260 1;
@@ -561,3 +564,5 @@
 #X connect 269 0 270 0;
 #X connect 269 0 200 0;
 #X connect 270 0 171 0;
+#X connect 271 0 171 0;
+#X connect 271 0 269 0;
