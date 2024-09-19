@@ -52,20 +52,6 @@
           "clear": false
         }
       },
-      //{
-      //  "label": "Restart em_sys service",
-      //  "type": "shell",
-      //  "command": "ssh patch@patchbox.local 'systemctl --user daemon-reload && systemctl --user restart em_sys'",
-      //  "problemMatcher": [],
-      //  "presentation": {
-      //    "echo": true,
-      //    "reveal": "never",
-      //    "focus": false,
-      //    "panel": "dedicated",
-      //    "showReuseMessage": true,
-      //    "clear": false
-      //  }
-      //},
       {
         "label": "Restart em_midisetup service",
         "type": "shell",
@@ -94,20 +80,6 @@
           "clear": false
         }
       },
-      //{
-      //  "label": "Enable em_sys service",
-      //  "type": "shell",
-      //  "command": "ssh patch@patchbox.local 'ln -s /home/patch/repos/emsys/serv/em_sys.service /home/patch/.config/systemd/user/em_sys.service && systemctl --user daemon-reload && systemctl --user enable em_sys'",
-      //  "problemMatcher": [],
-      //  "presentation": {
-      //    "echo": true,
-      //    "reveal": "never",
-      //    "focus": false,
-      //    "panel": "dedicated",
-      //    "showReuseMessage": true,
-      //    "clear": false
-      //  }
-      //},
       {
         "label": "Enable em_clock service",
         "type": "shell",
