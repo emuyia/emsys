@@ -1,9 +1,9 @@
-#N canvas 1746 980 1514 689 12;
+#N canvas 1440 928 1920 976 12;
 #N canvas 0 50 450 250 (subpatch) 0;
 #X array mnm_seq 12 float 3;
-#A 0 19.2 16.0582 36 39 43 47 38 44 0 0 0 0;
+#A 0 19.2 28.5091 36 39 43 47 38 44 0 0 0 0;
 #X coords 0 64 12 0 1471 550 1 0 0;
-#X restore 37 111 graph;
+#X restore 38 110 graph;
 #X floatatom 2312 852 5 0 0 0 - - - 0;
 #X obj 2221 1077 array get mnm_seq;
 #X floatatom 2223 1013 5 0 63 0 - - - 0;
@@ -42,9 +42,9 @@
 #X obj 2259 951 + 1;
 #N canvas 0 50 450 250 (subpatch) 0;
 #X array mnm_chance 12 float 3;
-#A 0 103.637 -10.911 -11.5177 -13.3359 -10.9116 -6.66905 -8.48729 -10.3055 0 0 0 0;
+#A 0 103.637 104.241 103.027 101.815 100.603 101.209 102.421 101.209 100.603 0 0 0;
 #X coords 0 100 12 0 1471 165 1 0 0;
-#X restore 36 706 graph;
+#X restore 39 704 graph;
 #X obj 2378 1227 random 100;
 #X obj 2283 1453 spigot;
 #X obj 2382 1075 array get mnm_chance;

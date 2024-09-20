@@ -149,6 +149,62 @@
           "showReuseMessage": true,
           "clear": false
         }
+      },
+      {
+        "label": "Mount patchbox_home",
+        "type": "shell",
+        "command": "./serv/mount_patchbox.sh",
+        "problemMatcher": [],
+        "presentation": {
+          "echo": true,
+          "reveal": "never",
+          "focus": false,
+          "panel": "dedicated",
+          "showReuseMessage": true,
+          "clear": false
+        }
+      },
+      {
+        "label": "Unmount patchbox_home",
+        "type": "shell",
+        "command": "./serv/mount_patchbox.sh -u",
+        "problemMatcher": [],
+        "presentation": {
+          "echo": true,
+          "reveal": "never",
+          "focus": false,
+          "panel": "dedicated",
+          "showReuseMessage": true,
+          "clear": false
+        }
+      },
+      {
+        "label": "Mount patchbox_megacmd",
+        "type": "shell",
+        "command": "./serv/mount_megacmd.sh",
+        "problemMatcher": [],
+        "presentation": {
+          "echo": true,
+          "reveal": "never",
+          "focus": false,
+          "panel": "dedicated",
+          "showReuseMessage": true,
+          "clear": false
+        }
+      },
+      {
+        "label": "Unmount patchbox_megacmd",
+        "type": "shell",
+        "command": "./serv/mount_megacmd.sh -u",
+        "problemMatcher": [],
+        "presentation": {
+          "echo": true,
+          "reveal": "never",
+          "focus": false,
+          "panel": "dedicated",
+          "showReuseMessage": true,
+          "clear": false
+        }
       }
     ]
   }

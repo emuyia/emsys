@@ -157,7 +157,7 @@
 #X text 3100 832 comment;
 #X obj 1020 1018 s s.seg_tin_lookahead;
 #X obj 987 985 s s.loop_len_lookahead;
-#X obj 1052 1058 s s.seg_bpm_target_lookahead;
+#X obj 1060 1056 s s.seg_bpm_target_lookahead;
 #X obj 1024 1091 s s.seg_bpm_rtime_lookahead;
 #X obj 1074 1125 s s.seg_poly_lookahead;
 #X obj 1038 910 s t.length;
@@ -183,6 +183,12 @@
 #X obj 1435 767 r s.reset;
 #X obj 1555 800 s t.tempo;
 #X obj 1558 766 once;
+#X obj 747 1135 r s.seg_bpm_target_lookahead;
+#X obj 735 1195 onebang;
+#X obj 811 1102 r s.reset;
+#X obj 735 1226 i;
+#X obj 740 1163 t b f;
+#X obj 732 1262 s t.tempo;
 #X connect 0 0 69 1;
 #X connect 0 0 154 0;
 #X connect 1 0 70 1;
@@ -367,3 +373,9 @@
 #X connect 181 0 178 0;
 #X connect 181 0 72 0;
 #X connect 183 0 182 0;
+#X connect 184 0 188 0;
+#X connect 185 0 187 0;
+#X connect 186 0 185 1;
+#X connect 187 0 189 0;
+#X connect 188 0 185 0;
+#X connect 188 1 187 1;
