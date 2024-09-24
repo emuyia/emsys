@@ -90,7 +90,6 @@
 #X obj 836 174 tosymbol;
 #X obj 933 214 symbol;
 #X obj 845 219 symbol;
-#X obj 877 270 print;
 #X obj 1104 70 r s.seek_seg;
 #X obj 1042 187 del 20;
 #X connect 1 0 29 0;
@@ -186,7 +185,7 @@
 #X connect 76 1 67 0;
 #X connect 77 0 15 1;
 #X connect 78 0 79 0;
-#X connect 79 0 93 0;
+#X connect 79 0 92 0;
 #X connect 80 0 82 0;
 #X connect 81 0 80 0;
 #X connect 81 1 80 1;
@@ -200,7 +199,6 @@
 #X connect 88 0 90 1;
 #X connect 89 0 81 1;
 #X connect 90 0 81 0;
-#X connect 90 0 91 0;
-#X connect 92 0 79 0;
-#X connect 93 0 89 0;
-#X connect 93 0 90 0;
+#X connect 91 0 79 0;
+#X connect 92 0 89 0;
+#X connect 92 0 90 0;

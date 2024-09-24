@@ -1,4 +1,4 @@
-#N canvas 1988 1357 483 286 12;
+#N canvas 1944 28 483 286 12;
 #X msg 209 79 \; pd dsp 1;
 #X obj 209 39 loadbang;
 #X obj 303 120 dac~;
