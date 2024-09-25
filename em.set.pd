@@ -195,7 +195,7 @@
 #X obj 942 602 s s.reload;
 #X obj 751 258 i;
 #X obj 862 222 r s.current_seg_id;
-#X obj 1529 577 s s.seek_seg;
+#X obj 1539 576 s s.seek_seg;
 #X floatatom 1490 520 5 0 0 0 - - - 0;
 #X obj 1485 606 s ctl.update_text;
 #X obj 1478 550 t b f;
@@ -238,6 +238,9 @@
 #X floatatom 1958 550 5 0 0 0 - - - 0;
 #X obj 1702 772 bng 20 250 50 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000;
 #X obj 1334 1055 r s.poly;
+#X obj 857 324 r ctl.shift_state;
+#X obj 784 442 buddy;
+#X obj 831 353 sel 0;
 #X connect 0 0 69 1;
 #X connect 0 0 154 0;
 #X connect 1 0 70 1;
@@ -313,7 +316,7 @@
 #X connect 57 0 58 0;
 #X connect 59 0 53 1;
 #X connect 59 0 169 0;
-#X connect 61 0 35 0;
+#X connect 61 0 240 0;
 #X connect 62 0 194 0;
 #X connect 67 0 81 0;
 #X connect 67 0 83 0;
@@ -488,3 +491,6 @@
 #X connect 235 1 236 0;
 #X connect 236 0 205 0;
 #X connect 238 0 162 0;
+#X connect 239 0 241 0;
+#X connect 240 0 35 0;
+#X connect 241 0 240 1;
