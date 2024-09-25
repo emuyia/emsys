@@ -161,7 +161,7 @@
 #X obj 1024 1091 s s.seg_bpm_rtime_lookahead;
 #X obj 1074 1125 s s.seg_poly_lookahead;
 #X obj 1038 910 s t.length;
-#X obj 1324 1064 tgl 20 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000 0 1;
+#X obj 1297 1064 tgl 20 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000 0 1;
 #X floatatom 737 929 5 0 0 0 - - - 0;
 #X obj 739 966 bng 20 250 50 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000;
 #X obj 782 952 pgmout 31;
@@ -236,6 +236,8 @@
 #X obj 2001 378 unpack f f;
 #X obj 1987 487 t b f;
 #X floatatom 1958 550 5 0 0 0 - - - 0;
+#X obj 1702 772 bng 20 250 50 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000;
+#X obj 1334 1055 r s.poly;
 #X connect 0 0 69 1;
 #X connect 0 0 154 0;
 #X connect 1 0 70 1;
@@ -324,7 +326,7 @@
 #X connect 72 0 87 0;
 #X connect 73 0 90 0;
 #X connect 74 0 88 0;
-#X connect 74 0 128 0;
+#X connect 74 0 162 0;
 #X connect 75 0 76 0;
 #X connect 76 0 67 0;
 #X connect 76 0 68 0;
@@ -421,6 +423,7 @@
 #X connect 181 0 176 0;
 #X connect 181 0 178 0;
 #X connect 181 0 72 0;
+#X connect 181 0 237 0;
 #X connect 183 0 182 0;
 #X connect 184 0 188 0;
 #X connect 185 0 187 0;
@@ -484,3 +487,4 @@
 #X connect 235 0 224 0;
 #X connect 235 1 236 0;
 #X connect 236 0 205 0;
+#X connect 238 0 162 0;

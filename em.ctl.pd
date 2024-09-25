@@ -348,6 +348,7 @@
 #X obj 1581 1960 onebang;
 #X obj 1431 1912 t b b;
 #X msg 1522 1919 stop;
+#X obj 1319 1770 s s.poly;
 #X connect 1 0 0 0;
 #X connect 2 0 1 0;
 #X connect 4 0 7 0;
@@ -696,6 +697,7 @@
 #X connect 321 0 312 0;
 #X connect 322 0 315 0;
 #X connect 323 0 324 0;
+#X connect 323 0 349 0;
 #X connect 324 0 316 0;
 #X connect 325 0 317 0;
 #X connect 326 0 323 0;
