@@ -1,4 +1,4 @@
-#N canvas 2720 940 370 480 8;
+#N canvas 2333 257 370 480 8;
 #X obj 72 387 + 1;
 #X obj 114 285 + 1;
 #X obj 71 413 sel 1 2 3 4 5 6 7 8;
@@ -63,5 +63,4 @@
 #X connect 24 0 1 0;
 #X connect 25 0 22 0;
 #X connect 26 0 27 0;
-#X connect 27 0 25 0;
 #X connect 27 1 25 0;
