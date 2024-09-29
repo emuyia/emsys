@@ -98,13 +98,18 @@ while True:
     if client_cache["MCL_CLIENT"] and client_cache["PD_CLIENT"]:
         connect_ports(connections, client_cache["MCL_CLIENT"], MCL_OUT, client_cache["PD_CLIENT"], PD_IN_4)
     else:
-        missing_clients.append("Minilab3 to Pure Data")
+        missing_clients.append("MCL to Pure Data")
     
     # MCL to Pd 4 (external hardware - extra functionality)
     if client_cache["MCL_CLIENT"] and client_cache["PD_CLIENT"]:
         connect_ports(connections, client_cache["PD_CLIENT"], PD_OUT_4, client_cache["MCL_CLIENT"], MCL_IN)
     else:
-        missing_clients.append("Minilab3 to Pure Data")
+        missing_clients.append("Pure Data to MCL")
+    
+    if client_cache["PS_CLIENT"] and client_cache["MCL_CLIENT"]:
+        connect_ports(connections, client_cache["PS_CLIENT"], PS_OUT, client_cache["MCL_CLIENT"], MCL_IN)
+    else:
+        missing_clients.append("Pisound to MCL")
 
     # Report missing clients
     if missing_clients:
