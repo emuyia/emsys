@@ -4,7 +4,7 @@
       {
         "label": "Pd over SSH",
         "type": "shell",
-        "command": "ssh -X patch@patchbox.local 'systemctl --user stop em_sys; ~/Applications/pdnext/bin/pd ~/repos/emsys/main.pd &'",
+        "command": "ssh -X patch@patchbox.local 'sudo killall pd; ~/Applications/pdnext/bin/pd ~/repos/emsys/main.pd &'",
         "problemMatcher": [],
         "presentation": {
           "echo": true,
