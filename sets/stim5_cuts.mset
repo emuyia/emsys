@@ -1,0 +1,4 @@
+md B04 mnm A10 rep 2 len 16 tin 0 bpm 151 bpmr 0 poly 0 seq 0 seqto mnm0 note 10-04;
+md B05 mnm A12 rep 2 len 16 tin 0 bpm 151 bpmr 0 poly 0 seq 0 seqto mnm0;
+md B06 mnm A13 rep 2 len 16 tin 0 bpm 151 bpmr 0 poly 0 seq 0 seqto mnm0;
+md B07 mnm A13 rep 2 len 16 tin 0 bpm 151 bpmr 0 poly 0 seq 0 seqto mnm0;

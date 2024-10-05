@@ -111,6 +111,11 @@ while True:
     else:
         missing_clients.append("Pisound to MCL")
 
+    #if client_cache["PS_CLIENT"]:
+    #    connect_ports(connections, client_cache["PS_CLIENT"], PS_OUT, client_cache["PS_CLIENT"], PS_IN)
+    #else:
+    #    missing_clients.append("Pisound to Pisound")
+
     # Report missing clients
     if missing_clients:
         print("The following connections were not established due to missing clients:")
