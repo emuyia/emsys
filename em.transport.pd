@@ -86,6 +86,10 @@
 #X msg 530 210 2;
 #X obj 636 45 loadmess 0;
 #X obj 636 74 s t.clock_toggle;
+#X obj 341 46 r t.transport_status;
+#X obj 339 74 tgl 20 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000 0 1;
+#X obj 340 108 sel 0;
+#X obj 336 143 s t.clock_toggle;
 #X connect 0 0 23 1;
 #X connect 0 0 52 0;
 #X connect 1 0 3 0;
@@ -178,3 +182,6 @@
 #X connect 84 0 82 1;
 #X connect 84 0 82 2;
 #X connect 85 0 86 0;
+#X connect 87 0 88 0;
+#X connect 88 0 89 0;
+#X connect 89 1 90 0;
