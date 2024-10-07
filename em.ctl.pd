@@ -36,7 +36,7 @@
 #X obj 788 265 ctlin 105 33;
 #X obj 347 412 onebang;
 #X msg 398 362 stop;
-#X obj 396 334 b;
+#X obj 391 330 b;
 #X obj 791 327 sel 127;
 #X obj 885 261 ctlin;
 #X floatatom 701 175 5 0 0 0 - - - 0;
@@ -384,7 +384,7 @@
 #X obj 1588 964 sel 0;
 #X obj 1615 922 spigot;
 #X obj 2065 936 text set seg_data_buffer;
-#X obj 1904 644 text define seg_data_buffer;
+#X obj 1983 752 text define seg_data_buffer;
 #X obj 1998 1052 text get seg_data_buffer;
 #X obj 2065 898 text get set;
 #X obj 2214 635 r s.current_seg_id;
@@ -546,6 +546,15 @@
 #X floatatom 2268 881 5 0 0 0 - - - 0;
 #X obj 2286 827 i;
 #X obj 2245 750 t b f f;
+#X obj 1677 593 s t.clock_toggle;
+#X obj 1774 419 r ctl.shift_state;
+#X obj 1774 451 sel 0;
+#X msg 1773 491 1;
+#X obj 1757 528 pipe 500;
+#X text 1865 538 stop clock for a bit while loading pgm... fixes 'sysex error' on mcl loads for now, f 29;
+#X obj 1666 454 r s.seek_seg;
+#X msg 1669 522 0;
+#X obj 1664 487 bng 20 250 50 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000;
 #X connect 1 0 0 0;
 #X connect 2 0 1 0;
 #X connect 5 0 7 0;
@@ -1189,3 +1198,10 @@
 #X connect 546 1 538 0;
 #X connect 546 2 542 0;
 #X connect 546 2 545 1;
+#X connect 548 0 549 0;
+#X connect 549 0 550 0;
+#X connect 550 0 551 0;
+#X connect 551 0 547 0;
+#X connect 553 0 555 0;
+#X connect 554 0 547 0;
+#X connect 555 0 554 0;
