@@ -90,6 +90,7 @@
 #X obj 339 74 tgl 20 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000 0 1;
 #X obj 340 108 sel 0;
 #X obj 336 143 s t.clock_toggle;
+#X obj 651 122 bng 25 250 50 0 empty empty empty 17 7 0 10 #e3dfd9 #5a5a5a #5a5a5a;
 #X connect 0 0 23 1;
 #X connect 0 0 52 0;
 #X connect 1 0 3 0;
@@ -185,3 +186,4 @@
 #X connect 87 0 88 0;
 #X connect 88 0 89 0;
 #X connect 89 1 90 0;
+#X connect 91 0 62 0;
