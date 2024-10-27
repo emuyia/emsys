@@ -49,7 +49,7 @@ class MidiClockGen:
             self.midi_process.join()
             self.midi_process = None
 
-def midi_bpm_listener(shared_bpm, run_code, clock_running, in_port_name, cc_bpm=1, cc_start_stop=2):
+def midi_bpm_listener(shared_bpm, run_code, clock_running, pulse_rate, in_port_name, cc_bpm=1, cc_start_stop=2):
     try:
         midi_input = mido.open_input(in_port_name, virtual=True)
         while run_code.value:
@@ -58,6 +58,8 @@ def midi_bpm_listener(shared_bpm, run_code, clock_running, in_port_name, cc_bpm=
                     if msg.control == cc_bpm:
                         new_bpm = int(30 + (msg.value * (300 - 30) / 127))
                         shared_bpm.value = new_bpm
+                        pulse_rate.value = 60.0 / (new_bpm * 24)
+                        logging.debug(f"set bpm: {new_bpm}")
                     elif msg.control == cc_start_stop:
                         if msg.value >= 64:
                             clock_running.value = 1
@@ -84,7 +86,7 @@ class MidiClockApp:
             self.mcg.launch_process(virtual_out_port)
 
             midi_listener_process = Process(target=midi_bpm_listener, args=(
-                self.mcg.shared_bpm, self.mcg._run_code, self.mcg.clock_running, virtual_in_port))
+                self.mcg.shared_bpm, self.mcg._run_code, self.mcg.clock_running, self.mcg.pulse_rate, virtual_in_port))
             midi_listener_process.start()
 
             logging.info("MIDI clock is running. Press Ctrl+C to stop.")
