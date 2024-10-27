@@ -49,6 +49,24 @@ class MidiClockGen:
             self.midi_process.join()
             self.midi_process = None
 
+def midi_bpm_listener(shared_bpm, run_code, clock_running, in_port_name, cc_bpm=1, cc_start_stop=2):
+    try:
+        midi_input = mido.open_input(in_port_name, virtual=True)
+        while run_code.value:
+            for msg in midi_input.iter_pending():
+                if msg.type == 'control_change':
+                    if msg.control == cc_bpm:
+                        new_bpm = int(30 + (msg.value * (300 - 30) / 127))
+                        shared_bpm.value = new_bpm
+                    elif msg.control == cc_start_stop:
+                        if msg.value >= 64:
+                            clock_running.value = 1
+                        else:
+                            clock_running.value = 0
+            sleep(0.1)
+    except Exception as e:
+        logging.error(f"Error in MIDI BPM listener: {e}")
+
 class MidiClockApp:
     def __init__(self):
         self.mcg = MidiClockGen()
@@ -59,14 +77,21 @@ class MidiClockApp:
 
     def start(self):
         virtual_out_port = "Virtual-MIDI-Out"
+        virtual_in_port = "Virtual-MIDI-In"
+
         try:
-            logging.debug(f"Creating virtual MIDI ports: '{virtual_out_port}'")
+            logging.debug(f"Creating virtual MIDI ports: '{virtual_in_port}' (input), '{virtual_out_port}' (output)")
             self.mcg.launch_process(virtual_out_port)
+
+            midi_listener_process = Process(target=midi_bpm_listener, args=(
+                self.mcg.shared_bpm, self.mcg._run_code, self.mcg.clock_running, virtual_in_port))
+            midi_listener_process.start()
+
             logging.info("MIDI clock is running. Press Ctrl+C to stop.")
             while True:
                 sleep(1)
         except KeyboardInterrupt:
-            logging.info("\nStopping MIDI clock...")
+            logging.info("Stopping MIDI clock...")
         finally:
             self.clean_exit()
             logging.info("MIDI clock stopped.")
