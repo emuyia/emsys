@@ -78,8 +78,8 @@ class MidiClockApp:
             self.mcg.end_process()
 
     def start(self):
-        virtual_out_port = "Virtual-MIDI-Out"
-        virtual_in_port = "Virtual-MIDI-In"
+        virtual_out_port = "em_clock_out"
+        virtual_in_port = "em_clock_in"
 
         try:
             logging.debug(f"Creating virtual MIDI ports: '{virtual_in_port}' (input), '{virtual_out_port}' (output)")
