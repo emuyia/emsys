@@ -3,12 +3,10 @@
 # Allow use of this script for pisound button:
 # sudo ln -s /home/patch/repos/emsys/serv/em_sys.sh /usr/local/pisound/scripts/pisound-btn/em_sys.sh
 
-# Set up environment
 source ~/.bashrc
 export JACK_PROMISCUOUS_SERVER=jack
 export DISPLAY=:0
 
-# Path to your Pd binary and the Pd patch you want to run
 PD_PATH="/home/patch/Applications/pdnext/bin/pd"
 PD_PATCH="/home/patch/repos/emsys/main.pd"
 

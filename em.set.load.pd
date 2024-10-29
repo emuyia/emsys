@@ -47,7 +47,7 @@
 #X obj 341 572 zl join;
 #X obj 375 410 t b l;
 #X msg 338 457 sets/;
-#X msg 860 194 symbol /home/patch/repos/emsys/sets/*.mset;
+#X msg 860 194 symbol ~/repos/emsys/sets/*.mset;
 #X connect 0 0 19 0;
 #X connect 0 0 20 0;
 #X connect 2 0 3 0;
