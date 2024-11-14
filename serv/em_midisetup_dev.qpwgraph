@@ -1,0 +1,38 @@
+<!DOCTYPE patchbay>
+<patchbay name="em_midisetup_dev" version="0.7.9">
+ <items>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="plugdata" port="plugdata:out_1"/>
+   <input node="Built-in Audio Digital Stereo (IEC958)" port="ALC887-VD Digital:playback_FL"/>
+  </item>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="Firefox" port="Firefox:output_FR"/>
+   <input node="Built-in Audio Digital Stereo (IEC958)" port="ALC887-VD Digital:playback_FR"/>
+  </item>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="plugdata" port="plugdata:out_2"/>
+   <input node="Built-in Audio Digital Stereo (IEC958)" port="ALC887-VD Digital:playback_FR"/>
+  </item>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="Firefox" port="Firefox:output_FL"/>
+   <input node="Built-in Audio Digital Stereo (IEC958)" port="ALC887-VD Digital:playback_FL"/>
+  </item>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="Built-in Audio Analog Stereo" port="ALC887-VD Analog:capture_FL"/>
+   <input node="plugdata" port="plugdata:in_1"/>
+  </item>
+  <item node-type="alsa" port-type="alsa-midi">
+   <output node="130:RtMidiOut Client" port="0:em_clock_out"/>
+   <input node="24:M4" port="0:M4 MIDI 1"/>
+  </item>
+  <item node-type="alsa" port-type="alsa-midi">
+   <output node="130:RtMidiOut Client" port="0:em_clock_out"/>
+   <input node="32:MegaCMD" port="0:MegaCMD MIDI 1"/>
+  </item>
+  <item node-type="pipewire" port-type="pipewire-audio">
+   <output node="Built-in Audio Analog Stereo" port="ALC887-VD Analog:capture_FR"/>
+   <input node="plugdata" port="plugdata:in_2"/>
+  </item>
+ </items>
+</patchbay>
+

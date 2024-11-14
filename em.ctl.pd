@@ -188,7 +188,7 @@
 #X obj 258 1108 ctlin;
 #X obj 186 1106 bendin;
 #X obj 222 1357 bendout 57;
-#X msg 163 1200 57;
+#X msg 163 1190 57;
 #X msg 193 1201 27;
 #X text 69 1189 mnm auto ch via megacmd midi, f 12;
 #X text 68 1231 md chr ch via pisound midi, f 12;
@@ -604,9 +604,14 @@
 #X msg 166 97 \$2;
 #X obj 221 129 bng 25 250 50 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
 #X obj 122 68 midi.learn;
-#A saved ctlin 27 1;
+#A saved ctlin 27 17;
 #X obj 122 2 r ctl.midi_learn;
 #X text 189 22 dynamically assign correct ml3 midi channel on boot. default will be 33 (port 3 ch1), f 17;
+#X obj 163 1232 i;
+#X obj 509 1439 shell, f 7;
+#X obj 509 1501 print stdout;
+#X obj 537 1472 print result;
+#X msg 509 1407 aconnect -l;
 #X connect 1 0 0 0;
 #X connect 2 0 1 0;
 #X connect 5 0 7 0;
@@ -799,7 +804,6 @@
 #X connect 167 0 508 0;
 #X connect 168 0 154 0;
 #X connect 170 0 169 0;
-#X connect 171 0 169 2;
 #X connect 172 0 170 0;
 #X connect 172 1 173 0;
 #X connect 172 2 171 0;
@@ -826,9 +830,7 @@
 #X connect 187 0 200 1;
 #X connect 187 1 593 0;
 #X connect 187 1 594 0;
-#X connect 189 0 185 2;
-#X connect 189 0 188 1;
-#X connect 189 0 194 2;
+#X connect 189 0 607 0;
 #X connect 190 0 188 1;
 #X connect 190 0 185 2;
 #X connect 190 0 194 2;
@@ -1104,7 +1106,6 @@
 #X connect 423 0 425 0;
 #X connect 424 0 426 0;
 #X connect 424 0 430 0;
-#X connect 425 0 398 2;
 #X connect 426 0 423 0;
 #X connect 427 0 418 0;
 #X connect 427 1 422 1;
@@ -1308,8 +1309,8 @@
 #X connect 590 0 231 0;
 #X connect 591 0 411 0;
 #X connect 592 0 410 0;
-#X connect 593 0 190 0;
 #X connect 593 0 196 0;
+#X connect 593 0 190 0;
 #X connect 593 1 197 0;
 #X connect 594 0 189 0;
 #X connect 594 0 196 0;
@@ -1324,3 +1325,9 @@
 #X connect 602 0 603 0;
 #X connect 604 1 602 0;
 #X connect 605 0 601 0;
+#X connect 607 0 185 2;
+#X connect 607 0 188 1;
+#X connect 607 0 194 2;
+#X connect 608 0 609 0;
+#X connect 608 1 610 0;
+#X connect 611 0 608 0;
