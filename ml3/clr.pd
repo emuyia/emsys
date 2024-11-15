@@ -39,6 +39,7 @@
 #X obj 831 114 list-apply * 2;
 #X obj 369 453 midiout 3;
 #X obj 59 464 midiout 3;
+#X obj 125 348 r midich_ctl;
 #X connect 0 0 2 0;
 #X connect 1 0 7 0;
 #X connect 2 0 1 0;
@@ -84,3 +85,5 @@
 #X connect 35 1 33 0;
 #X connect 36 0 37 0;
 #X connect 37 0 25 1;
+#X connect 40 0 39 1;
+#X connect 40 0 38 1;

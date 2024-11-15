@@ -56,11 +56,11 @@
 #X floatatom 660 530 5 0 0 0 - - - 0;
 #X floatatom 812 505 5 0 0 0 - - - 0;
 #X floatatom 651 203 5 30 300 2 tempo - - 0;
-#X obj 677 242 loadbang;
+#X obj 713 203 loadbang;
 #X msg 677 282 1;
 #X obj 643 325 ctlout;
 #X msg 701 282 1;
-#X obj 651 242 scale 30 300 0 127;
+#X obj 651 235 scale 30 300 0 127;
 #X obj 651 163 loadmess 120;
 #X obj 752 164 r t.tempo;
 #X obj 34 275 s t.transport_status;
@@ -81,9 +81,9 @@
 #X obj 508 109 sel 0 1;
 #X msg 505 140 0;
 #X msg 545 139 127;
-#X obj 504 244 ctlout;
+#X obj 473 282 ctlout;
 #X obj 510 173 t f b;
-#X msg 530 210 2;
+#X msg 510 248 2;
 #X obj 636 45 loadmess 0;
 #X obj 636 74 s t.clock_toggle;
 #X obj 341 46 r t.transport_status;
@@ -91,6 +91,11 @@
 #X obj 340 108 sel 0;
 #X obj 336 143 s t.clock_toggle;
 #X obj 651 122 bng 25 250 50 0 empty empty empty 17 7 0 10 #e3dfd9 #5a5a5a #5a5a5a;
+#X obj 744 273 r midich_clock;
+#X obj 728 309 i;
+#X obj 555 173 r midich_clock;
+#X obj 555 203 i;
+#X obj 966 267 r midich_ctl;
 #X connect 0 0 23 1;
 #X connect 0 0 52 0;
 #X connect 1 0 3 0;
@@ -158,6 +163,7 @@
 #X connect 56 0 61 0;
 #X connect 57 0 58 0;
 #X connect 57 0 60 0;
+#X connect 57 0 84 0;
 #X connect 58 0 59 1;
 #X connect 60 0 59 2;
 #X connect 61 0 59 0;
@@ -187,3 +193,8 @@
 #X connect 88 0 89 0;
 #X connect 89 1 90 0;
 #X connect 91 0 62 0;
+#X connect 92 0 93 0;
+#X connect 93 0 59 2;
+#X connect 94 0 95 0;
+#X connect 95 0 82 2;
+#X connect 96 0 51 1;

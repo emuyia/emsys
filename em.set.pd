@@ -259,6 +259,11 @@
 #X floatatom 782 1203 5 0 0 0 - - - 0;
 #X floatatom 838 1206 5 0 0 0 - - - 0;
 #X obj 731 1155 pgmout 49;
+#X obj 898 1196 nbx 4 18 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10 #191919 #e1e1e1 #e1e1e1 0 256;
+#X obj 592 1058 r midich_md_pgm;
+#X obj 876 1056 r midich_mnm_pgm;
+#X floatatom 959 1195 5 0 0 0 - - - 12;
+#X obj 1396 1148 r midich_mnm_sysex;
 #X connect 0 0 67 1;
 #X connect 0 0 150 0;
 #X connect 1 0 68 1;
@@ -530,3 +535,8 @@
 #X connect 256 0 243 0;
 #X connect 257 0 159 0;
 #X connect 258 0 259 0;
+#X connect 260 0 159 1;
+#X connect 261 0 159 1;
+#X connect 262 0 259 1;
+#X connect 263 0 259 1;
+#X connect 264 0 160 1;

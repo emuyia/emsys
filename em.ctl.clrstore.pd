@@ -38,8 +38,8 @@
 #X text 489 137 shift;
 #X obj 519 238 b;
 #X obj 552 204 s ctl.load_clrstore;
-#X obj 552 138 r ctl.ml3_ch;
 #X obj 475 166 ctl.in 27 33;
+#X obj 552 138 r midich_ml3;
 #X connect 0 0 1 0;
 #X connect 1 4 4 1;
 #X connect 1 5 5 1;
@@ -99,6 +99,6 @@
 #X connect 33 1 34 0;
 #X connect 33 1 37 0;
 #X connect 35 0 34 0;
-#X connect 39 0 40 2;
-#X connect 40 0 33 0;
-#X connect 40 0 38 0;
+#X connect 39 0 33 0;
+#X connect 39 0 38 0;
+#X connect 40 0 39 2;
