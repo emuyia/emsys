@@ -6,7 +6,7 @@
 #X obj 808 357 listfunnel 0;
 #X obj 808 503 text set ml3_line\$1;
 #X obj 583 144 text define -k ml3_line\$1;
-#A set +default 0 \; +screen 0 \;;
+#A set ?seg test \; :?rep 0 \; :?beat 0 \; /?len 0 \;;
 #X obj 1097 295 inlet;
 #X obj 808 454 pack s 0;
 #X obj 336 268 text tolist ml3_line\$1;
@@ -28,7 +28,7 @@
 #X text 1643 1720 pass through;
 #X obj 513 342 iterate;
 #X obj 513 371 tosymbol;
-#X obj 909 411 zl rev;
+#X obj 909 394 zl rev;
 #X obj 909 445 unpack s f;
 #X obj 909 357 listfunnel 0;
 #X obj 588 357 i;
@@ -59,14 +59,14 @@
 #X msg 1624 756 2;
 #X msg 1651 756 3;
 #X text 1636 617 check first character for special function, f 16;
-#X obj 1785 690 list fromsymbol;
-#X obj 1785 665 tosymbol;
+#X obj 1785 722 list fromsymbol;
+#X obj 1785 697 tosymbol;
 #X obj 743 860 prepend 58;
 #X obj 1680 719 bng 26 250 50 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
 #X msg 1680 756 4;
 #X obj 337 980 zl filter 32;
 #X obj 1174 741 zl rev;
-#X obj 336 586 list, f 21;
+#X obj 336 586 list, f 20;
 #X obj 336 530 t b l;
 #X obj 336 472 t l l, f 20;
 #X text 412 971 remove spaces, f 8;
@@ -94,7 +94,7 @@
 #X obj 403 1549 bng 25 250 50 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
 #X obj 448 1623 - 1;
 #X obj 160 1692 zl group, f 39;
-#X obj 287 1157 list;
+#X obj 283 1157 list;
 #X obj 283 1185 t l b, f 20;
 #X obj 265 1347 iterate;
 #X obj 265 1643 i;
@@ -109,12 +109,12 @@
 #X obj 160 1727 zl rev;
 #X obj 209 1462 once;
 #X obj 909 318 tosymbol;
-#X obj 1785 725 print;
+#X obj 1785 751 print;
 #X obj 659 437 zl nth 2;
-#X obj 659 494 list fromsymbol;
-#X obj 659 530 zl len;
+#X obj 659 484 list fromsymbol;
+#X obj 659 509 zl len;
 #X obj 534 703 zl slice, f 18;
-#X obj 659 469 tosymbol;
+#X obj 659 461 tosymbol;
 #X obj 336 380 t a a;
 #X obj 534 743 zl rev;
 #X text 1410 891 + - hide val (simple text), f 11;
@@ -145,7 +145,7 @@
 #X obj 820 860 prepend 58;
 #X obj 971 906 selector 4, f 14;
 #X obj 760 905 selector 4, f 13;
-#X msg 1785 642 +;
+#X msg 1787 670 +;
 #X obj 1452 697 sel 63 126 43, f 16;
 #X obj 1514 724 bng 25 250 50 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
 #X msg 1514 758 3;
@@ -154,6 +154,7 @@
 #X text 1073 891 / - divider \, with other funcs, f 15;
 #X msg 249 88 init_params p ~p ?p +p :p ?p, f 26;
 #X msg 249 109 init_params ?h :?h +and ?h /~flip +and ?h :+hi;
+#X obj 1059 295 list;
 #X connect 1 0 36 0;
 #X connect 2 0 3 0;
 #X connect 3 0 8 0;
@@ -182,7 +183,7 @@
 #X connect 31 0 50 2;
 #X connect 33 0 38 0;
 #X connect 33 1 39 0;
-#X connect 33 2 16 0;
+#X connect 33 2 154 0;
 #X connect 35 0 34 0;
 #X connect 36 0 10 0;
 #X connect 36 1 14 0;
@@ -332,3 +333,4 @@
 #X connect 149 1 144 3;
 #X connect 152 0 36 0;
 #X connect 153 0 36 0;
+#X connect 154 0 16 0;
