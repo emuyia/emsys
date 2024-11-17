@@ -6,7 +6,7 @@
 #X obj 808 357 listfunnel 0;
 #X obj 808 503 text set ml3_line\$1;
 #X obj 583 144 text define -k ml3_line\$1;
-#A set ?h 0 \; :?h 0 \; +and 0 \; ?h 0 \; /~flip 0 \; +and 0 \; ?h 0 \; :+hi 0 \;;
+#A set +default 0 \; +screen 0 \;;
 #X obj 1097 295 inlet;
 #X obj 808 454 pack s 0;
 #X obj 336 268 text tolist ml3_line\$1;

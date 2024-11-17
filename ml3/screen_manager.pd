@@ -24,7 +24,7 @@
 #X text 632 462 clear lines \, send temp msg \, recall lines, f 10;
 #X obj 714 457 prepend init_simple;
 #X obj 787 983 bng 25 250 50 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
-#X obj 306 147 route init default temp_simple temp_param tap dtap hold thold tholdmod, f 220;
+#X obj 306 147 route init default temp_simple temp_param tap dtap hold thold tholdmod, f 71;
 #X obj 774 582 del;
 #X text 986 681 loading bar;
 #X obj 961 905 spigot 0;
@@ -73,9 +73,10 @@
 #X obj 1093 507 bng 25 250 50 0 empty empty postpone 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
 #X text 769 817 bottom;
 #X text 882 818 top;
-#X text 757 363 todo: need to recall vals \, not just param labels, f 14;
+#X text 821 230 todo: need to recall vals \, not just param labels, f 14;
 #X msg 442 396 init_params ~bpm /~s t ?seg :?rep :?beat /?len;
 #X msg 400 429 init_params +default +screen;
+#X text 936 230 todo: vals should be able to display symbols too \, not just integers. why? because for example \, while selecting msets with temp_param \, vals will be symbols (the mset names). perhaps code can be added to optionally display symbols that correspond to the integers, f 27;
 #X connect 0 0 15 0;
 #X connect 0 0 71 0;
 #X connect 1 0 15 1;
