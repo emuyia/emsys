@@ -18,6 +18,8 @@
 #X msg 418 379 set \$1;
 #X symbolatom 418 442 23 0 0 0 - - - 24;
 #X symbolatom 418 477 23 0 0 0 - - - 24;
+#X obj 182 379 loadbang;
+#X msg 182 407 set ...;
 #X connect 0 0 15 0;
 #X connect 0 1 16 0;
 #X connect 1 0 0 0;
@@ -37,3 +39,6 @@
 #X connect 14 0 8 0;
 #X connect 15 0 18 0;
 #X connect 16 0 17 0;
+#X connect 19 0 20 0;
+#X connect 20 0 17 0;
+#X connect 20 0 18 0;
