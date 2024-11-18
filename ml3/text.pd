@@ -21,6 +21,10 @@
 #X obj 113 555 midiout 3;
 #X obj 450 333 zl filter 92;
 #X obj 574 333 zl filter 92;
+#X obj 450 494 outlet;
+#X obj 574 494 outlet;
+#X obj 450 398 list tosymbol;
+#X obj 574 398 list tosymbol;
 #X connect 0 0 16 0;
 #X connect 1 0 4 0;
 #X connect 2 0 5 1;
@@ -45,4 +49,8 @@
 #X connect 17 1 15 0;
 #X connect 18 0 19 1;
 #X connect 20 0 6 1;
+#X connect 20 0 24 0;
 #X connect 21 0 4 1;
+#X connect 21 0 25 0;
+#X connect 24 0 22 0;
+#X connect 25 0 23 0;

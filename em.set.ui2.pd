@@ -9,11 +9,17 @@
 #X obj 65 105 bng 25 250 50 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
 #X obj 271 202 hradio 21 1 0 5 empty empty empty 0 -11 0 12 #fcfcfc #000000 #000000 0;
 #X obj 271 247 nbx 4 18 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10 #191919 #e1e1e1 #e1e1e1 0 256;
-#X text 313 168 select screen;
+#X text 313 167 select screen;
 #X msg 102 144 0;
 #X msg 164 144 1;
 #X msg 416 204 temp_simple message;
 #X floatatom 271 169 5 0 0 0 - - - 12;
+#X msg 271 379 set \$1;
+#X msg 418 379 set \$1;
+#X symbolatom 418 442 23 0 0 0 - - - 24;
+#X symbolatom 418 477 23 0 0 0 - - - 24;
+#X connect 0 0 15 0;
+#X connect 0 1 16 0;
 #X connect 1 0 0 0;
 #X connect 1 1 0 1;
 #X connect 2 0 1 1;
@@ -29,3 +35,5 @@
 #X connect 12 0 8 0;
 #X connect 13 0 1 1;
 #X connect 14 0 8 0;
+#X connect 15 0 18 0;
+#X connect 16 0 17 0;
