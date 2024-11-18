@@ -6,7 +6,7 @@
 #X obj 808 357 listfunnel 0;
 #X obj 808 503 text set ml3_line\$1;
 #X obj 559 76 text define -k ml3_line\$1;
-#A set ~bpm 25 \; /~s 0 \; t 0 \;;
+#A set seek\ segment \;;
 #X obj 1099 58 inlet;
 #X obj 808 454 pack s 0;
 #X obj 336 268 text tolist ml3_line\$1;
@@ -157,7 +157,6 @@
 #X obj 883 106 zl ecils 1;
 #X obj 883 72 zl rot -1;
 #X obj 883 37 r lnmgr\$1.param;
-#X obj 918 138 route float;
 #X text 1347 28 maybe todo: lookup system for params...? would involve a global table to get the location of the param in whichever line manager ID it's in. might be a lot of work. would also likely need another column in line_managers for "parameter" IDs \, since param labels can't be relied on for lookup due to special function characters and brevity for the sake of display., f 31;
 #X connect 1 0 33 0;
 #X connect 2 0 3 0;
@@ -339,7 +338,6 @@
 #X connect 152 3 151 0;
 #X connect 153 0 16 1;
 #X connect 154 0 33 0;
-#X connect 154 1 157 0;
+#X connect 154 1 16 1;
 #X connect 155 0 154 0;
 #X connect 156 0 155 0;
-#X connect 157 0 16 1;
