@@ -1,4 +1,4 @@
-md E04 mnm E11 rep 1 len 48 tin 0 bpm 195 bpmr 58 poly 0 seq 0 seqto 1;
+md E04 mnm E11 rep 1 len 16 tin 0 bpm 195 bpmr 6 poly 0 seq 0 seqto 1;
 md A01 mnm A01 rep 1 len 10 tin 0 bpm 0 bpmr 0 poly 0 seq 0 seqto mnm0;
 md A02 mnm A02 rep 1 len 10 tin 0 bpm 0 bpmr 0 poly 0 seq 0 seqto mnm0;
 md A01 mnm A01 rep 2 len 10 tin 0 bpm 130 bpmr 0 poly 0 seq 0 seqto mnm0;
