@@ -99,11 +99,11 @@
 #X obj 874 604 s scmgr.temp_param.val;
 #X obj 1766 64 r ctl.update_text;
 #X obj 1611 64 r ctl.seek_knob_state;
-#X obj 1611 95 == 0;
-#X obj 1766 95 bng 25 250 50 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
-#X obj 1611 126 tgl 25 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1 0 1;
-#X obj 1611 174 gate 1, f 25;
-#X obj 1611 209 del 25;
+#X obj 1611 92 == 0;
+#X obj 1766 92 bng 25 250 50 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
+#X obj 1611 123 tgl 25 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1 0 1;
+#X obj 1611 156 gate 1, f 25;
+#X obj 1611 184 del 25;
 #X obj 905 635 s scmgr.temp;
 #X obj 1112 604 s scmgr.temp_param.val;
 #X obj 1143 635 s scmgr.temp;
@@ -111,6 +111,14 @@
 #X obj 1114 487 tosymbol;
 #X obj 1112 525 t s b, f 8;
 #X msg 1143 561 temp_param load mset;
+#X text 168 626 bug: why does changing seg data for bank to E cause to display 0?;
+#X text 168 660 bug: rep shows value of zero;
+#X text 168 692 bug: current beat shows value of zero;
+#X text 166 734 bug: seg editing randomly shows value of zero as well - found on bpm \, bpmr \, and loop length;
+#X obj 1334 453 r s.duration_total;
+#X obj 1334 487 tosymbol;
+#X obj 1334 635 s scmgr.temp;
+#X obj 1334 561 prepend temp_simple;
 #X connect 0 0 15 0;
 #X connect 0 1 16 0;
 #X connect 1 0 0 0;
@@ -248,3 +256,6 @@
 #X connect 110 0 106 0;
 #X connect 110 1 111 0;
 #X connect 111 0 107 0;
+#X connect 116 0 117 0;
+#X connect 117 0 119 0;
+#X connect 119 0 118 0;
