@@ -1,6 +1,6 @@
 #N canvas 827 239 527 327 12;
-#X obj 1136 910 outlet;
-#X obj 1293 908 outlet;
+#X obj 1136 952 outlet;
+#X obj 1293 950 outlet;
 #X msg 1046 620 init_simple emsys 0.2;
 #X obj 985 495 del 50;
 #X obj 933 495 del 150;
@@ -100,8 +100,8 @@
 #X text 2150 947 ml3 param mode param type;
 #X text 1730 951 ml3 param/scroll mode value;
 #X text 1523 951 ml3 centred mode emotes (0 0);
-#X text 1136 937 top line;
-#X text 1293 937 bottom line;
+#X text 1136 979 top line;
+#X text 1293 979 bottom line;
 #X text 2344 949 ml3 scroll mode length;
 #X obj 933 381 t;
 #X obj 933 341 bng 25 250 50 0 empty empty screen\ 0 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
