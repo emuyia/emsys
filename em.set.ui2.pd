@@ -123,6 +123,7 @@
 #X text 1595 21 - quirks to get things to display correctly & at the right times -;
 #X msg 1136 347 1;
 #X obj 1634 229 r t.count;
+#X text 197 574 todo: make temp screens go away when shift is released;
 #X connect 0 0 15 0;
 #X connect 0 1 16 0;
 #X connect 1 0 0 0;
