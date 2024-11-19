@@ -25,6 +25,7 @@
 #X text 268 307 todo: add ctl for em.midisetup - in particular \, midich learning;
 #X text 268 250 todo: em.ctl needs an overhaul to make implementation of per-screen ctl and the various modifiers that exist (shift \, sustain shift \, and tap) easier to manage and assign ctl to;
 #X text 691 254 - custom ctlin etc objects which have automatically assigned midich's inbuilt;
+#X text 270 496 bug: position on global settings menu after a setting is selected / performed resets to first position \, but the cursor doesn't move on the scroll text screen;
 #X connect 1 0 0 0;
 #X connect 3 0 4 0;
 #X connect 4 0 2 0;
