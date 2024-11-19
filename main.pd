@@ -19,10 +19,12 @@
 #X obj 29 227 em.set.duration;
 #X obj 27 198 em.set.ui2;
 #X obj 29 260 serv/em.midisetup;
-#X text 273 311 todo: make it so that tempos from seg data that are set to 0 use tempo from most recent previous segment (not in terms of what was last loaded \, but what is actually in the seg data [text] in order);
-#X text 271 268 todo: verify that current state of patch works in live environment (pisound);
-#X text 270 241 add ctl for em.midisetup - in particular \, midich learning;
-#X text 271 370 bug: insert segment option seems to show a random temp_param screen for MD Bank if you let go of the shift button before the temp_simple screen is up;
+#X text 271 377 todo: make it so that tempos from seg data that are set to 0 use tempo from most recent previous segment (not in terms of what was last loaded \, but what is actually in the seg data [text] in order);
+#X text 269 334 todo: verify that current state of patch works in live environment (pisound);
+#X text 269 436 bug: insert segment option seems to show a random temp_param screen for MD Bank if you let go of the shift button before the temp_simple screen is up;
+#X text 268 307 todo: add ctl for em.midisetup - in particular \, midich learning;
+#X text 268 250 todo: em.ctl needs an overhaul to make implementation of per-screen ctl and the various modifiers that exist (shift \, sustain shift \, and tap) easier to manage and assign ctl to;
+#X text 691 254 - custom ctlin etc objects which have automatically assigned midich's inbuilt;
 #X connect 1 0 0 0;
 #X connect 3 0 4 0;
 #X connect 4 0 2 0;
