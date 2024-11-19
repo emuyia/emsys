@@ -19,6 +19,10 @@
 #X obj 29 227 em.set.duration;
 #X obj 27 198 em.set.ui2;
 #X obj 29 260 serv/em.midisetup;
+#X text 290 230 todo: make it so that tempos from seg data that are set to 0 use tempo from most recent previous segment (not in terms of what was last loaded \, but what is actually in the seg data [text] in order);
+#X text 290 296 todo: add temp_simple screens for copy paste etc functions;
+#X text 290 328 todo: add shorter temp_simple screens for hold \, tin and reset;
+#X text 290 360 todo: implement mset duration total time as a ctl;
 #X connect 1 0 0 0;
 #X connect 3 0 4 0;
 #X connect 4 0 2 0;

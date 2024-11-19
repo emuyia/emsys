@@ -1,6 +1,7 @@
-md E08 mnm E11 rep 1 len 16 tin 0 bpm 162 bpmr 6 poly 0 seq 0 seqto 1;
-md E04 mnm E11 rep 1 len 16 tin 0 bpm 195 bpmr 6 poly 0 seq 0 seqto 1;
-md E04 mnm E11 rep 1 len 22 tin 0 bpm 195 bpmr 6 poly 0 seq 0 seqto 1;
+md E08 mnm E11 rep 1 len 23 tin 0 bpm 162 bpmr 6 poly 0 seq 0 seqto 1;
+md E04 mnm E11 rep 1 len 16 tin 0 bpm 169 bpmr 6 poly 0 seq 0 seqto 1;
+md F01 mnm A02 rep 1 len 21 tin 0 bpm 128 bpmr 6 poly 0 seq 0 seqto 1;
+md A03 mnm A03 rep 1 len 16 tin 0 bpm 195 bpmr 6 poly 0 seq 0 seqto 1;
 md A01 mnm A01 rep 3 len 10 tin 0 bpm 156 bpmr 23 poly 0 seq 0 seqto mnm0;
 md E04 mnm E11 rep 1 len 22 tin 0 bpm 195 bpmr 6 poly 0 seq 0 seqto 1;
 md A01 mnm A01 rep 2 len 10 tin 0 bpm 0 bpmr 0 poly 0 seq 0 seqto mnm0;
