@@ -3,3 +3,4 @@
 .venv
 todo.txt
 todo-ports.txt
+.stignore
