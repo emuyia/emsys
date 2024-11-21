@@ -1,8 +1,0 @@
-md C11 mnm C11 rep 1 len 32 tin 0 bpm 0 bpmr 0 poly 0 seq 0 seqto mnm0;
-md C12 mnm C12 rep 1 len 32 tin 0 bpm 0 bpmr 0 poly 0 seq 0 seqto mnm0;
-md C13 mnm C13 rep 1 len 32 tin 0 bpm 0 bpmr 0 poly 0 seq 0 seqto mnm0;
-md C15 mnm C15 rep 2 len 32 tin 0 bpm 0 bpmr 0 poly 0 seq 0 seqto mnm0;
-md C16 mnm C16 rep 2 len 32 tin 0 bpm 201 bpmr 6 poly 0 seq 0 seqto mnm0;
-md D01 mnm D01 rep 1 len 32 tin 0 bpm 207 bpmr 16 poly 0 seq 0 seqto mnm0;
-md C15 mnm C15 rep 3 len 32 tin 0 bpm 134 bpmr 0 poly 0 seq 0 seqto mnm0 note joke_ending;
-md G12 mnm H04 rep 2 len 32 tin 0 bpm 42 bpmr 0 poly 0 seq 0 seqto mnm0 note sudden_ending;
