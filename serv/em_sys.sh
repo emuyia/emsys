@@ -6,6 +6,7 @@
 source ~/.bashrc
 export JACK_PROMISCUOUS_SERVER=jack
 export DISPLAY=:0
+export HOME=/home/patch
 
 PD_PATH="/home/patch/Applications/pdnext/bin/pd"
 PD_PATCH="/home/patch/repos/emsys/main.pd"
