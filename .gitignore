@@ -4,3 +4,6 @@
 todo.txt
 todo-ports.txt
 .stignore
+sets/*
+samples/*
+backups/*
