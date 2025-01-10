@@ -225,12 +225,12 @@
 #X text 808 1073 let changes through if seek knob is held down \, so that we can reload the pgm by clicking the knob and not changing the value, f 19;
 #X msg 236 412 0;
 #X floatatom 782 1203 5 0 0 0 - - - 0;
-#X floatatom 838 1206 5 0 0 0 - - - 0;
+#X floatatom 842 1288 5 0 0 0 - - - 0;
 #X obj 731 1155 pgmout 49;
 #X obj 898 1196 nbx 4 18 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10 #191919 #e1e1e1 #e1e1e1 0 256;
 #X obj 592 1058 r midich_md_pgm;
 #X obj 876 1056 r midich_mnm_pgm;
-#X floatatom 959 1195 5 0 0 0 - - - 12;
+#X floatatom 879 1279 5 0 0 0 - - - 12;
 #X obj 1396 1148 r midich_mnm_sysex;
 #X obj 1913 712 text set set;
 #X obj 2399 770 s s.save;
