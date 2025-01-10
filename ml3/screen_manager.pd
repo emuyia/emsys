@@ -176,7 +176,7 @@
 #X obj 1985 369 == 3;
 #X obj 3129 177 tgl 25 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1 0 1;
 #X msg 2362 625 init_params ?;
-#X msg 2124 522 list learn.ml3midi learn.ml3padmidi md.midich mnm.midich;
+#X msg 2131 513 list learn.ml3midi learn.ml3padmidi md.midich mnm.midich mnm.midich.notes md.midich.notes;
 #X connect 2 0 32 0;
 #X connect 2 0 5 0;
 #X connect 3 0 2 0;
