@@ -129,6 +129,8 @@
 #X obj 1208 474 list prepend 4;
 #X obj 1304 474 list prepend 5;
 #X obj 1402 474 list prepend 6;
+#X obj -93 278 s scmgr.InitScreenFinished;
+#X obj -94 245 bng 25 250 50 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
 #X connect 0 0 15 0;
 #X connect 0 1 16 0;
 #X connect 1 0 0 0;
@@ -156,6 +158,7 @@
 #X connect 11 0 6 0;
 #X connect 11 0 8 0;
 #X connect 12 0 8 0;
+#X connect 12 0 131 0;
 #X connect 13 0 1 1;
 #X connect 14 0 8 0;
 #X connect 15 0 18 0;
@@ -285,3 +288,4 @@
 #X connect 127 0 61 0;
 #X connect 128 0 61 0;
 #X connect 129 0 61 0;
+#X connect 131 0 130 0;

@@ -143,7 +143,7 @@
 #X msg 2382 366 3;
 #X obj 2423 372 s scmgr.ml3_autohide;
 #X msg 2410 342 0;
-#X obj 2663 491 s scmgr.ml3_scroll_length;
+#X obj 2773 523 s scmgr.ml3_scroll_length;
 #X obj 2436 270 s scmgr.ml3_value;
 #X obj 2426 237 t b f;
 #X obj 2597 374 list;
@@ -155,7 +155,7 @@
 #X obj 2585 334 t b l;
 #X floatatom 2382 172 5 0 0 0 - - - 12;
 #X obj 2572 456 prepend init_simple;
-#X obj 2721 459 s scmgr.NumberOfGlobalSettings;
+#X obj 2831 491 s scmgr.NumberOfGlobalSettings;
 #X obj 2424 205 spigot 0;
 #X obj 2448 172 tgl 25 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1 0 1;
 #X obj 2445 109 r scmgr.current_screen;
@@ -163,7 +163,7 @@
 #X obj 1361 15 bng 25 250 50 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
 #X obj 2665 435 - 1;
 #X text 2141 817 todo: having a selector for each of these outlets for each screen would be good \, instead of having to set conditionals as & when needed to route controls;
-#X obj 2504 522 s scmgr.GlobalSettingsSelectionName;
+#X obj 2621 580 s scmgr.GlobalSettingsSelectionName;
 #X msg 1046 620 init_simple emsys 0.3;
 #X floatatom 1238 215 5 0 0 0 - - - 12;
 #X floatatom 2624 153 5 0 0 0 - - - 12;

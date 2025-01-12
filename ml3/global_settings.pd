@@ -22,7 +22,7 @@
 #X obj 763 422 r midich_ml3_pads;
 #X msg 520 502 ml3 ctl: ch\$1;
 #X msg 765 501 ml3 pads: ch\$1;
-#X text 648 103 probably badly implemented for now idk it works;
+#X text 648 102 probably badly implemented for now idk it works;
 #X obj 680 228 r scmgr.GlobalSettingsDo;
 #X obj 663 264 tosymbol;
 #X obj 430 103 r midich_ml3_pads;
@@ -98,10 +98,12 @@
 #X msg 2496 478 0;
 #X msg 2526 486 1;
 #X obj 2481 438 t b b b b;
-#X text 1787 343 i can probably make this its own object but cba for now;
+#X text 1787 342 i can probably make this its own object but cba for now;
 #X obj 179 692 i;
 #X obj 380 282 sel 1;
 #X obj 572 299 sel ml3.midich ml3.midich.pads mnm.midich.pgm md.midich.pgm mnm.midich.notes md.midich.notes, f 91;
+#X obj 177 302 r scmgr.ML3ShiftNotif;
+#X obj 200 350 bng 25 250 50 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
 #X connect 0 0 43 2;
 #X connect 2 0 5 0;
 #X connect 4 0 102 0;
@@ -214,3 +216,5 @@
 #X connect 102 3 61 0;
 #X connect 102 4 95 0;
 #X connect 102 5 98 0;
+#X connect 103 0 104 0;
+#X connect 104 0 16 0;
