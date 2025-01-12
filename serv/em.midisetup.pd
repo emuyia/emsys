@@ -66,6 +66,13 @@
 #X obj 947 135 onebang;
 #X obj 1043 83 bng 25 250 50 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
 #X obj 1130 410 pipe 1000;
+#X obj 283 32 r midich_prod_defaults_set;
+#X obj 485 36 r midich_dev_defaults_set;
+#X msg 599 192 26;
+#X obj 501 149 bng 25 250 50 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
+#X msg 484 191 15;
+#X msg 521 191 14;
+#X msg 558 192 9;
 #X connect 0 0 11 0;
 #X connect 0 0 64 1;
 #X connect 3 0 5 0;
@@ -129,3 +136,12 @@
 #X connect 64 0 45 1;
 #X connect 65 0 64 0;
 #X connect 66 0 41 0;
+#X connect 67 0 48 0;
+#X connect 68 0 70 0;
+#X connect 69 0 17 0;
+#X connect 70 0 71 0;
+#X connect 70 0 72 0;
+#X connect 70 0 69 0;
+#X connect 71 0 20 0;
+#X connect 72 0 19 0;
+#X connect 73 0 18 0;
