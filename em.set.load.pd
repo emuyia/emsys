@@ -37,7 +37,7 @@
 #X obj 901 154 text define mset_list;
 #X obj 391 708 symbol;
 #X obj 413 577 list fromsymbol;
-#X obj 413 648 list tosymbol;
+#X obj 405 656 list tosymbol;
 #X obj 493 546 list fromsymbol;
 #X obj 411 529 tosymbol;
 #X obj 493 509 tosymbol;
@@ -62,7 +62,11 @@
 #X obj 630 480 loadmess bang;
 #X obj 293 163 del 850;
 #X obj 208 304 del 750;
-#X msg 933 239 symbol ~/repos/emsys/sets/*.mset;
+#X msg 933 239 symbol ~/repos/emsys_dev/sets/*.mset;
+#X obj 866 546 s scmgr.GetMsetList;
+#X obj 862 513 del 100;
+#X obj 864 474 bng 25 250 50 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
+#X obj 579 669 s scmgr.CurrentlyLoadedMsetName;
 #X connect 1 0 2 0;
 #X connect 2 0 3 0;
 #X connect 3 0 15 0;
@@ -96,6 +100,7 @@
 #X connect 30 0 31 0;
 #X connect 30 0 34 0;
 #X connect 31 0 27 0;
+#X connect 31 0 66 0;
 #X connect 32 0 30 0;
 #X connect 34 0 33 0;
 #X connect 36 0 22 1;
@@ -106,6 +111,7 @@
 #X connect 40 0 37 0;
 #X connect 41 0 39 0;
 #X connect 41 0 57 0;
+#X connect 41 0 67 0;
 #X connect 42 0 38 0;
 #X connect 43 0 44 0;
 #X connect 43 1 41 0;
@@ -130,3 +136,5 @@
 #X connect 61 0 53 0;
 #X connect 62 0 14 0;
 #X connect 63 0 26 0;
+#X connect 65 0 64 0;
+#X connect 66 0 65 0;

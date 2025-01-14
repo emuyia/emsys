@@ -23,6 +23,7 @@
 #X text 268 250 todo: em.ctl needs an overhaul to make implementation of per-screen ctl and the various modifiers that exist (shift \, sustain shift \, and tap) easier to manage and assign ctl to;
 #X text 691 254 - custom ctlin etc objects which have automatically assigned midich's inbuilt;
 #X obj 28 293 ml3/global_settings;
+#X obj 28 323 ml3/mset_manager;
 #X connect 1 0 0 0;
 #X connect 3 0 4 0;
 #X connect 4 0 2 0;
