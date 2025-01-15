@@ -536,6 +536,15 @@
 #X obj 231 178 clr 1 1;
 #X msg 234 143 clear;
 #X obj 192 138 t;
+#X obj 43 308 ctl.in 27 33;
+#X obj 120 280 r midich_ml3;
+#X text 18 279 shift reloads clr;
+#X obj 34 400 s ctl.load_clrstore_1;
+#X obj 131 316 r seg_manager.focus;
+#X obj 41 353 spigot 0, f 12;
+#X obj 59 449 loadbang;
+#X msg 59 474 clear;
+#X obj 56 509 clr 1;
 #X connect 0 0 2 0;
 #X connect 0 0 12 1;
 #X connect 0 0 56 0;
@@ -1195,3 +1204,9 @@
 #X connect 535 0 534 0;
 #X connect 536 0 525 0;
 #X connect 536 1 535 0;
+#X connect 537 0 542 0;
+#X connect 538 0 537 2;
+#X connect 541 0 542 1;
+#X connect 542 0 540 0;
+#X connect 543 0 544 0;
+#X connect 544 0 545 0;
