@@ -67,6 +67,7 @@
 #X obj 862 513 del 100;
 #X obj 864 474 bng 25 250 50 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
 #X obj 579 669 s scmgr.CurrentlyLoadedMsetName;
+#X text 25 384 todo: add detection for if mset in boot.set is not found, f 25;
 #X connect 1 0 2 0;
 #X connect 2 0 3 0;
 #X connect 3 0 15 0;
