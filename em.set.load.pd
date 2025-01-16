@@ -12,7 +12,7 @@
 #X obj 410 423 symbol;
 #X msg 388 769 read \$1;
 #X obj 435 819 text define set;
-#X text 392 220 load mset file from boot.txt \, and load .mset file into [text define set], f 24;
+#X text 390 232 load mset file from boot.txt \, and load .mset file into [text define set], f 24;
 #X msg 211 386 read boot.set;
 #X msg 169 354 write boot.set;
 #X obj 567 354 symbol;
@@ -34,7 +34,7 @@
 #X obj 909 328 zl nth 1;
 #X obj 1065 488 s s.num_of_msets;
 #X obj 971 439 zl len;
-#X obj 901 154 text define mset_list;
+#X obj 1050 543 text define mset_list;
 #X obj 391 708 symbol;
 #X obj 413 577 list fromsymbol;
 #X obj 405 656 list tosymbol;
@@ -55,7 +55,7 @@
 #X obj 293 189 bng 25 250 50 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
 #X obj 83 243 bng 20 250 50 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000;
 #X obj 82 206 r s.read_boot.set;
-#X obj 32 132 r scmgr.startup-100ms;
+#X obj 40 177 r scmgr.startup-100ms;
 #X obj 613 529 once;
 #X obj 679 442 r em.set.fullreload;
 #X obj 639 442 bng 25 250 50 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
@@ -68,6 +68,10 @@
 #X obj 864 474 bng 25 250 50 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
 #X obj 579 669 s scmgr.CurrentlyLoadedMsetName;
 #X text 25 384 todo: add detection for if mset in boot.set is not found, f 25;
+#X obj 45 544 text define mset_temp;
+#X obj 45 509 r em.set.mset_temp;
+#X obj 912 163 r em.set.repopulate_mset_list;
+#X obj 924 198 bng 25 250 50 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
 #X connect 1 0 2 0;
 #X connect 2 0 3 0;
 #X connect 3 0 15 0;
@@ -139,3 +143,6 @@
 #X connect 63 0 26 0;
 #X connect 65 0 64 0;
 #X connect 66 0 65 0;
+#X connect 70 0 69 0;
+#X connect 71 0 72 0;
+#X connect 72 0 63 0;
