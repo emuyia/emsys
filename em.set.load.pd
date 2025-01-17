@@ -72,6 +72,11 @@
 #X obj 45 509 r em.set.mset_temp;
 #X obj 912 163 r em.set.repopulate_mset_list;
 #X obj 924 198 bng 25 250 50 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
+#X obj 638 701 list fromsymbol;
+#X obj 638 747 list tosymbol;
+#X obj 638 726 zl ecils 5;
+#X obj 641 788 s scmgr.CurrentlyLoadedMsetName_NoExt;
+#X text 719 726 strip .mset ext;
 #X connect 1 0 2 0;
 #X connect 2 0 3 0;
 #X connect 3 0 15 0;
@@ -117,6 +122,7 @@
 #X connect 41 0 39 0;
 #X connect 41 0 57 0;
 #X connect 41 0 67 0;
+#X connect 41 0 73 0;
 #X connect 42 0 38 0;
 #X connect 43 0 44 0;
 #X connect 43 1 41 0;
@@ -146,3 +152,6 @@
 #X connect 70 0 69 0;
 #X connect 71 0 72 0;
 #X connect 72 0 63 0;
+#X connect 73 0 75 0;
+#X connect 74 0 76 0;
+#X connect 75 0 74 0;
