@@ -14,6 +14,7 @@
 #X obj 592 150 inlet;
 #X obj 664 346 inlet;
 #X obj 713 349 inlet;
+#X obj 775 355 inlet;
 #X connect 0 0 1 0;
 #X connect 1 0 2 0;
 #X connect 1 0 8 0;
@@ -31,3 +32,4 @@
 #X connect 12 0 0 0;
 #X connect 13 0 7 1;
 #X connect 14 0 6 1;
+#X connect 15 0 10 0;
