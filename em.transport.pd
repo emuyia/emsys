@@ -75,7 +75,7 @@
 #X obj 46 380 s t.16n_db;
 #X obj 950 541 s t.count16_db;
 #X obj 945 435 r t.16n_db;
-#X text 924 608 lags slightly behind to compensate for midi latency, f 21;
+#X text 924 605 lags slightly behind to compensate for midi latency, f 21;
 #X obj 508 44 r t.clock_toggle;
 #X obj 508 77 tgl 20 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000 0 1;
 #X obj 508 109 sel 0 1;
@@ -96,6 +96,15 @@
 #X obj 555 173 r midich_clock;
 #X obj 555 203 i;
 #X obj 966 267 r midich_ctl;
+#X obj 1186 172 r t.tempo;
+#X floatatom 1185 205 5 0 0 0 - - - 12;
+#X obj 1182 256 polling_rate 100;
+#X floatatom 1181 287 5 0 0 0 - - - 12;
+#X obj 1246 290 r midich_thru;
+#X text 1300 174 ch13 (pd62) is for studio use (via MegaCMD USB \, forwarded to PORT 2 OUT \, then through MnM MIDI THRU \, which connects to a MIDI Interface \, then to a DAW where this CC must be listened to), f 32;
+#X obj 1193 400 ctlout 1 62;
+#X obj 1185 322 change;
+#X obj 1187 359 scale 30 300 0 127;
 #X connect 0 0 23 1;
 #X connect 0 0 52 0;
 #X connect 1 0 3 0;
@@ -198,3 +207,10 @@
 #X connect 94 0 95 0;
 #X connect 95 0 82 2;
 #X connect 96 0 51 1;
+#X connect 97 0 98 0;
+#X connect 98 0 99 0;
+#X connect 99 0 100 0;
+#X connect 100 0 104 0;
+#X connect 101 0 103 2;
+#X connect 104 0 105 0;
+#X connect 105 0 103 0;
