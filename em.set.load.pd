@@ -1,4 +1,4 @@
-#N canvas 1440 928 1920 976 12;
+#N canvas 1440 928 1920 980 12;
 #X obj 190 424 text define boot;
 #X msg 293 227 0;
 #X obj 285 259 text get boot;
@@ -87,6 +87,7 @@
 #X obj 991 144 t b f;
 #X obj 729 163 s mset_manager.RepopAndReload;
 #X text 176 595 currently the path for sets is acquired dynamically here \, but for changing between dev & prod environments \, it should respect whether it's emsys_dev or emsys. maybe. idk., f 30;
+#X obj 360 836 print;
 #X connect 1 0 2 0;
 #X connect 2 0 3 0;
 #X connect 3 0 15 0;
@@ -109,6 +110,7 @@
 #X connect 18 0 16 0;
 #X connect 20 0 10 0;
 #X connect 21 0 12 0;
+#X connect 21 0 88 0;
 #X connect 22 0 21 0;
 #X connect 23 0 22 0;
 #X connect 24 0 25 0;
