@@ -212,7 +212,7 @@
 #X obj 1098 608 r emsys.version;
 #X msg 600 626 1500;
 #X msg 352 626 1000;
-#X msg 2607 386 list ml3.midich ml3.midich.pads env.defaults.tog md.midich.pgm md.midich.notes mnm.midich.pgm mnm.midich.notes cc.tempo.tog;
+#X msg 2607 386 list ml3.midich ml3.midich.pads env.defaults.tog md.midich.pgm md.midich.notes mnm.midich.pgm mnm.midich.notes cc.tempo.tog cc.midich, f 69;
 #X connect 2 0 27 0;
 #X connect 2 0 5 0;
 #X connect 3 0 2 0;
