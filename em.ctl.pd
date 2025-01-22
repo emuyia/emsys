@@ -109,6 +109,9 @@
 #X obj 39 327 s scmgr.SeekScreenPrevious;
 #X obj 154 376 s scmgr.SeekScreenNext;
 #X obj 485 380 s ctl.rec;
+#X obj 683 253 r ctl.tap_func_status;
+#X obj 685 293 == 0;
+#X obj 649 336 s scmgr.goawaytemp_param;
 #X connect 1 0 0 0;
 #X connect 2 0 1 0;
 #X connect 4 0 6 0;
@@ -208,3 +211,5 @@
 #X connect 98 0 87 0;
 #X connect 98 1 87 1;
 #X connect 99 0 98 1;
+#X connect 110 0 111 0;
+#X connect 111 0 112 0;
