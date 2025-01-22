@@ -8,3 +8,4 @@ sets/*
 samples/*
 backups/*
 boot.set
+boot.conf
