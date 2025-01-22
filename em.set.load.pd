@@ -43,9 +43,9 @@
 #X obj 847 62 r em.set.repopulate_mset_list;
 #X obj 849 95 bng 25 250 50 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
 #X obj 232 663 list fromsymbol;
-#X obj 305 585 list tosymbol;
-#X obj 308 626 s scmgr.CurrentlyLoadedMsetName_NoExt;
-#X text 372 550 strip .mset ext;
+#X obj 351 619 list tosymbol;
+#X obj 356 654 s scmgr.CurrentlyLoadedMsetName_NoExt;
+#X text 438 595 strip .mset ext;
 #X obj 229 969 print;
 #X obj 204 320 tosymbol;
 #X obj 207 269 return boot.GetParamFromConf mset;
@@ -65,12 +65,12 @@
 #X obj 208 295 route mset;
 #X obj 847 212 symbol;
 #X obj 916 197 tosymbol;
-#X obj 254 503 fromsymbol;
-#X obj 300 550 zl ecils 5;
+#X obj 355 588 zl ecils 5;
+#X obj 353 556 list fromsymbol;
 #X connect 0 0 1 0;
 #X connect 0 1 5 0;
 #X connect 0 1 38 0;
-#X connect 0 1 66 0;
+#X connect 0 1 67 0;
 #X connect 1 0 2 0;
 #X connect 1 0 3 0;
 #X connect 2 0 3 0;
@@ -134,5 +134,5 @@
 #X connect 63 0 48 0;
 #X connect 64 0 56 0;
 #X connect 65 0 64 1;
-#X connect 66 0 67 0;
-#X connect 67 0 44 0;
+#X connect 66 0 44 0;
+#X connect 67 0 66 0;
