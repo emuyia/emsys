@@ -17,12 +17,12 @@ MIDI
         CC LOOP: OFF
     PROGRAM
         PRG MODE: BASIC
-        PRG IN: 15
+        PRG IN: 14
         PRG OUT: --
     MD MIDI
-        CHRO CHAN: 11
-        POLY CHAN: 12
-        TRIG CHAN: 13
+        CHRO CHAN: 10
+        POLY CHAN: 11
+        TRIG CHAN: 12
     GENERAL MIDI
         MUTE CC: --
 
