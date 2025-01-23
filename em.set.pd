@@ -179,7 +179,7 @@
 #X obj 520 1432 i;
 #X obj 525 1369 t b f;
 #X obj 517 1468 s t.tempo;
-#X obj 1471 391 r s.reload;
+#X obj 1442 371 r s.reload;
 #X obj 1383 597 s tin.toggle;
 #X msg 1375 561 1;
 #X obj 757 251 i;
@@ -294,6 +294,7 @@
 #X obj 1485 571 del 100;
 #X obj 1656 522 bng 25 250 50 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
 #X obj 2300 947 s s.reload;
+#X obj 1487 400 bng 20 250 50 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000;
 #X connect 0 0 67 1;
 #X connect 0 0 150 0;
 #X connect 1 0 68 1;
@@ -475,6 +476,7 @@
 #X connect 178 0 175 0;
 #X connect 178 1 177 1;
 #X connect 180 0 191 0;
+#X connect 180 0 295 0;
 #X connect 182 0 181 0;
 #X connect 183 0 57 0;
 #X connect 184 0 183 1;
@@ -613,3 +615,4 @@
 #X connect 291 0 294 0;
 #X connect 292 0 187 0;
 #X connect 293 0 187 0;
+#X connect 295 0 191 0;

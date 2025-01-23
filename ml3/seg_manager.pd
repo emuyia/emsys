@@ -64,7 +64,7 @@
 #X obj 162 1970 f;
 #X floatatom 188 2020 5 0 0 0 - - - 0;
 #X msg 238 1834 \$1;
-#X obj 127 2097 s ctl.update_text;
+#X obj 126 2097 s ctl.update_text;
 #X obj 127 2059 del 50;
 #X floatatom 240 1685 5 0 127 0 - - - 0;
 #X obj 246 1652 r s.num_of_segs;
@@ -442,6 +442,7 @@
 #X obj 1839 1418 sel 105;
 #X obj 953 313 s s.reload;
 #X obj 108 444 r ctl.shift;
+#X obj 252 2095 s s.reload;
 #X connect 0 0 3 0;
 #X connect 1 0 365 0;
 #X connect 1 0 51 0;
@@ -510,6 +511,7 @@
 #X connect 63 0 55 0;
 #X connect 64 0 256 0;
 #X connect 66 0 65 0;
+#X connect 66 0 443 0;
 #X connect 67 0 69 1;
 #X connect 68 0 67 0;
 #X connect 69 0 70 0;
