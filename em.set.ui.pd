@@ -9,7 +9,7 @@
 #X obj 100 293 bng 25 250 50 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
 #X obj 306 392 hradio 21 1 0 5 empty empty empty 0 -11 0 12 #fcfcfc #000000 #000000 0;
 #X obj 306 435 nbx 4 18 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10 #191919 #e1e1e1 #e1e1e1 0 256;
-#X text 348 346 select screen;
+#X text 348 345 select screen;
 #X msg 137 332 0;
 #X msg 199 332 1;
 #X msg 290 240 temp_simple message;
@@ -21,8 +21,8 @@
 #X obj 217 567 loadbang;
 #X msg 217 595 set ...;
 #X obj 508 491 hradio 21 1 0 4 empty empty empty 0 -11 0 12 #fcfcfc #000000 #000000 0;
-#X text 508 456 select ml3 mode;
-#X text 146 445 select ml3 emote;
+#X text 508 455 select ml3 mode;
+#X text 146 444 select ml3 emote;
 #X obj 146 479 hradio 21 1 0 6 empty empty empty 0 -11 0 12 #fcfcfc #000000 #000000 0;
 #X obj 146 503 hradio 21 1 0 6 empty empty empty 0 -11 0 12 #fcfcfc #000000 #000000 0;
 #X obj 116 544 pak 0 0;
@@ -49,7 +49,7 @@
 #X obj 871 315 s lnmgr1a.param;
 #X obj 871 284 list prepend 0;
 #X obj 973 284 list prepend 1;
-#X obj 1170 -566 r s.seg_bpm_target_lookahead;
+#X obj 1169 -602 r s.seg_bpm_target_lookahead;
 #X obj 1283 178 r s.seg_bpm_rtime_lookahead;
 #X obj 1397 202 r s.seg_tin_lookahead;
 #X obj 1069 284 list prepend 2;
@@ -113,7 +113,7 @@
 #X obj 1639 418 bng 26 250 50 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
 #X obj 1655 361 r t.prime;
 #X obj 1721 361 r s.reset;
-#X text 1600 112 - quirks to get things to display correctly & at the right times -;
+#X text 1600 111 - quirks to get things to display correctly & at the right times -;
 #X msg 1141 444 1;
 #X obj 1639 326 r t.count;
 #X obj 278 167 r scmgr.current_screen;
@@ -126,16 +126,16 @@
 #X obj 1191 22 sel 0;
 #X obj 1239 22 i;
 #X obj 1261 -197 text get set;
-#X obj 1317 -530 r s.current_seg_id;
-#X obj 1320 -496 - 1;
+#X obj 1316 -566 r s.current_seg_id;
+#X obj 1319 -532 - 1;
 #X obj 1309 -452 i;
 #X obj 1240 64 contain_char 40 41;
-#X obj 1170 -532 t f b;
+#X obj 1169 -568 t f b;
 #X obj 1267 -113 route bpm;
 #X obj 1266 -143 list trim;
 #X obj 1264 -172 list split 2;
 #X obj 1338 -171 list;
-#X text 1390 -500 if bpm=0 \, find last bpm value and display that instead. this is display only \, because we want to allow tempo changing during performance for as long as it's not enforced, f 16;
+#X text 1390 -501 if bpm=0 \, find last bpm value and display that instead. this is display only \, because we want to allow tempo changing during performance for as long as it's not enforced, f 16;
 #X obj 1277 -298 spigot 1;
 #X floatatom 1260 -230 5 0 0 0 - - - 12;
 #X obj 1278 -268 counter 1 0 999, f 21;
@@ -161,6 +161,9 @@
 #X obj 1342 763 s scmgr.static;
 #X obj 1339 658 prepend b;
 #X msg 1364 722 a mset duration;
+#X floatatom 1321 -496 5 0 0 0 - - - 12;
+#X obj 1411 -30 buddy;
+#X text 1460 -95 [buddy] ensures [spigot] is deactivated if needed \, before triggering the counter again, f 15;
 #X connect 0 0 15 0;
 #X connect 0 1 16 0;
 #X connect 1 0 0 0;
@@ -316,7 +319,7 @@
 #X connect 125 0 130 0;
 #X connect 126 0 134 0;
 #X connect 127 0 128 0;
-#X connect 128 0 129 1;
+#X connect 128 0 162 0;
 #X connect 129 0 143 0;
 #X connect 130 0 103 2;
 #X connect 131 0 124 0;
@@ -334,9 +337,9 @@
 #X connect 141 0 137 0;
 #X connect 142 0 137 1;
 #X connect 143 0 147 0;
-#X connect 144 0 141 0;
+#X connect 144 0 163 0;
 #X connect 144 1 146 0;
-#X connect 145 0 137 1;
+#X connect 145 0 163 1;
 #X connect 146 0 125 1;
 #X connect 146 1 145 0;
 #X connect 147 0 141 0;
@@ -360,3 +363,6 @@
 #X connect 160 0 159 0;
 #X connect 160 0 161 0;
 #X connect 161 0 159 0;
+#X connect 162 0 129 1;
+#X connect 163 0 141 0;
+#X connect 163 1 137 1;
