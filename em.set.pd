@@ -295,6 +295,7 @@
 #X obj 1656 522 bng 25 250 50 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
 #X obj 2300 947 s s.reload;
 #X obj 1487 400 bng 20 250 50 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000;
+#X obj 828 1088 r s.allowPGMChange;
 #X connect 0 0 67 1;
 #X connect 0 0 150 0;
 #X connect 1 0 68 1;
@@ -616,3 +617,4 @@
 #X connect 292 0 187 0;
 #X connect 293 0 187 0;
 #X connect 295 0 191 0;
+#X connect 296 0 219 0;
