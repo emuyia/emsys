@@ -1,4 +1,4 @@
-mset test.mset;
+mset init.mset;
 path /home/patch/repos/emsys/;
 env.defaults.dev 0;
 ml3.midich 17;

@@ -4,7 +4,6 @@ After=sound.target midi.target
 
 [Service]
 Type=simple
-EnvironmentFile=/home/patch/.myenv
 ExecStart=/home/patch/repos/emsys/.venv/bin/python /home/patch/repos/emsys/serv/em_midisetup.py
 WorkingDirectory=/home/patch/repos/emsys
 StandardOutput=inherit
