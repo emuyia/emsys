@@ -1,5 +1,7 @@
-# emsys
-A bespoke live music companion to MCL built in Pd for Pisound.
+<div align="center">
+    <img src="resources/banner.webp" height="80">
+    <p>A bespoke live music companion to MCL built in Pd for Pisound.</p>
+</div>
 
 ## Setup
 > A niche hardware configuration is required. Not made for general use.
