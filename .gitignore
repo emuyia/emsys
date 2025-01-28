@@ -1,10 +1,11 @@
 .DS_Store
 .stfolder
 .venv
+.venv*
 todo.txt
 todo-ports.txt
 .stignore
-sets/*
+sets/*.mset
 samples/*
 backups/*
 boot.set
