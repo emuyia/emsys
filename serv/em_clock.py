@@ -2,6 +2,7 @@ from time import perf_counter, sleep
 from multiprocessing import Process, Value, freeze_support
 import mido
 import logging
+import sys
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -19,7 +20,12 @@ class MidiClockGen:
     @staticmethod
     def _midi_clock_generator(out_port_name, pulse_rate, run, clock_running):
         try:
-            midi_output = mido.open_output(out_port_name, virtual=True)
+            # Cross-platform port handling
+            if sys.platform == 'win32':
+                midi_output = mido.open_output(out_port_name)
+            else:
+                midi_output = mido.open_output(out_port_name, virtual=True)
+
             clock_tick = mido.Message('clock')
             while run.value:
                 if clock_running.value:
@@ -51,7 +57,12 @@ class MidiClockGen:
 
 def midi_bpm_listener(shared_bpm, run_code, clock_running, pulse_rate, in_port_name, cc_bpm=1, cc_start_stop=2):
     try:
-        midi_input = mido.open_input(in_port_name, virtual=True)
+        # Cross-platform port handling
+        if sys.platform == 'win32':
+            midi_input = mido.open_input(in_port_name)
+        else:
+            midi_input = mido.open_input(in_port_name, virtual=True)
+
         while run_code.value:
             for msg in midi_input.iter_pending():
                 if msg.type == 'control_change':
@@ -61,10 +72,7 @@ def midi_bpm_listener(shared_bpm, run_code, clock_running, pulse_rate, in_port_n
                         pulse_rate.value = 60.0 / (new_bpm * 24)
                         logging.debug(f"set bpm: {new_bpm}")
                     elif msg.control == cc_start_stop:
-                        if msg.value >= 64:
-                            clock_running.value = 1
-                        else:
-                            clock_running.value = 0
+                        clock_running.value = 1 if msg.value >= 64 else 0
             sleep(0.1)
     except Exception as e:
         logging.error(f"Error in MIDI BPM listener: {e}")
@@ -78,15 +86,28 @@ class MidiClockApp:
             self.mcg.end_process()
 
     def start(self):
-        virtual_out_port = "em_clock_out"
-        virtual_in_port = "em_clock_in"
+        # Platform-specific port configuration
+        if sys.platform == 'win32':
+            # Find loopMIDI ports on Windows
+            input_ports = mido.get_input_names()
+            output_ports = mido.get_output_names()
+            virtual_in_port = next((p for p in input_ports if 'em_clock' in p), None)
+            virtual_out_port = next((p for p in output_ports if 'em_clock' in p), None)
+            
+            if not virtual_in_port or not virtual_out_port:
+                raise RuntimeError("Couldn't find loopMIDI ports. Ensure they're created in loopMIDI.")
+        else:
+            # Linux/macOS configuration
+            virtual_in_port = "em_clock_in"
+            virtual_out_port = "em_clock_out"
 
         try:
-            logging.debug(f"Creating virtual MIDI ports: '{virtual_in_port}' (input), '{virtual_out_port}' (output)")
+            logging.debug(f"Using MIDI ports: In='{virtual_in_port}', Out='{virtual_out_port}'")
             self.mcg.launch_process(virtual_out_port)
 
             midi_listener_process = Process(target=midi_bpm_listener, args=(
-                self.mcg.shared_bpm, self.mcg._run_code, self.mcg.clock_running, self.mcg.pulse_rate, virtual_in_port))
+                self.mcg.shared_bpm, self.mcg._run_code, self.mcg.clock_running, 
+                self.mcg.pulse_rate, virtual_in_port))
             midi_listener_process.start()
 
             logging.info("MIDI clock is running. Press Ctrl+C to stop.")
