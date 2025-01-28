@@ -1,5 +1,7 @@
-# emsys
-A bespoke live music companion to MCL built in Pd for Pisound.
+<div align="center">
+    <img src="resources/banner.webp" height="80">
+    <p>A bespoke live music companion to MCL built in Pd for Pisound.</p>
+</div>
 
 ## Setup
 > A niche hardware configuration is required. Not made for general use.
@@ -53,7 +55,6 @@ systemctl --user start em_midisetup
 `boot.conf` contains settings necessary for emsys to run.
 1. Rename or copy `serv/boot.conf.example` to `serv/boot.conf`.
 2. Rename or copy `sets/init.mset.example` to `sets/init.mset`.
-3. Open boot.conf in a text editor & set `path` to the emsys directory.
 
 Optional: Change `env.defaults.dev` to `1` if you intend to use emsys with plugdata. This tells emsys to assume that all connected MIDI devices are on Port 1 (this can be adjusted later).
 
