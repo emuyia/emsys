@@ -10,3 +10,4 @@ samples/*
 backups/*
 boot.set
 boot.conf
+*.mset
