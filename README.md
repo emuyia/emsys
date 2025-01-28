@@ -53,7 +53,6 @@ systemctl --user start em_midisetup
 `boot.conf` contains settings necessary for emsys to run.
 1. Rename or copy `serv/boot.conf.example` to `serv/boot.conf`.
 2. Rename or copy `sets/init.mset.example` to `sets/init.mset`.
-3. Open boot.conf in a text editor & set `path` to the emsys directory.
 
 Optional: Change `env.defaults.dev` to `1` if you intend to use emsys with plugdata. This tells emsys to assume that all connected MIDI devices are on Port 1 (this can be adjusted later).
 
