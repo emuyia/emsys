@@ -16,7 +16,6 @@
 #X text 58 49 screens;
 #X obj 230 222 em.set.ui;
 #X obj 641 95 s emsys.version;
-#X msg 640 66 0.4b;
 #X obj 640 33 loadbang;
 #X text 227 39 core;
 #X text 377 46 setup;
@@ -26,8 +25,9 @@
 #X obj 646 136 loadbang;
 #X text 715 130 required for init ml3_text;
 #X text 431 47 <---;
+#X msg 640 66 0.4;
 #X connect 1 0 0 0;
-#X connect 17 0 16 0;
-#X connect 18 0 17 0;
+#X connect 17 0 26 0;
+#X connect 22 0 21 0;
 #X connect 23 0 22 0;
-#X connect 24 0 23 0;
+#X connect 26 0 16 0;
