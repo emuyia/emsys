@@ -6,8 +6,12 @@ todo.txt
 todo-ports.txt
 .stignore
 sets/*.mset
+sets/*.seq
 samples/*
 backups/*
 boot.set
 boot.conf
 *.mset
+*.seq
+experiments/sets/*.mset
+experiments/sets/*.seq
