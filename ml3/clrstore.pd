@@ -31,7 +31,8 @@
 #X text 268 117 preserve pad colour states through shift presses, f 22;
 #X obj 179 87 r ctl.ml3_colour_store_\$1;
 #X obj 448 109 r ctl.load_clrstore_\$1;
-#X obj 133 498 clr \$1, f 12;
+#X obj 127 532 clr \$1, f 12;
+#X obj 214 481 route bang;
 #X connect 0 4 2 1;
 #X connect 0 5 3 1;
 #X connect 0 6 4 1;
@@ -61,7 +62,7 @@
 #X connect 12 0 11 1;
 #X connect 13 0 10 0;
 #X connect 13 1 11 0;
-#X connect 13 2 32 3;
+#X connect 13 2 33 0;
 #X connect 14 0 13 0;
 #X connect 14 1 12 0;
 #X connect 15 0 13 0;
@@ -87,3 +88,4 @@
 #X connect 28 0 11 1;
 #X connect 30 0 0 0;
 #X connect 31 0 1 0;
+#X connect 33 1 32 3;
