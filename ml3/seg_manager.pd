@@ -448,6 +448,14 @@
 #X obj 1070 464 s s.reload;
 #X obj 930 369 s s.allowPGMChange;
 #X obj 965 263 t;
+#X obj 369 1484 r ctl.prog;
+#X obj 369 1521 spigot 0;
+#X obj 369 1551 sel 127;
+#X obj 369 1582 bng 25 250 50 0 empty empty empty 17 7 0 10 #211d14 #e1bf96 #e1ce9c;
+#X obj 395 1582 bng 25 250 50 0 empty empty empty 17 7 0 10 #211d14 #e1bf96 #e1ce9c;
+#X obj 450 1484 r ctl.stop.prog;
+#X obj 450 1582 bng 25 250 50 0 empty empty empty 17 7 0 10 #211d14 #e1bf96 #e1ce9c;
+#X obj 450 1620 del 50;
 #X connect 0 0 3 0;
 #X connect 1 0 365 0;
 #X connect 1 0 51 0;
@@ -857,6 +865,7 @@
 #X connect 353 0 356 0;
 #X connect 354 0 353 0;
 #X connect 355 0 354 1;
+#X connect 355 0 450 1;
 #X connect 356 0 61 0;
 #X connect 357 0 60 0;
 #X connect 358 0 56 0;
@@ -953,3 +962,13 @@
 #X connect 448 0 346 0;
 #X connect 448 0 441 0;
 #X connect 448 1 447 0;
+#X connect 449 0 450 0;
+#X connect 450 0 451 0;
+#X connect 451 0 452 0;
+#X connect 451 1 453 0;
+#X connect 452 0 60 0;
+#X connect 453 0 389 0;
+#X connect 454 0 455 0;
+#X connect 455 0 56 0;
+#X connect 455 0 456 0;
+#X connect 456 0 453 0;
