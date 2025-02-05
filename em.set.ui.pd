@@ -29,7 +29,7 @@
 #X obj 116 573 t b l;
 #X obj 508 523 t b f;
 #X obj 513 354 tgl 25 0 empty empty autohide 17 7 0 10 #191919 #e1e1e1 #e1e1e1 0 1;
-#X obj 453 319 knob 25 0 127 0 0 empty empty #191919 #696969 #E1E1E1 1 0 0 0 1 270 0 0 0;
+#X obj 453 319 knob 25 0 127 0 0 empty empty #191919 #696969 #E1E1E1 1 0 0 0 1 270 0 0 0 empty empty 0 0 0 0 0 0 0 0;
 #X obj 513 384 t b f;
 #X obj 475 384 t b f;
 #X obj 571 364 hradio 21 1 0 3 empty empty param\ type 0 -11 0 12 #fcfcfc #000000 #ffffff 0;
@@ -164,6 +164,8 @@
 #X floatatom 1321 -496 5 0 0 0 - - - 12;
 #X obj 1411 -30 buddy;
 #X text 1460 -95 [buddy] ensures [spigot] is deactivated if needed \, before triggering the counter again, f 15;
+#X obj 475 601 s ui.top_line;
+#X obj 306 676 s ui.bottom_line;
 #X connect 0 0 15 0;
 #X connect 0 1 16 0;
 #X connect 1 0 0 0;
@@ -195,7 +197,9 @@
 #X connect 13 0 1 1;
 #X connect 14 0 8 0;
 #X connect 15 0 18 0;
+#X connect 15 0 166 0;
 #X connect 16 0 17 0;
+#X connect 16 0 165 0;
 #X connect 17 0 0 1;
 #X connect 18 0 0 0;
 #X connect 19 0 20 0;

@@ -54,7 +54,7 @@
 #X obj 547 1013 bng 25 250 50 0 empty empty learn 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
 #X floatatom 456 704 5 0 0 0 - - - 12;
 #X floatatom 499 701 5 0 0 0 - - - 12;
-#X obj 456 739 sel 27;
+#X obj 456 729 sel 27;
 #X obj 539 819 i;
 #X obj 595 676 bng 25 250 50 0 empty empty learn 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
 #X floatatom 540 851 5 0 0 0 - - - 12;
@@ -112,6 +112,9 @@
 #X msg 361 911 -> Pad;
 #X msg 269 909 -> Shift;
 #X obj 95 298 r ctl.shift;
+#X obj 756 701 r pdctl.shift;
+#X msg 767 765 stop;
+#X obj 756 729 t;
 #X connect 0 0 11 2;
 #X connect 2 0 4 0;
 #X connect 3 0 81 0;
@@ -241,3 +244,7 @@
 #X connect 110 0 68 0;
 #X connect 111 0 68 0;
 #X connect 112 0 36 0;
+#X connect 113 0 115 0;
+#X connect 114 0 65 0;
+#X connect 115 0 76 0;
+#X connect 115 1 114 0;
