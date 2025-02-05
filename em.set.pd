@@ -54,7 +54,7 @@
 #X obj 681 296 + 1;
 #X obj 681 345 gate 2;
 #X obj 710 372 b;
-#X msg 599 414 0;
+#X msg 629 421 0;
 #X obj 556 458 s s.hold;
 #X obj 756 287 - 1;
 #X obj 626 458 s tin.toggle;
@@ -363,9 +363,8 @@
 #X connect 53 0 15 2;
 #X connect 53 1 54 0;
 #X connect 53 1 15 3;
-#X connect 54 0 55 0;
 #X connect 54 0 59 0;
-#X connect 55 0 56 0;
+#X connect 54 0 55 0;
 #X connect 55 0 58 0;
 #X connect 57 0 53 1;
 #X connect 57 0 160 0;
