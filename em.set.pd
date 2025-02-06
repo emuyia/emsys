@@ -296,6 +296,8 @@
 #X obj 2300 947 s s.reload;
 #X obj 1487 400 bng 20 250 50 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000;
 #X obj 828 1088 r s.allowPGMChange;
+#X obj 625 1432 print PGM_MD;
+#X obj 726 1432 print PGM_MnM;
 #X connect 0 0 67 1;
 #X connect 0 0 150 0;
 #X connect 1 0 68 1;
@@ -390,7 +392,9 @@
 #X connect 76 1 71 1;
 #X connect 77 0 72 1;
 #X connect 80 0 158 0;
+#X connect 80 0 297 0;
 #X connect 81 0 225 0;
+#X connect 81 0 298 0;
 #X connect 88 0 90 0;
 #X connect 89 0 90 0;
 #X connect 90 0 91 0;
