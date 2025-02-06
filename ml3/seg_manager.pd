@@ -463,10 +463,14 @@
 #X obj 530 1607 s scmgr.goawaytemp_param;
 #X obj 533 1552 b;
 #X obj 562 1525 b;
+#X obj 1674 329 s scmgr.goawaytemp_param;
+#X obj 438 120 s scmgr.goawaytemp_param;
+#X obj 438 81 bng 25 250 50 0 empty empty empty 17 7 0 10 #211d14 #e1bf96 #e1ce9c;
 #X connect 0 0 3 0;
 #X connect 1 0 365 0;
 #X connect 1 0 51 0;
 #X connect 1 0 4 0;
+#X connect 1 1 466 0;
 #X connect 7 0 16 0;
 #X connect 8 0 448 0;
 #X connect 11 0 10 0;
@@ -894,6 +898,7 @@
 #X connect 379 0 378 2;
 #X connect 380 0 378 0;
 #X connect 381 0 34 0;
+#X connect 381 0 464 0;
 #X connect 382 0 23 0;
 #X connect 382 0 272 0;
 #X connect 383 0 382 0;
@@ -988,3 +993,4 @@
 #X connect 462 0 459 0;
 #X connect 462 0 461 0;
 #X connect 463 0 460 0;
+#X connect 466 0 465 0;
