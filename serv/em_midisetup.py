@@ -86,7 +86,7 @@ while True:
     if client_cache["CLK_OUT_CLIENT"] and client_cache["MCL_CLIENT"]:
         connect_ports(connections, client_cache["CLK_OUT_CLIENT"], CLK_OUT, client_cache["MCL_CLIENT"], MCL_IN)
     else:
-        missing_clients.append("Clock Out to Pisound")
+        missing_clients.append("Clock Out to MCL USB")
 
     # Pisound to Pd 2 (synth feedback)
     if client_cache["PS_CLIENT"] and client_cache["PD_CLIENT"]:
@@ -110,12 +110,12 @@ while True:
     if client_cache["MCL_CLIENT"] and client_cache["PD_CLIENT"]:
         connect_ports(connections, client_cache["PD_CLIENT"], PD_OUT_4, client_cache["MCL_CLIENT"], MCL_IN)
     else:
-        missing_clients.append("Pure Data to MCL")
+        missing_clients.append("Pure Data to MCL USB")
     
     if client_cache["PS_CLIENT"] and client_cache["MCL_CLIENT"]:
         connect_ports(connections, client_cache["PS_CLIENT"], PS_OUT, client_cache["MCL_CLIENT"], MCL_IN)
     else:
-        missing_clients.append("Pisound to MCL")
+        missing_clients.append("Pisound to MCL USB")
 
     # Report missing clients
     if missing_clients:
