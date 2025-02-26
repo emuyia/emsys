@@ -55,7 +55,7 @@ class MidiClockGen:
             self.midi_process.join()
             self.midi_process = None
 
-def midi_bpm_listener(shared_bpm, run_code, clock_running, pulse_rate, in_port_name, cc_bpm=1, cc_start_stop=2):
+def midi_bpm_listener(shared_bpm, run_code, clock_running, pulse_rate, in_port_name, cc_bpm=40, cc_start_stop=41):
     try:
         # Cross-platform port handling
         if sys.platform == 'win32':
