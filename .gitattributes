@@ -4,3 +4,4 @@
 *.pd linguist-detectable=true
 *.sh linguist-detectable=false
 *.py linguist-detectable=false
+*.vbs linguist-detectable=false
