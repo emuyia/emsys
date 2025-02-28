@@ -116,7 +116,7 @@
 #X text 1600 111 - quirks to get things to display correctly & at the right times -;
 #X msg 1141 444 1;
 #X obj 1639 326 r t.count;
-#X obj 278 167 r scmgr.current_screen;
+#X obj 392 148 r scmgr.current_screen;
 #X obj 1106 474 list prepend 3;
 #X obj 1208 474 list prepend 4;
 #X obj 1304 474 list prepend 5;
@@ -166,6 +166,7 @@
 #X text 1460 -95 [buddy] ensures [spigot] is deactivated if needed \, before triggering the counter again, f 15;
 #X obj 475 601 s ui.top_line;
 #X obj 306 676 s ui.bottom_line;
+#X obj 259 148 r scmgr.userselect;
 #X connect 0 0 15 0;
 #X connect 0 1 16 0;
 #X connect 1 0 0 0;
@@ -370,3 +371,4 @@
 #X connect 162 0 129 1;
 #X connect 163 0 141 0;
 #X connect 163 1 137 1;
+#X connect 167 0 150 3;
