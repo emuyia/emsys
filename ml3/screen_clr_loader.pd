@@ -18,7 +18,7 @@
 #X obj 549 169 sel 0 1;
 #X obj 629 257 clr \$1 1;
 #X msg 519 289 4;
-#X msg 494 289 5;
+#X msg 492 289 5;
 #X obj 486 368 clr \$1 1;
 #X msg 534 334 cyan;
 #X obj 594 334 loadmess bang;
@@ -27,7 +27,7 @@
 #X obj 49 142 clr \$1;
 #X msg 49 101 clear;
 #X msg 462 289 0;
-#X obj 549 223 t b b b b;
+#X obj 435 223 t b b b b, f 26;
 #X connect 0 0 10 0;
 #X connect 1 0 3 0;
 #X connect 2 0 1 0;
@@ -52,8 +52,8 @@
 #X connect 27 0 20 1;
 #X connect 28 0 27 0;
 #X connect 28 0 23 0;
-#X connect 28 1 23 0;
 #X connect 28 1 19 0;
-#X connect 28 2 23 0;
+#X connect 28 1 23 0;
 #X connect 28 2 18 0;
+#X connect 28 2 23 0;
 #X connect 28 3 11 0;
