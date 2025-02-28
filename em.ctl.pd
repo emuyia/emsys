@@ -488,8 +488,8 @@
 #X obj 2371 915 t;
 #X msg 2382 946 stop;
 #X msg 2369 1006 0;
-#X obj 2371 816 r ctl.bend;
-#X obj 2298 816 r ctl.mod;
+#X obj 2360 774 r ctl.bend;
+#X obj 2287 774 r ctl.mod;
 #X obj 2367 974 del 50;
 #X msg 2493 904 2;
 #X obj 544 1048 onebang;
@@ -518,6 +518,11 @@
 #X msg 584 259 0;
 #X obj 615 272 tgl 25 0 empty empty empty 17 7 0 10 #211d14 #e1bf96 #e1ce9c 0 1;
 #X obj 668 272 s scmgr.userselect;
+#X obj 2557 784 r ctl.click.enc;
+#X obj 2659 784 r ctl.enc;
+#X obj 2735 790 r ctl.shift.click.enc;
+#X obj 2871 790 r ctl.shift.enc;
+#X obj 2735 839 t;
 #X connect 0 0 39 2;
 #X connect 1 0 39 1;
 #X connect 2 0 0 0;
@@ -1091,8 +1096,8 @@
 #X connect 486 1 487 0;
 #X connect 487 0 491 0;
 #X connect 488 0 477 0;
-#X connect 489 0 485 0;
-#X connect 490 0 485 0;
+#X connect 489 0 480 0;
+#X connect 490 0 480 0;
 #X connect 491 0 488 0;
 #X connect 492 0 477 1;
 #X connect 493 0 496 0;
@@ -1126,3 +1131,8 @@
 #X connect 516 0 517 0;
 #X connect 517 0 447 0;
 #X connect 517 0 448 0;
+#X connect 519 0 480 0;
+#X connect 520 0 480 0;
+#X connect 521 0 523 0;
+#X connect 522 0 523 0;
+#X connect 523 0 480 0;
