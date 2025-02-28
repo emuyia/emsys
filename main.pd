@@ -52,9 +52,9 @@
 #X obj 189 314 tgl 25 0 pdctl.prog pdctl.prog_ empty 17 7 0 10 #211d14 #e1bf96 #e1ce9c 0 1;
 #X obj 220 264 button 50 50 0 0 0 225 191 150 0;
 #X obj 245 314 tgl 25 0 pdctl.loop pdctl.loop_ empty 17 7 0 10 #211d14 #e1bf96 #e1ce9c 0 1;
-#X obj 278 264 button 50 50 255 255 255 225 191 150 0;
+#X obj 278 264 button 50 50 255 0 0 225 191 150 0;
 #X obj 303 314 tgl 25 0 pdctl.stop pdctl.stop_ empty 17 7 0 10 #211d14 #e1bf96 #e1ce9c 0 1;
-#X obj 334 264 button 50 50 255 255 0 225 191 150 0;
+#X obj 334 264 button 50 50 0 0 0 225 191 150 0;
 #X obj 359 314 tgl 25 0 pdctl.play pdctl.play_ empty 17 7 0 10 #211d14 #e1bf96 #e1ce9c 0 1;
 #X obj 392 264 button 50 50 0 0 0 225 191 150 0;
 #X obj 417 314 tgl 25 0 pdctl.record pdctl.record_ empty 17 7 0 10 #211d14 #e1bf96 #e1ce9c 0 1;
