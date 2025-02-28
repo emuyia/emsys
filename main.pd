@@ -54,7 +54,7 @@
 #X obj 245 314 tgl 25 0 pdctl.loop pdctl.loop_ empty 17 7 0 10 #211d14 #e1bf96 #e1ce9c 0 1;
 #X obj 278 264 button 50 50 255 255 255 225 191 150 0;
 #X obj 303 314 tgl 25 0 pdctl.stop pdctl.stop_ empty 17 7 0 10 #211d14 #e1bf96 #e1ce9c 0 1;
-#X obj 334 264 button 50 50 0 0 0 225 191 150 0;
+#X obj 334 264 button 50 50 255 255 0 225 191 150 0;
 #X obj 359 314 tgl 25 0 pdctl.play pdctl.play_ empty 17 7 0 10 #211d14 #e1bf96 #e1ce9c 0 1;
 #X obj 392 264 button 50 50 0 0 0 225 191 150 0;
 #X obj 417 314 tgl 25 0 pdctl.record pdctl.record_ empty 17 7 0 10 #211d14 #e1bf96 #e1ce9c 0 1;
@@ -126,10 +126,13 @@
 #X obj -282 90 r pdctl.shift__;
 #X text 477 380 #9;
 #X text 499 380 #10;
+#X msg 563 667 clear;
+#X obj 563 712 ml3/clr 0;
 #X connect 1 0 0 0;
 #X connect 17 0 26 0;
 #X connect 22 0 21 0;
 #X connect 23 0 22 0;
+#X connect 23 0 99 0;
 #X connect 26 0 16 0;
 #X connect 29 0 72 0;
 #X connect 44 0 80 0;
@@ -171,4 +174,5 @@
 #X connect 94 0 49 0;
 #X connect 95 0 51 0;
 #X connect 96 0 45 0;
+#X connect 99 0 100 0;
 #X coords 0 0 1 1 536 413 0;

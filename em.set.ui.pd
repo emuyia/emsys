@@ -155,8 +155,8 @@
 #X msg 112 196 1;
 #X msg 161 190 0;
 #X obj 246 271 i;
-#X obj 79 32 r scmgr.SeekScreenPrevious;
-#X obj 144 59 r scmgr.SeekScreenNext;
+#X obj 84 24 r scmgr.SeekScreenPrevious;
+#X obj 146 50 r scmgr.SeekScreenNext;
 #X msg 1142 662 temp_param loading mset...;
 #X obj 1342 763 s scmgr.static;
 #X obj 1339 658 prepend b;
