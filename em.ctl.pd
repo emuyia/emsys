@@ -376,8 +376,8 @@
 #X obj 3074 557 r ctl.shift;
 #X obj 832 1405 change;
 #X floatatom 440 534 5 0 0 0 - - - 12;
-#X obj 396 469 r pdctl.shift.enc;
-#X floatatom 396 493 5 0 0 0 - - - 12;
+#X obj 479 557 r pdctl.shift.enc;
+#X floatatom 479 581 5 0 0 0 - - - 12;
 #X obj 440 509 r pdctl.noshift.enc;
 #X obj 2020 557 r pdctl.k1;
 #X obj 2110 557 r pdctl.k2;
@@ -434,6 +434,11 @@
 #X obj 2215 977 s pdctl.tap_;
 #X obj 1945 869 del 50;
 #X msg 1945 905 0;
+#X obj 159 1168 s pdctl.shift.enc;
+#X obj 126 1129 s pdctl.noshift.enc;
+#X obj 126 1051 r pdctl.enc;
+#X obj 126 1099 router 2;
+#X obj 212 1051 r ctl.shift;
 #X connect 0 0 39 2;
 #X connect 1 0 39 1;
 #X connect 2 0 0 0;
@@ -923,3 +928,7 @@
 #X connect 434 0 432 0;
 #X connect 434 0 429 0;
 #X connect 434 0 425 0;
+#X connect 437 0 438 0;
+#X connect 438 0 436 0;
+#X connect 438 1 435 0;
+#X connect 439 0 438 1;
