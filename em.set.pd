@@ -298,6 +298,8 @@
 #X obj 828 1088 r s.allowPGMChange;
 #X obj 625 1432 print PGM_MD;
 #X obj 726 1432 print PGM_MnM;
+#X obj 708 884 s s.seg_md_pgm_lookahead;
+#X obj 706 906 s s.seg_mnm_pgm_lookahead;
 #X connect 0 0 67 1;
 #X connect 0 0 150 0;
 #X connect 1 0 68 1;
@@ -312,7 +314,9 @@
 #X connect 5 0 65 1;
 #X connect 6 0 66 1;
 #X connect 7 0 5 0;
+#X connect 7 0 299 0;
 #X connect 8 0 6 0;
+#X connect 8 0 300 0;
 #X connect 9 0 77 0;
 #X connect 9 0 155 0;
 #X connect 10 0 164 0;
