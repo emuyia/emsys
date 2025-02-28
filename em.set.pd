@@ -180,7 +180,7 @@
 #X obj 525 1369 t b f;
 #X obj 517 1468 s t.tempo;
 #X obj 1442 371 r s.reload;
-#X obj 1383 597 s tin.toggle;
+#X obj 1381 608 s tin.toggle;
 #X msg 1375 561 1;
 #X obj 757 251 i;
 #X obj 868 215 r s.current_seg_id;
@@ -485,7 +485,6 @@
 #X connect 178 1 177 1;
 #X connect 180 0 191 0;
 #X connect 180 0 295 0;
-#X connect 182 0 181 0;
 #X connect 183 0 57 0;
 #X connect 184 0 183 1;
 #X connect 186 0 188 0;
