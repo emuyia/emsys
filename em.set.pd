@@ -199,7 +199,7 @@
 #X obj 805 414 buddy;
 #X obj 837 346 sel 0;
 #X obj 249 432 del 50;
-#X obj 342 426 s tin.toggle;
+#X obj 342 432 s tin.toggle;
 #X msg 334 390 1;
 #X obj 324 316 r s.seek_seg;
 #X obj 327 352 bng 20 250 50 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000;
@@ -501,7 +501,6 @@
 #X connect 198 0 197 1;
 #X connect 199 0 208 0;
 #X connect 199 0 222 0;
-#X connect 201 0 200 0;
 #X connect 202 0 203 0;
 #X connect 203 0 201 0;
 #X connect 203 0 199 0;
