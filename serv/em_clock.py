@@ -88,14 +88,14 @@ class MidiClockApp:
     def start(self):
         # Platform-specific port configuration
         if sys.platform == 'win32':
-            # Find loopMIDI ports on Windows
+            # Find specific loopMIDI ports on Windows
             input_ports = mido.get_input_names()
             output_ports = mido.get_output_names()
             virtual_in_port = next((p for p in input_ports if 'em_clock' in p), None)
             virtual_out_port = next((p for p in output_ports if 'em_clock' in p), None)
             
             if not virtual_in_port or not virtual_out_port:
-                raise RuntimeError("Couldn't find loopMIDI ports. Ensure they're created in loopMIDI.")
+                raise RuntimeError("Couldn't find 'em_clock' loopMIDI port(s).")
         else:
             # Linux/macOS configuration
             virtual_in_port = "em_clock_in"

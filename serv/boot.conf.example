@@ -1,5 +1,4 @@
 mset init.mset;
-env.defaults.dev 0;
 ml3.midich 17;
 ml3.midich.pads 26;
 md.midich.pgm 30;
