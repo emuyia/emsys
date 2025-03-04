@@ -113,7 +113,7 @@
 #X msg 677 282 40;
 #X msg 495 246 41;
 #X text 537 267 cc 40 & 41 are em_clock bpm & transport toggle, f 15;
-#X obj 1195 501 ctlout 42 62;
+#X obj 1195 501 ctlout 42 61;
 #X connect 0 0 23 1;
 #X connect 0 0 52 0;
 #X connect 1 0 3 0;
