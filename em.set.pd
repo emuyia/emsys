@@ -46,10 +46,10 @@
 #X obj 886 737 s s.current_seg_data;
 #X obj 610 768 s s.next_seg_data;
 #X obj 533 735 s s.start;
-#X obj 651 169 r t.stop;
+#X obj 648 179 r t.stop;
 #X msg 651 218 1;
 #X msg 720 218 0;
-#X obj 720 169 r t.4n;
+#X obj 718 179 r t.4n;
 #X obj 681 247 tgl 20 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000 0 1;
 #X obj 681 296 + 1;
 #X obj 681 345 gate 2;
@@ -160,7 +160,7 @@
 #X obj 647 1252 pgmout 31;
 #X obj 1298 1249 midiout 4;
 #X floatatom 772 323 5 0 0 0 - - - 0;
-#X obj 585 194 loadbang;
+#X obj 571 179 loadbang;
 #X obj 1375 1012 s s.seg_midiseq_id;
 #X obj 1396 979 s s.seg_midiseq_dest;
 #X obj 1033 745 route md mnm rep len tin bpm bpmr poly seq seqto;
