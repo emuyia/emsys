@@ -138,6 +138,10 @@
 #X text 48 783 These are set automatically by em_midisetup.py. If em_midisetup cannot run on this device (e.g. a dev environment using plugdata) \, the ports must be connected manually.;
 #X text 48 989 Procedure for managing patterns on the fly: \; - Copy the current MnM pattern \; - Peek the next available MD bank with Insert \; - Save the current MCL row (X+Y) to the upcoming bank \; - Perform the insert \, after which playback will flow into the new bank pair \; - As soon as the MnM pattern loads \, overwrite the pattern \, and save the current kit into an unused kit slot;
 #X obj 626 749 midiout 3;
+#X obj 588 337 s t.toggle_pd_clock;
+#X obj 508 264 tgl 36 0 empty empty USE\ INTERNAL\ CLOCK 42 18 0 16 #211d14 #7d00e1 #e1ce9c 0 1;
+#X obj 561 129 r t.pd_clock_enabled;
+#X msg 561 162 set \$1;
 #X connect 1 0 0 0;
 #X connect 17 0 24 0;
 #X connect 21 0 110 0;
@@ -190,4 +194,7 @@
 #X connect 101 0 21 0;
 #X connect 101 0 97 0;
 #X connect 102 0 110 1;
+#X connect 112 0 111 0;
+#X connect 113 0 114 0;
+#X connect 114 0 112 0;
 #X coords 0 0 1 1 536 413 0;
