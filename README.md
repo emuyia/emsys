@@ -29,9 +29,11 @@ source .venv/Scripts/Activate  # Windows (Bash)
 pip install -r requirements.txt
 ```
 
-> Note: For Windows, you must additionally install [loopMIDI](https://www.tobias-erichsen.de/software/loopmidi.html) and create a MIDI loopback port named `em_clock`.
+> Note: For Windows, you must additionally install [loopMIDI](https://www.tobias-erichsen.de/software/loopmidi.html) and create a MIDI loopback port named `em_clock`. Virtual MIDI routing can be performed with [MIDI-OX](http://www.midiox.com/).
 
 You are now able to run em_clock or em_midisetup directly with `python serv/em_clock.py` and `python serv/em_midisetup.py`.
+
+> Note: If you're unable to get `em_clock` running, you can instead use the internal clock contained in the patch, which uses `[else/midi.clock]`. You can turn it on within `main.pd` later. Keep in mind that this clock is unstable, and is therefore not recommended for production.
 
 #### systemd services
 
@@ -66,6 +68,8 @@ Optional: Change `env.defaults.dev` to `1` if you intend to use emsys with plugd
 If `em_midisetup.py` is not in use, you will need to configure MIDI devices manually in plugdata or Pd, and then reopen `main.pd`.
 
 > Note: `serv/em_sys.sh` can also be targeted as a function for the pisound "button" by creating a symlink here: `sudo ln -s serv/em_sys.sh /usr/local/pisound/scripts/pisound-btn/em_sys.sh`, and then assigning it within Patchbox OS.
+
+> Note: `main.pd` contains a rudimentary emulation of the ML3 controls & screens. It can be used for most functions but should not be relied on in production.
 
 ## Usage
 WIP

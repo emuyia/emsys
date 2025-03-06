@@ -42,7 +42,7 @@
 #X text 480 3 emsys;
 #X text 592 467 inits;
 #X obj 50 264 button 50 50 0 0 0 225 191 150 0;
-#X obj 27 129 button 50 29 0 0 0 225 191 150 0;
+#X obj 27 129 button 50 29 255 0 0 225 191 150 0;
 #X obj 75 314 tgl 25 0 pdctl.arp pdctl.arp_ empty 17 7 0 10 #211d14 #e1bf96 #e1ce9c 0 1;
 #X obj 106 264 button 50 50 0 0 0 225 191 150 0;
 #X obj 131 314 tgl 25 0 pdctl.pad pdctl.pad_ empty 17 7 0 10 #211d14 #e1bf96 #e1ce9c 0 1;
@@ -121,7 +121,7 @@
 #X obj -209 183 r pdctl.pad__;
 #X obj -202 202 r pdctl.prog__;
 #X obj -202 222 r pdctl.loop__;
-#X obj -282 90 r pdctl.shift__;
+#X obj -144 98 r pdctl.shift__;
 #X text 477 380 #9;
 #X text 499 380 #10;
 #X msg 542 703 clear, f 6;
