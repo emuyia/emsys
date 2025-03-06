@@ -153,9 +153,10 @@
 #X obj 37 38 loadmess 0;
 #X text 33 183 external clock;
 #X obj 215 100 s t.pd_clock_enabled;
-#X obj 285 136 r t.tempo;
-#X floatatom 285 164 5 0 0 0 - - - 12;
+#X obj 285 144 r t.tempo;
+#X floatatom 285 167 9 0 0 0 - - - 12;
 #X obj 198 204 i 120;
+#X text 1659 792 todo: this may exceed 127... future solution needed, f 14;
 #X connect 0 0 149 0;
 #X connect 0 0 139 0;
 #X connect 1 0 3 0;
