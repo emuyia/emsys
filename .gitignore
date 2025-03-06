@@ -15,3 +15,4 @@ boot.conf
 *.seq
 experiments/sets/*.mset
 experiments/sets/*.seq
+Desktop.ini
