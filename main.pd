@@ -27,8 +27,8 @@
 #X symbolatom 36 23 22 0 0 0 - ui.top_line - 36;
 #X symbolatom 36 68 22 0 0 0 - ui.bottom_line - 36;
 #X obj 27 193 knob 50 0 1000 0 500 empty empty #111d14 #5D513E #4d4b46 1 0 0 0 0 0 0 0 0 empty 2 0 18 -15 0 1 0 0 0;
-#X obj 90 129 knob 50 0 127 0 17.272 pdctl.k1 pdctl.k1_ #211D14 #5D513E #E1BF96 0 0 0 0 1 270 0 0 0 empty 2 0 6 -15 0 1 0 0 0;
-#X obj 212 129 knob 50 0 127 0 91 pdctl.k3 pdctl.k3_ #211D14 #5D513E #E1BF96 0 0 0 0 1 270 0 0 0 empty 2 0 6 -15 0 1 0 0 0;
+#X obj 90 129 knob 50 0 127 0 36.068 pdctl.k1 pdctl.k1_ #211D14 #5D513E #E1BF96 0 0 0 0 1 270 0 0 0 empty 2 0 6 -15 0 1 0 0 0;
+#X obj 212 129 knob 50 0 127 0 98.62 pdctl.k3 pdctl.k3_ #211D14 #5D513E #E1BF96 0 0 0 0 1 270 0 0 0 empty 2 0 6 -15 0 1 0 0 0;
 #X obj 151 129 knob 50 0 127 0 96.52 pdctl.k2 pdctl.k2_ #211D14 #5D513E #E1BF96 0 0 0 0 1 270 0 0 0 empty 2 0 6 -15 0 1 0 0 0;
 #X obj 272 129 knob 50 0 127 0 16.256 pdctl.k4 pdctl.k4_ #211D14 #5D513E #E1BF96 0 0 0 0 1 270 0 0 0 empty 2 0 6 -15 0 1 0 0 0;
 #X obj 90 193 knob 50 0 127 0 64 pdctl.k5 pdctl.k5_ #211D14 #5D513E #E1BF96 0 0 0 0 1 270 0 0 0 empty 2 0 6 -15 0 1 0 0 0;
@@ -50,7 +50,7 @@
 #X obj 189 314 tgl 25 0 pdctl.prog pdctl.prog_ empty 17 7 0 10 #211d14 #e1bf96 #e1ce9c 0 1;
 #X obj 220 264 button 50 50 0 0 0 225 191 150 0;
 #X obj 245 314 tgl 25 0 pdctl.loop pdctl.loop_ empty 17 7 0 10 #211d14 #e1bf96 #e1ce9c 0 1;
-#X obj 278 264 button 50 50 255 0 0 225 191 150 0;
+#X obj 278 264 button 50 50 0 0 0 225 191 150 0;
 #X obj 303 314 tgl 25 0 pdctl.stop pdctl.stop_ empty 17 7 0 10 #211d14 #e1bf96 #e1ce9c 0 1;
 #X obj 334 264 button 50 50 0 0 0 225 191 150 0;
 #X obj 359 314 tgl 25 0 pdctl.play pdctl.play_ empty 17 7 0 10 #211d14 #e1bf96 #e1ce9c 0 1;
