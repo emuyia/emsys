@@ -12,8 +12,12 @@
 #X obj 311 218 loadbang;
 #X obj 251 340 param tempo_cc 120;
 #X msg 249 293 range 20 666;
-#X text 329 89 Place this patch on an empty MIDI track in your chosen DAW \, arm it \, and set incoming MIDI to Ch 13 Automation data will be written as the "tempo_cc" parameter \, which can be copied to the Tempo automation lane on the Master track., f 50;
+#X text 322 71 Place this patch on an empty MIDI track in your chosen DAW \, arm it \, and set incoming MIDI to Ch 13 Automation data will be written as the "tempo_cc" parameter \, which can be copied to the Tempo automation lane on the Master track., f 50;
 #X text 28 292 Currently this min/max tempo range is optimised for Bitwig. It may need to be adjusted for other DAWs., f 29;
+#X obj 485 224 ctlin 45;
+#X obj 619 224 ctlin 47;
+#X obj 551 224 ctlin 46;
+#X text 501 194 seg ID \, MD & MnM bank IDs;
 #X connect 0 0 6 0;
 #X connect 1 0 4 0;
 #X connect 2 0 5 0;
