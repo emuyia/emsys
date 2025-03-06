@@ -133,6 +133,15 @@
 #X obj 1485 337 r t.4n;
 #X obj 1283 419 i 120;
 #X text 1303 61 tempo cc for DAW integration;
+#X obj 1677 585 ctlout 45 61;
+#X obj 1770 585 ctlout 46 61;
+#X obj 1866 585 ctlout 47 61;
+#X obj 1661 492 r s.seg_id.now;
+#X obj 1770 492 r s.md_pgm.now;
+#X obj 1886 492 r s.mnm_pgm.now;
+#X floatatom 1677 537 5 0 0 0 - - - 12;
+#X floatatom 1770 537 5 0 0 0 - - - 12;
+#X floatatom 1866 537 5 0 0 0 - - - 12;
 #X connect 0 0 23 1;
 #X connect 0 0 52 0;
 #X connect 1 0 3 0;
@@ -269,3 +278,9 @@
 #X connect 131 0 129 0;
 #X connect 132 0 122 0;
 #X connect 132 0 114 0;
+#X connect 137 0 140 0;
+#X connect 138 0 141 0;
+#X connect 139 0 142 0;
+#X connect 140 0 134 0;
+#X connect 141 0 135 0;
+#X connect 142 0 136 0;
