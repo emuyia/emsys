@@ -50,7 +50,7 @@
 #X obj 189 314 tgl 25 0 pdctl.prog pdctl.prog_ empty 17 7 0 10 #211d14 #e1bf96 #e1ce9c 0 1;
 #X obj 220 264 button 50 50 0 0 0 225 191 150 0;
 #X obj 245 314 tgl 25 0 pdctl.loop pdctl.loop_ empty 17 7 0 10 #211d14 #e1bf96 #e1ce9c 0 1;
-#X obj 278 264 button 50 50 0 0 0 225 191 150 0;
+#X obj 278 264 button 50 50 255 0 0 225 191 150 0;
 #X obj 303 314 tgl 25 0 pdctl.stop pdctl.stop_ empty 17 7 0 10 #211d14 #e1bf96 #e1ce9c 0 1;
 #X obj 334 264 button 50 50 0 0 0 225 191 150 0;
 #X obj 359 314 tgl 25 0 pdctl.play pdctl.play_ empty 17 7 0 10 #211d14 #e1bf96 #e1ce9c 0 1;
@@ -130,7 +130,6 @@
 #X obj 626 637 loadmess bang;
 #X obj 542 643 del 100;
 #X obj 675 710 r midich_ctl;
-#X obj 626 749 midiout 33;
 #X text 48 847 Port 1 = em_clock;
 #X text 48 871 Port 2 = DIN MIDI;
 #X text 48 893 Port 3 = MiniLab 3;
@@ -138,9 +137,10 @@
 #X text 48 753 Pure Data port settings:;
 #X text 48 783 These are set automatically by em_midisetup.py. If em_midisetup cannot run on this device (e.g. a dev environment using plugdata) \, the ports must be connected manually.;
 #X text 48 989 Procedure for managing patterns on the fly: \; - Copy the current MnM pattern \; - Peek the next available MD bank with Insert \; - Save the current MCL row (X+Y) to the upcoming bank \; - Perform the insert \, after which playback will flow into the new bank pair \; - As soon as the MnM pattern loads \, overwrite the pattern \, and save the current kit into an unused kit slot;
+#X obj 626 749 midiout 1;
 #X connect 1 0 0 0;
 #X connect 17 0 24 0;
-#X connect 21 0 103 0;
+#X connect 21 0 110 0;
 #X connect 24 0 16 0;
 #X connect 27 0 70 0;
 #X connect 42 0 78 0;
@@ -189,5 +189,5 @@
 #X connect 100 0 101 0;
 #X connect 101 0 21 0;
 #X connect 101 0 97 0;
-#X connect 102 0 103 1;
+#X connect 102 0 110 1;
 #X coords 0 0 1 1 536 413 0;
