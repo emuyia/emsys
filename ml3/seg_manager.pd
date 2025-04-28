@@ -308,7 +308,7 @@
 #X obj 711 202 spigot 0, f 12;
 #X obj 484 332 bng 25 250 50 0 empty empty empty 17 7 0 10 #191919 #e1e1e1 #e1e1e1;
 #X text 748 130 prime;
-#X obj 545 361 s t.prime;
+#X obj 545 405 s t.prime;
 #X text 610 351 if we reset before \, prime, f 12;
 #X obj 1150 155 r ctl.stop.loop;
 #X obj 1149 198 spigot 0, f 12;
@@ -658,6 +658,9 @@
 #X text 2829 1203 stop clock briefly while transport off & loading MD. this fixes 'sysex error' on mcl loads for now, f 29;
 #X text 2829 1358 we should also create an action to manually toggle the clock on/off directly, f 21;
 #X obj 2686 1373 del 500;
+#X obj 388 213 r t.transport_status;
+#X obj 388 245 == 0;
+#X obj 545 366 spigot 1, f 8;
 #X connect 0 0 3 0;
 #X connect 1 0 307 0;
 #X connect 1 0 31 0;
@@ -689,7 +692,7 @@
 #X connect 29 0 522 0;
 #X connect 30 0 285 0;
 #X connect 30 0 522 0;
-#X connect 31 0 309 0;
+#X connect 31 0 661 0;
 #X connect 32 0 31 1;
 #X connect 33 0 34 0;
 #X connect 34 0 52 0;
@@ -1457,3 +1460,6 @@
 #X connect 653 0 654 0;
 #X connect 655 0 647 0;
 #X connect 658 0 653 0;
+#X connect 659 0 660 0;
+#X connect 660 0 661 1;
+#X connect 661 0 309 0;
