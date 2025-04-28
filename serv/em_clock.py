@@ -72,7 +72,12 @@ def midi_bpm_listener(shared_bpm, run_code, clock_running, pulse_rate, in_port_n
                         pulse_rate.value = 60.0 / (new_bpm * 24)
                         logging.debug(f"set bpm: {new_bpm}")
                     elif msg.control == cc_start_stop:
-                        clock_running.value = 1 if msg.value >= 64 else 0
+                        is_running = msg.value >= 64
+                        clock_running.value = 1 if is_running else 0
+                        if is_running:
+                            logging.debug(f"Clock START received (CC {cc_start_stop} value: {msg.value})")
+                        else:
+                            logging.debug(f"Clock STOP received (CC {cc_start_stop} value: {msg.value})")
             sleep(0.1)
     except Exception as e:
         logging.error(f"Error in MIDI BPM listener: {e}")
