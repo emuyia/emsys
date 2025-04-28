@@ -655,10 +655,6 @@
 #X msg 2689 1415 1;
 #X obj 2630 1469 tgl 25 0 empty empty empty 17 7 0 10 #211d14 #e1bf96 #e1ce9c 0 1;
 #X obj 2630 1169 tgl 25 0 empty empty empty 17 7 0 10 #211d14 #e1bf96 #e1ce9c 0 1;
-#X obj 2848 1302 print s.md_pgm_change;
-#X obj 2466 1229 print r.transport_status;
-#X obj 2769 1520 print t.clock_toggle;
-#X obj 2769 1466 r t.clock_toggle;
 #X text 2829 1203 stop clock briefly while transport off & loading MD. this fixes 'sysex error' on mcl loads for now, f 29;
 #X text 2829 1358 we should also create an action to manually toggle the clock on/off directly, f 21;
 #X obj 2686 1373 del 500;
@@ -1454,11 +1450,10 @@
 #X connect 647 0 645 0;
 #X connect 649 0 654 0;
 #X connect 650 0 646 0;
-#X connect 650 0 662 0;
+#X connect 650 0 658 0;
 #X connect 650 1 651 0;
-#X connect 651 0 662 0;
+#X connect 651 0 658 0;
 #X connect 652 0 645 1;
 #X connect 653 0 654 0;
-#X connect 654 0 648 0;
 #X connect 655 0 647 0;
-#X connect 662 0 653 0;
+#X connect 658 0 653 0;
