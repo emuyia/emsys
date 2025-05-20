@@ -1,0 +1,18 @@
+[Unit]
+Description=emsys PD Controller
+After=sound.target midi.target
+
+[Service]
+Type=simple
+ExecStartPre=/usr/bin/sleep 3
+ExecStart=/home/patch/repos/emsys/.venv/bin/python /home/patch/repos/emsys/serv/em_pd_controller.py
+WorkingDirectory=/home/patch/repos/emsys
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+
+[Install]
+WantedBy=default.target
+
+# ln -s /home/patch/repos/emsys/serv/em_pd_controller.service /home/patch/.config/systemd/user/em_pd_controller.service
+# systemctl --user daemon-reload && systemctl --user enable em_pd_controller.service
