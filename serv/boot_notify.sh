@@ -4,9 +4,9 @@
 . /usr/local/pisound/scripts/common/common.sh
 
 # Flash the LEDs in a specific pattern to indicate the system has booted
-for i in $(seq 1 5); do
+for i in $(seq 1 3); do
     flash_leds 1  # Flash once
-    sleep 0.2     # Short pause
+    sleep 0.1     # Short pause
 done
 
 log "System has booted!"
