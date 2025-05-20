@@ -17,3 +17,5 @@ boot.conf
 experiments/sets/*.mset
 experiments/sets/*.seq
 Desktop.ini
+NOTES.md
+TODO.md
