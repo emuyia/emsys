@@ -13,3 +13,6 @@ Restart=always
 
 [Install]
 WantedBy=default.target
+
+# ln -s /home/patch/repos/emsys/serv/em_clock.service /home/patch/.config/systemd/user/em_clock.service
+# systemctl --user daemon-reload && systemctl --user enable em_clock.service

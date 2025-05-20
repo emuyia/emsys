@@ -9,7 +9,9 @@ WorkingDirectory=/home/patch/repos/emsys
 StandardOutput=inherit
 StandardError=inherit
 Restart=always
-#User=patch
 
 [Install]
 WantedBy=default.target
+
+# ln -s /home/patch/repos/emsys/serv/em_midisetup.service /home/patch/.config/systemd/user/em_midisetup.service
+# systemctl --user daemon-reload && systemctl --user enable em_midisetup.service
