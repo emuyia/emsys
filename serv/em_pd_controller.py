@@ -36,6 +36,41 @@ SYSEX_LINE2_TEXT = "Shift+Tab+Y/N"
 # Logging - for systemd, this will go to journald
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
+def flash_pisound_leds_on_startup():
+    """Flashes Pisound LEDs on script startup, similar to boot_notify.sh."""
+    logging.info("Attempting to flash Pisound LEDs for startup notification...")
+    common_sh_path = "/usr/local/pisound/scripts/common/common.sh"
+    if not os.path.exists(common_sh_path):
+        logging.warning(f"Pisound common script not found at {common_sh_path}. Cannot flash LEDs.")
+        return
+
+    # Command to source common.sh and then execute the flash sequence and log
+    # The log command is from common.sh
+    command_to_run = (
+        f". {common_sh_path} && "
+        "for i in 1 2 3; do flash_leds 1; sleep 0.1; done && "
+        "log 'em_pd_controller.py: Startup notification LEDs flashed.'"
+    )
+    try:
+        # Using shell=True because of the sourcing and multiple commands.
+        # Ensure command_to_run is safe and comes from trusted sources.
+        result = subprocess.run(['bash', '-c', command_to_run], capture_output=True, text=True, check=False)
+        if result.returncode == 0:
+            logging.info("Pisound LEDs flashed successfully.")
+            if result.stdout:
+                logging.debug(f"flash_leds script stdout: {result.stdout.strip()}")
+            if result.stderr:
+                logging.debug(f"flash_leds script stderr: {result.stderr.strip()}")
+        else:
+            logging.error(f"Failed to flash Pisound LEDs. Return code: {result.returncode}")
+            logging.error(f"flash_leds script stderr: {result.stderr.strip()}")
+            if result.stdout:
+                logging.error(f"flash_leds script stdout: {result.stdout.strip()}")
+    except FileNotFoundError:
+        logging.error("Failed to run bash for flashing LEDs. 'bash' command not found?")
+    except Exception as e:
+        logging.error(f"An error occurred while trying to flash Pisound LEDs: {e}")
+
 def get_pd_pid():
     """Checks if Pd is running using a pattern matching PD_PATH and PD_PATCH, returns its PID or None."""
     try:
@@ -309,6 +344,10 @@ def main_loop():
 
 if __name__ == '__main__':
     logging.info("Pd Controller Script starting...")
+
+    # Flash Pisound LEDs on startup
+    flash_pisound_leds_on_startup()
+
     if not os.path.exists(PD_PATH):
         logging.error(f"Critical: Pd executable not found at '{PD_PATH}'. Exiting.")
         sys.exit(1)
