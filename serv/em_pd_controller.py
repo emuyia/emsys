@@ -274,16 +274,16 @@ def main_loop():
                         _midi_output_port_ref = None # Clear ref
                         target_output_port_name = None # Force re-find next iteration
                         initial_display_sent = False
-
+                
                 if _midi_output_port_ref and not _midi_output_port_ref.closed and not initial_display_sent:
                     send_sysex_message(_midi_output_port_ref, SYSEX_INIT_DATA_TUPLE, "Minilab3 Init")
                     text_sysex_data = construct_text_sysex(SYSEX_LINE1_TEXT, SYSEX_LINE2_TEXT)
-                    if text_sysex_data:
-                        send_sysex_message(_midi_output_port_ref, text_sysex_data, "Minilab3 Initial Display Text")
-                    initial_display_sent = True
+                    #if text_sysex_data:
+                    #    send_sysex_message(_midi_output_port_ref, text_sysex_data, "Minilab3 Initial Display Text")
+                    #initial_display_sent = True
                 
-                if process_midi_input(in_port): 
-                    return 
+                if process_midi_input(in_port):
+                    return
         
         except OSError as e:
             logging.error(f"MIDI port OS error (input: '{target_input_port_name}'): {e}. Reconnecting...")
@@ -315,6 +315,11 @@ if __name__ == '__main__':
     if not os.path.exists(PD_PATCH):
         logging.error(f"Critical: Pd patch file not found at '{PD_PATCH}'. Exiting.")
         sys.exit(1)
+    
+    logging.info("Waiting 2 seconds before attempting to autostart Pd...")
+    time.sleep(2)
+    logging.info("Attempting to autostart Pd patch...")
+    start_pd()
         
     main_loop()
     logging.info("Pd Controller Script finished.")
