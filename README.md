@@ -12,8 +12,12 @@ git clone https://github.com/emuyia/emsys.git
 cd emsys
 ```
 
-#### em_clock.py & em_midisetup.py
-> Note: em_midisetup is intended for Pisound (Linux) only.
+#### em_clock.py, em_midisetup.py & em_pd_controller.py
+> Note: em_midisetup & em_pd_controller are intended for Pisound (Linux) only.
+
+- `em_clock.py` creates the central realtime MIDI clock.
+- `em_midisetup.py` maintains all necessary virtual MIDI connections.
+- `em_pd_controller.py` starts the emsys Pd patch in CLI mode, and allows management the patch via a MiniLab 3 MIDI controller (Shift + Tap + Yes/No to start or stop the patch, at any time).
 
 Set up the Python environment:
 ```
@@ -31,26 +35,26 @@ pip install -r requirements.txt
 
 > Note: For Windows, you must additionally install [loopMIDI](https://www.tobias-erichsen.de/software/loopmidi.html) and create a MIDI loopback port named `em_clock`. Virtual MIDI routing can be performed with [MIDI-OX](http://www.midiox.com/).
 
-You are now able to run em_clock or em_midisetup directly with `python serv/em_clock.py` and `python serv/em_midisetup.py`.
+You are now able to run em_clock, em_midisetup or em_pd_controller directly with `python serv/em_clock.py`, `python serv/em_midisetup.py` and `python serv/em_pd_controller.py`.
 
 > Note: If you're unable to get `em_clock` running, you can instead use the internal clock contained in the patch, which uses `[else/midi.clock]`. You can turn it on within `main.pd` later. Keep in mind that this clock is unstable, and is therefore not recommended for production.
 
 #### systemd services
 
-If you intend to run emsys from boot on a Linux device, it is recommended to allow both scripts to run automatically via systemd:
+If you intend to run emsys from boot on a Linux device, it is recommended to allow all scripts to run automatically via systemd:
 1. First edit the `.service` files in `serv` so that `WorkingDirectory` and `ExecStart` have correct paths.
 2. Then run:
 ```
 # Create symlinks
-ln -s serv/em_midisetup.service ~/.config/systemd/user/em_midisetup.service
 ln -s serv/em_clock.service ~/.config/systemd/user/em_clock.service
+ln -s serv/em_midisetup.service ~/.config/systemd/user/em_midisetup.service
+ln -s serv/em_pd_controller.service ~/.config/systemd/user/em_pd_controller.service
 
-# Reload systemctl, then enable & start services
+# Reload systemctl, then enable services
 systemctl --user daemon-reload
 systemctl --user enable em_clock
-systemctl --user start em_clock
 systemctl --user enable em_midisetup
-systemctl --user start em_midisetup
+systemctl --user enable em_pd_controller
 ```
 
 #### boot.conf
@@ -63,11 +67,9 @@ Optional: Change `env.defaults.dev` to `1` if you intend to use emsys with plugd
 #### Running emsys
 `main.pd` is the entry point for emsys. It can be run in plugdata or Pure Data on macOS and Linux, however it is primarily intended for a headless Linux system running Pure Data in CLI, such as a Raspberry Pi.
 
-`serv/em_sys.sh` should be used to run emsys in CLI. Otherwise, `main.pd` can be opened directly.
+`serv/em_pd_controller.py` should be used to run emsys on boot using the corresponding systemd service, `serv/em_pd_controller.service`. Otherwise, `main.pd` can be opened directly.
 
 If `em_midisetup.py` is not in use, you will need to configure MIDI devices manually in plugdata or Pd, and then reopen `main.pd`.
-
-> Note: `serv/em_sys.sh` can also be targeted as a function for the pisound "button" by creating a symlink here: `sudo ln -s serv/em_sys.sh /usr/local/pisound/scripts/pisound-btn/em_sys.sh`, and then assigning it within Patchbox OS.
 
 > Note: `main.pd` contains a rudimentary emulation of the ML3 controls & screens. It can be used for most functions but should not be relied on in production.
 
