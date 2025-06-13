@@ -45,16 +45,14 @@ If you intend to run emsys from boot on a Linux device, it is recommended to all
 1. First edit the `.service` files in `serv` so that `WorkingDirectory` and `ExecStart` have correct paths.
 2. Then run:
 ```
-# Create symlinks
-ln -s serv/em_clock.service ~/.config/systemd/user/em_clock.service
-ln -s serv/em_midisetup.service ~/.config/systemd/user/em_midisetup.service
-ln -s serv/em_pd_controller.service ~/.config/systemd/user/em_pd_controller.service
-
 # Reload systemctl, then enable services
 systemctl --user daemon-reload
-systemctl --user enable em_clock
-systemctl --user enable em_midisetup
-systemctl --user enable em_pd_controller
+systemctl --user enable serv/em_clock.service
+systemctl --user enable serv/em_midisetup.service
+
+# For the Pd controller we need broader permissions (e.g., for disk writes):
+sudo systemctl daemon-reload
+sudo systemctl enable serv/em_pd_controller.service
 ```
 
 #### boot.conf
@@ -74,4 +72,10 @@ If `em_midisetup.py` is not in use, you will need to configure MIDI devices manu
 > Note: `main.pd` contains a rudimentary emulation of the ML3 controls & screens. It can be used for most functions but should not be relied on in production.
 
 ## Usage
+#### Managing emsys state
+- On boot, emsys will launch. It can be managed with the following inputs on the MiniLab:
+    - Shift+Tap+YES: Start patch
+    - Shift+Tap+NO: Stop patch
+    - Shift+Tap+Reload: Reboot system
+
 WIP
