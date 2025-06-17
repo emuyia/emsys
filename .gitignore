@@ -19,3 +19,4 @@ experiments/sets/*.seq
 Desktop.ini
 NOTES.md
 TODO.md
+__pycache__
