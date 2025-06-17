@@ -39,7 +39,7 @@ class SetListScreen(BaseScreen):
             current_set_name = self.set_names[self.current_set_index]
             line1 = f"{self.current_set_index + 1}/{total_sets}: {current_set_name}"
             line1 = line1[:config.SCREEN_LINE_1_MAX_CHARS] 
-            line2 = "Enc:Scroll P1:OK" 
+            line2 = "Enc:Scroll P6:OK" # Changed P1 to P6
             line2 = line2[:config.SCREEN_LINE_2_MAX_CHARS]
 
         self.midi_handler.update_display(line1, line2)
@@ -56,44 +56,27 @@ class SetListScreen(BaseScreen):
             previous_index = self.current_set_index
             if message.value == config.ENCODER_VALUE_UP: 
                 self.current_set_index = (self.current_set_index + 1) % len(self.set_names)
-                # logger.debug(f"Encoder 'UP' -> Scroll Down. New index: {self.current_set_index}") # Reduced logging verbosity
             elif message.value == config.ENCODER_VALUE_DOWN: 
                 self.current_set_index = (self.current_set_index - 1 + len(self.set_names)) % len(self.set_names)
-                # logger.debug(f"Encoder 'DOWN' -> Scroll Up. New index: {self.current_set_index}") # Reduced logging verbosity
             
             if self.current_set_index != previous_index:
                 self.display_update_pending = True 
-                # We don't call self.display() here directly anymore for encoder events.
-                # The self.update() method will handle throttled display.
                 logger.info(f"Set index changed to: {self.current_set_index}. Display update pending.")
 
 
-        elif message.type == 'note_on' and message.note == config.PAD_1_NOTE:
+        elif message.type == 'note_on' and message.note == config.PAD_6_NOTE: # Changed from PAD_1_NOTE
             if self.set_names and self.current_set_index != -1:
                 selected_set_name = self.set_names[self.current_set_index]
-                logger.info(f"Pad 1 pressed: Selected set '{selected_set_name}' (index {self.current_set_index})")
+                original_filename = self.set_manager.set_files[self.current_set_index] # Get full filename
+                logger.info(f"Pad 6 pressed: Selected set '{selected_set_name}' (filename: {original_filename}) for rename.")
                 
-                temp_line1 = selected_set_name[:config.SCREEN_LINE_1_MAX_CHARS]
-                temp_line2 = "Selected: " + selected_set_name
-                if len(temp_line2) > config.SCREEN_LINE_2_MAX_CHARS:
-                    temp_line2 = "Selected!"
-                temp_line2 = temp_line2[:config.SCREEN_LINE_2_MAX_CHARS]
-
-                display_duration = 0.75  
-                refresh_interval = 0.05 
-                start_time = time.time()
-                
-                # This temporary display loop is for immediate feedback for the "Selected" message.
-                # It has its own refresh rate.
-                while time.time() - start_time < display_duration:
-                    self.midi_handler.update_display(temp_line1, temp_line2)
-                    time.sleep(refresh_interval) 
-                
-                # After the "Selected" animation, ensure the main display is updated.
-                # Set pending flag so the update() method refreshes the main list view.
-                self.display_update_pending = True
+                # Transition to RenameSetScreen
+                from .rename_set_screen import RenameSetScreen # Import here to avoid circular dependency at module level
+                self.screen_manager.change_screen(
+                    RenameSetScreen(self.screen_manager, self.midi_handler, self.set_manager, original_filename)
+                )
             else:
-                logger.info("Pad 1 pressed, but no set selected or no sets available.")
+                logger.info("Pad 6 pressed, but no set selected or no sets available.")
         
     def update(self):
         """Called periodically by the ScreenManager from the main loop."""

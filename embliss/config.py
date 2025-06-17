@@ -46,9 +46,9 @@ PAD_2_NOTE = 37
 PAD_3_NOTE = 38
 PAD_4_NOTE = 39
 PAD_5_NOTE = 40
-PAD_6_NOTE = 41
-PAD_7_NOTE = 42
-PAD_8_NOTE = 43
+PAD_6_NOTE = 41 # << This will be our new select button
+PAD_7_NOTE = 42 # << Will be Save for rename
+PAD_8_NOTE = 43 # << Will be Back/Cancel for rename
 
 # --- Shift Button (used as a modifier for pads) ---
 SHIFT_BUTTON_CC = 27 # This is the "Shift" button on the Minilab 3 itself
