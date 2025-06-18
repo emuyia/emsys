@@ -66,26 +66,28 @@ class CreateSetScreen(BaseNameEditorScreen): # Changed inheritance
             logger.warning(f"Cannot create set: Target file '{new_filename}' already exists.")
             self.midi_handler.update_display("Create Failed:", "Name exists")
             time.sleep(2)
-            self.display_update_pending = True # Refresh display to show error then clear
+            self.display_update_pending = True # Stay on create screen
         else:
             try:
                 with open(new_path, 'w') as f:
-                    pass 
-                logger.info(f"Successfully created new set '{new_filename}'")
+                    # Ensure default content is written as per TODO
+                    f.write("md a01 mnm a01 rep 1 len 32 tin 0 bpm 120 bpmr 0 poly 0 seq 0 seqto 1;\n")
+                logger.info(f"Successfully created new set '{new_filename}' with default segment.")
                 self.set_manager.load_set_files() 
                 self.midi_handler.update_display("Created:", new_filename_base[:config.SCREEN_LINE_2_MAX_CHARS-9])
                 time.sleep(1)
                 
                 from .set_list_screen import SetListScreen
                 self.screen_manager.change_screen(
-                    SetListScreen(self.screen_manager, self.midi_handler, self.set_manager)
+                    SetListScreen(self.screen_manager, self.midi_handler, self.set_manager, 
+                                  target_filename=new_filename) # Target the new filename
                 )
                 return 
             except OSError as e:
                 logger.error(f"Error creating file: {e}")
                 self.midi_handler.update_display("Create Error", str(e)[:config.SCREEN_LINE_2_MAX_CHARS])
                 time.sleep(2)
-                self.display_update_pending = True
+                self.display_update_pending = True # Stay on create screen
 
     def activate(self):
         # Reset to default name every time this screen is activated

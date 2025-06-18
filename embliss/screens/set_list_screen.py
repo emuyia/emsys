@@ -10,31 +10,29 @@ import glob
 logger = logging.getLogger(__name__)
 
 class SetListScreen(BaseScreen):
-    def __init__(self, screen_manager, midi_handler, set_manager):
+    def __init__(self, screen_manager, midi_handler, set_manager, 
+                 target_base_name=None, target_filename=None): # Added optional params
         super().__init__(screen_manager, midi_handler)
         self.set_manager = set_manager
 
-        self.browsing_mode = "base_names"  # "base_names" or "versions"
-        
+        self.browsing_mode = "base_names" 
         self.base_names = []
         self.current_base_name_index = 0
-        self.selected_base_name = None # Stores the string of the selected base name
-
-        self.versions_for_selected_base = [] # List of full filenames for the selected base
+        self.selected_base_name = None
+        self.versions_for_selected_base = []
         self.current_version_index = 0
-        
-        self.active_set_filename = None # Full filename of the "OK'd" version
+        self.active_set_filename = None
 
-        self._load_base_names_and_set_initial_index()
+        # Store targets for activate() to use
+        self._initial_target_base_name = target_base_name
+        self._initial_target_filename = target_filename
 
         self.last_actual_display_time = 0
         self.display_update_pending = False
         self.display_refresh_interval = 0.075 
-
         self.shift_held = False 
-
         self.awaiting_delete_confirm = False
-        self.delete_target_filename = None # This will be set to active_set_filename for delete
+        self.delete_target_filename = None
         self.first_del_press_time = 0
         self.delete_confirm_timeout = 3 
 
@@ -236,24 +234,43 @@ class SetListScreen(BaseScreen):
             self.display()
 
     def _perform_delete(self, filename_to_delete):
-        # ... (implementation is the same, uses filename_to_delete)
         full_path = os.path.join(config.SETS_DIR_PATH, filename_to_delete)
         logger.info(f"Attempting to delete set: {full_path}")
+        
+        # Store context before deletion
+        deleted_base_name = None
+        match = re.match(r'([a-zA-Z]{1,4})(\d*)\.mset$', filename_to_delete.lower())
+        if match:
+            deleted_base_name = match.group(1)
+        
+        original_browsing_mode = self.browsing_mode
+        original_selected_base = self.selected_base_name
+        original_version_index = self.current_version_index
+
         try:
             os.remove(full_path)
             logger.info(f"Successfully deleted {filename_to_delete}")
+            # ... (display "Deleted:" message) ...
             line1_text = "Deleted:"
-            filename_base = filename_to_delete.split('.')[0]
-            self.midi_handler.update_display(line1_text, filename_base[:config.SCREEN_LINE_2_MAX_CHARS])
+            filename_base_disp = filename_to_delete.split('.')[0]
+            self.midi_handler.update_display(line1_text, filename_base_disp[:config.SCREEN_LINE_2_MAX_CHARS])
             time.sleep(1)
+
         except OSError as e:
+            # ... (display error message) ...
             logger.error(f"Error deleting file {filename_to_delete}: {e}")
             self.midi_handler.update_display("Delete Error", str(e)[:config.SCREEN_LINE_2_MAX_CHARS])
             time.sleep(2)
         finally:
-            self._load_base_names_and_set_initial_index() # Reload base names
-            self.active_set_filename = None # Clear active set
-            self.display_update_pending = True
+            # Re-activate the screen, trying to stay "local"
+            # The activate method will handle reloading and trying to find a good spot.
+            # If the deleted file was the active one, we pass its base name.
+            # If the base name itself might disappear (if it was the last version),
+            # activate will default to the general list.
+            self.screen_manager.change_screen(
+                SetListScreen(self.screen_manager, self.midi_handler, self.set_manager, 
+                            target_base_name=deleted_base_name if deleted_base_name else None)
+            )
 
 
     def _perform_iterate(self, original_filename_to_copy_from):
@@ -293,26 +310,81 @@ class SetListScreen(BaseScreen):
             filename_base_disp = new_iterated_filename.split('.')[0]
             self.midi_handler.update_display(line1_text, filename_base_disp[:config.SCREEN_LINE_2_MAX_CHARS])
             time.sleep(1)
-            self._load_base_names_and_set_initial_index() # Reload all
-            # Try to select the new iterated set's base and then the version
-            self.selected_base_name = base_name
-            self._load_versions_for_selected_base()
-            self.browsing_mode = "versions"
-            try:
-                self.current_version_index = self.versions_for_selected_base.index(new_iterated_filename)
-                self.active_set_filename = new_iterated_filename # Make it active
-            except ValueError:
-                logger.warning(f"Could not find/select new '{new_iterated_filename}'.")
+
+            # Transition back to SetListScreen, targeting the new file
+            self.screen_manager.change_screen(
+                SetListScreen(self.screen_manager, self.midi_handler, self.set_manager, 
+                            target_filename=new_iterated_filename)
+            )
         except OSError as e:
             self.midi_handler.update_display("Iterate Error", str(e)[:config.SCREEN_LINE_2_MAX_CHARS])
             time.sleep(2)
-        finally:
             self.display_update_pending = True
 
     def activate(self):
-        super().activate() 
-        self._load_base_names_and_set_initial_index()
+        logger.info(f"Activating SetListScreen. Target base: '{self._initial_target_base_name}', Target file: '{self._initial_target_filename}'")
+        self.active = True # Set active state
         self.shift_held = False 
         self.awaiting_delete_confirm = False 
-        self.last_actual_display_time = time.time() 
+
+        self.set_manager.load_set_files() # Crucial: always get the latest file list
+        self.base_names = self.set_manager.get_unique_base_names()
+
+        focused = False
+        if self._initial_target_filename:
+            # Attempt to focus on a specific file
+            target_fn = self._initial_target_filename
+            parsed_base = None
+            match = re.match(r'([a-zA-Z]{1,4})(\d*)\.mset$', target_fn.lower())
+            if match:
+                parsed_base = match.group(1)
+
+            if parsed_base and parsed_base in self.base_names:
+                self.current_base_name_index = self.base_names.index(parsed_base)
+                self.selected_base_name = parsed_base
+                self._load_versions_for_selected_base() # Loads versions for self.selected_base_name
+                self.browsing_mode = "versions"
+                if target_fn in self.versions_for_selected_base:
+                    self.current_version_index = self.versions_for_selected_base.index(target_fn)
+                    self.active_set_filename = target_fn # Make it the active selected set
+                    focused = True
+                    logger.info(f"Focused on version: {target_fn}")
+                else:
+                    logger.warning(f"Target file '{target_fn}' not found in versions of '{parsed_base}'. Defaulting to first version.")
+                    if self.versions_for_selected_base: self.current_version_index = 0
+                    else: self.browsing_mode = "base_names" # Fallback
+            else:
+                logger.warning(f"Base for target file '{target_fn}' not found. Defaulting view.")
+
+        elif self._initial_target_base_name:
+            # Attempt to focus on a base name and show its versions
+            target_bn = self._initial_target_base_name
+            if target_bn in self.base_names:
+                self.current_base_name_index = self.base_names.index(target_bn)
+                self.selected_base_name = target_bn
+                self._load_versions_for_selected_base()
+                self.browsing_mode = "versions"
+                focused = True
+                logger.info(f"Focused on base name: {target_bn}, showing its versions.")
+            else:
+                logger.warning(f"Target base name '{target_bn}' not found. Defaulting view.")
+
+        if not focused:
+            # Default view: first base name, browsing_mode = "base_names"
+            if self.base_names:
+                self.current_base_name_index = 0
+            else:
+                self.current_base_name_index = -1
+            self.browsing_mode = "base_names"
+            self.selected_base_name = None
+            self.versions_for_selected_base = []
+            self.active_set_filename = None
+            logger.info("Defaulting to initial base name list view.")
+
+        # Clear initial targets as they've been processed
+        self._initial_target_base_name = None
+        self._initial_target_filename = None
+
+        self.last_actual_display_time = 0 # Ensure display updates if needed
         self.display_update_pending = True
+        self.display() # Manually call display as super().activate() was not called first

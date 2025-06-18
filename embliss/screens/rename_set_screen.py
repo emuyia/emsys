@@ -93,10 +93,18 @@ class RenameSetScreen(BaseNameEditorScreen): # Changed inheritance
             logger.info("No change in filename. Nothing to save.")
             self.midi_handler.update_display(new_filename_base, "No change.")
             time.sleep(1)
+            # Transition back, targeting the (unchanged) file
+            from .set_list_screen import SetListScreen 
+            self.screen_manager.change_screen(
+                SetListScreen(self.screen_manager, self.midi_handler, self.set_manager, 
+                              target_filename=self.original_filename) # Target original if no change
+            )
         elif os.path.exists(new_path):
             logger.warning(f"Cannot rename: Target file '{new_filename}' already exists.")
             self.midi_handler.update_display("Save Failed:", "Name exists")
             time.sleep(2)
+            # Stay on rename screen or go back to list targeting original? For now, stay.
+            self.display_update_pending = True 
         else:
             try:
                 os.rename(old_path, new_path)
@@ -104,15 +112,16 @@ class RenameSetScreen(BaseNameEditorScreen): # Changed inheritance
                 self.set_manager.load_set_files() 
                 self.midi_handler.update_display(new_filename_base, "Saved!")
                 time.sleep(1)
+                from .set_list_screen import SetListScreen 
+                self.screen_manager.change_screen(
+                    SetListScreen(self.screen_manager, self.midi_handler, self.set_manager, 
+                                  target_filename=new_filename) # Target the new filename
+                )
             except OSError as e:
                 logger.error(f"Error renaming file: {e}")
                 self.midi_handler.update_display("Save Error", str(e)[:config.SCREEN_LINE_2_MAX_CHARS])
                 time.sleep(2)
-
-        from .set_list_screen import SetListScreen 
-        self.screen_manager.change_screen(
-            SetListScreen(self.screen_manager, self.midi_handler, self.set_manager)
-        )
+                self.display_update_pending = True # Stay on rename screen
 
     # activate and deactivate can be inherited if no specific logic is needed,
     # or overridden if necessary. The base activate calls display.
