@@ -1,90 +1,78 @@
 import os
 import glob
-import re # For parsing base names
+import re 
 from . import config
 
 class SetManager:
     def __init__(self):
         self.sets_dir = config.SETS_DIR_PATH
         self.file_extension = config.MSET_FILE_EXTENSION
-        self.set_files = [] # Full list of actual filenames, e.g., "brnb0.mset"
+        self.set_files = [] 
         self.load_set_files()
 
     def load_set_files(self):
-        """Scans the sets directory for .mset files and sorts them."""
         pattern = os.path.join(self.sets_dir, f"*{self.file_extension}")
-        # Sort alphabetically, which usually groups base names and then versions
+        
+        # Initial load can be a simple sort, detailed sorting is for version listing.
         self.set_files = sorted([os.path.basename(f) for f in glob.glob(pattern)])
         print(f"Found {len(self.set_files)} set files: {self.set_files}")
 
     def get_set_names_for_display(self):
-        """Returns a list of set names (filenames without extension) for basic display."""
         return [self._extract_set_name_from_filename(f) for f in self.set_files]
 
     def _extract_set_name_from_filename(self, filename):
-        """Removes the .mset extension from the filename."""
         if filename.endswith(self.file_extension):
             return filename[:-len(self.file_extension)]
         return filename
 
     def get_set_count(self):
-        """Returns the total number of set files found."""
         return len(self.set_files)
 
     def get_set_name_by_index(self, index):
-        """Returns the set name (no ext) at a given index from the full list."""
         if 0 <= index < len(self.set_files):
             return self._extract_set_name_from_filename(self.set_files[index])
         return None
 
     def get_unique_base_names(self):
-        """
-        Extracts unique base names from all set files.
-        e.g., from ["brnb0.mset", "brnb1.mset", "test0.mset"], returns ["brnb", "test"]
-        """
         base_names = set()
         for filename in self.set_files:
             name_part = self._extract_set_name_from_filename(filename)
-            match = re.match(r'([a-zA-Z]{1,4})(\d*)$', name_part.lower()) # Match against lowercase
+            match = re.match(r'([a-zA-Z]{1,4})(\d*)$', name_part.lower()) 
             if match:
                 base_names.add(match.group(1))
-            else: # Handle names without numbers like "stma.mset" -> "stma"
+            else: 
                 if re.match(r'^[a-zA-Z]{1,4}$', name_part.lower()):
                     base_names.add(name_part.lower())
-
         sorted_base_names = sorted(list(base_names))
         print(f"Unique base names: {sorted_base_names}")
         return sorted_base_names
 
     def get_versions_for_base_name(self, base_name):
-        """
-        Returns a sorted list of full filenames for a given base name.
-        e.g., for "brnb", returns ["brnb0.mset", "brnb1.mset", ...]
-        """
-        versions = []
+        versions_filenames = []
         base_name_lower = base_name.lower()
         for filename in self.set_files:
             name_part_lower = self._extract_set_name_from_filename(filename).lower()
-            
-            # Check if the filename starts with the base_name and is followed by numbers or nothing
-            # (for base names that might not have a version number like 'stma')
             if name_part_lower.startswith(base_name_lower):
-                # Ensure it's not just a partial match like 'brn' matching 'brnb'.
-                # The part after base_name should be digits or empty.
                 suffix = name_part_lower[len(base_name_lower):]
                 if suffix == "" or suffix.isdigit():
-                     versions.append(filename)
+                     versions_filenames.append(filename)
         
-        # Custom sort: try to sort numerically if versions exist, then alphabetically
-        def sort_key(filename):
+        # Refined sort_key for natural alphanumeric sorting of versions
+        def sort_key_natural(filename):
             name_part = self._extract_set_name_from_filename(filename).lower()
-            match = re.match(rf"^{re.escape(base_name_lower)}(\d+)$", name_part)
+            # Attempt to split into non-digit prefix and digit suffix
+            # Handles cases like "name1", "name10", "name" (no number)
+            match = re.match(rf"^{re.escape(base_name_lower)}(\d*)$", name_part)
             if match:
-                return (0, int(match.group(1))) # Sort by number first
-            return (1, name_part) # Then by name for non-versioned or oddly named files
+                numeric_part_str = match.group(1)
+                if numeric_part_str: # If there is a number
+                    return (base_name_lower, int(numeric_part_str)) 
+                else: # No number after base_name, e.g. "stma.mset"
+                    return (base_name_lower, -1) # Place items without numbers first or consistently
+            return (name_part, 0) # Fallback for names not matching the pattern, sort alphabetically
 
-        sorted_versions = sorted(versions, key=sort_key)
-        print(f"Versions for base '{base_name}': {sorted_versions}")
+        sorted_versions = sorted(versions_filenames, key=sort_key_natural)
+        print(f"Versions for base '{base_name}' (sorted naturally): {sorted_versions}")
         return sorted_versions
 
 
