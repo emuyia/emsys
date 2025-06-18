@@ -67,7 +67,7 @@ class SetListScreen(BaseScreen):
 
         if self.awaiting_delete_confirm and self.delete_target_filename:
             target_name_only = self.delete_target_filename.replace(config.MSET_FILE_EXTENSION, "")
-            line1 = f"Del {target_name_only[:config.SCREEN_LINE_1_MAX_CHARS-4]}?"
+            line1 = f"Del {target_name_only[:config.SCREEN_LINE_1_MAX_CHARS-4]}?" # e.g., "Del setname?"
             line2 = "S+P6:Confirm" # Shift + Pad 6 (SHIFT_PAD_5_CC)
         
         elif self.browsing_mode == "base_names":
@@ -91,10 +91,17 @@ class SetListScreen(BaseScreen):
                 current_version_filename = self.versions_for_selected_base[self.current_version_index]
                 display_version_name = current_version_filename.replace(config.MSET_FILE_EXTENSION, "")
                 
-                line1 = f"{display_version_name}" # Show full version name on L1
+                is_active_set = (self.active_set_filename == current_version_filename)
+
+                if is_active_set:
+                    # Max length for name part is screen_width - 2 (for '>' and '<')
+                    name_max_len = config.SCREEN_LINE_1_MAX_CHARS - 2
+                    line1 = f">{display_version_name[:name_max_len]}<"
+                else:
+                    name_max_len = config.SCREEN_LINE_1_MAX_CHARS
+                    line1 = f"{display_version_name[:name_max_len]}"
                 
-                if self.active_set_filename == current_version_filename:
-                    # This version is "selected/OK'd"
+                if is_active_set:
                     if self.shift_held:
                         line2 = "S+P5:Iter S+P6:Del" # S+P5(Iter), S+P6(Del)
                     else:
@@ -103,7 +110,8 @@ class SetListScreen(BaseScreen):
                     # Just browsing versions, not yet "OK'd" one
                     line2 = "Enc:Scroll P6:OK P5:Back" # P6(OK), P5(Back)
         
-        line1 = line1[:config.SCREEN_LINE_1_MAX_CHARS]
+        # Ensure overall line length for line1 (already handled by specific truncations above)
+        # line1 = line1[:config.SCREEN_LINE_1_MAX_CHARS] 
         line2 = line2[:config.SCREEN_LINE_2_MAX_CHARS]
         self.midi_handler.update_display(line1, line2)
         logger.debug(f"Displaying SetListScreen: Mode='{self.browsing_mode}', L1='{line1}', L2='{line2}', ActiveSet='{self.active_set_filename}'")
@@ -121,20 +129,23 @@ class SetListScreen(BaseScreen):
                 if not self.shift_held and self.awaiting_delete_confirm:
                     logger.info("Delete confirmation cancelled due to Shift release.")
                     self.awaiting_delete_confirm = False
+                    self.delete_target_filename = None # Clear target on cancel
                 self.display_update_pending = True
             return
 
-        if self.awaiting_delete_confirm: # Delete confirmation (Shift + Pad 6, which is SHIFT_PAD_5_CC)
+        if self.awaiting_delete_confirm: 
             if self.shift_held and message.type == 'control_change' and \
-               message.control == config.SHIFT_PAD_5_CC and message.value > 0:
+               message.control == config.SHIFT_PAD_5_CC and message.value > 0: # SHIFT_PAD_5_CC is S+P6
                 logger.info(f"Delete confirmed for {self.delete_target_filename}")
-                self._perform_delete(self.delete_target_filename) # delete_target_filename was set before
+                self._perform_delete(self.delete_target_filename) 
                 self.awaiting_delete_confirm = False
-                self.active_set_filename = None # Clear active set if it was deleted
+                # self.active_set_filename = None # _perform_delete will trigger screen change which resets this
+                self.delete_target_filename = None 
+            else: # Any other action while awaiting confirm might cancel it or be ignored
+                logger.debug("Input received while awaiting delete confirmation. No action taken other than refresh.")
             self.display_update_pending = True 
             return
 
-        # Encoder handling
         if message.type == 'control_change' and message.control == config.ENCODER_CC:
             if self.browsing_mode == "base_names":
                 if self.base_names and self.current_base_name_index != -1:
@@ -147,41 +158,49 @@ class SetListScreen(BaseScreen):
             elif self.browsing_mode == "versions":
                 if self.versions_for_selected_base and self.current_version_index != -1:
                     prev_idx = self.current_version_index
+                    current_file_at_index = self.versions_for_selected_base[self.current_version_index]
                     if message.value == config.ENCODER_VALUE_UP:
                         self.current_version_index = (self.current_version_index + 1) % len(self.versions_for_selected_base)
                     elif message.value == config.ENCODER_VALUE_DOWN:
                         self.current_version_index = (self.current_version_index - 1 + len(self.versions_for_selected_base)) % len(self.versions_for_selected_base)
+                    
+                    new_file_at_index = self.versions_for_selected_base[self.current_version_index]
                     if prev_idx != self.current_version_index:
-                        # If an active set was selected, and we scroll away, "unselect" it
-                        if self.active_set_filename and self.active_set_filename != self.versions_for_selected_base[self.current_version_index]:
+                        # If an active set was selected, and we scroll away from it, "unselect" it.
+                        if self.active_set_filename and self.active_set_filename != new_file_at_index:
+                            logger.info(f"Scrolled away from active set '{self.active_set_filename}'. Deactivating it.")
                             self.active_set_filename = None
                         self.display_update_pending = True
-            return # Encoder message handled
+            return 
 
-        # Shift + Pad CC actions
         if self.shift_held and message.type == 'control_change' and message.value > 0:
-            target_for_action = self.active_set_filename # Most shift actions need an active set
+            target_for_action = self.active_set_filename 
             
             if message.control == config.SHIFT_PAD_4_CC: # Iterate (S+P5)
                 if target_for_action:
                     self._perform_iterate(target_for_action)
-                else: logger.warning("Iterate: No active set.")
+                else: 
+                    logger.warning("Iterate: No active set.")
+                    self.midi_handler.update_display("Iterate Fail:", "No Set OK'd")
+                    time.sleep(1)
             elif message.control == config.SHIFT_PAD_5_CC: # Delete Init (S+P6)
                 if target_for_action:
-                    self.delete_target_filename = target_for_action # Set for confirmation
+                    self.delete_target_filename = target_for_action 
                     self.awaiting_delete_confirm = True
                     self.first_del_press_time = time.time()
                     logger.info(f"Delete initiated for {self.delete_target_filename}.")
-                else: logger.warning("Delete: No active set.")
+                else: 
+                    logger.warning("Delete: No active set.")
+                    self.midi_handler.update_display("Delete Fail:", "No Set OK'd")
+                    time.sleep(1)
             elif message.control == config.SHIFT_PAD_6_CC: # New Set (S+P7)
                 logger.info("New Set action triggered.")
                 from .create_set_screen import CreateSetScreen
                 self.screen_manager.change_screen(CreateSetScreen(self.screen_manager, self.midi_handler, self.set_manager))
-                return # Screen changed
+                return 
             self.display_update_pending = True
             return
 
-        # Note On (No Shift) actions
         if not self.shift_held and message.type == 'note_on':
             if message.note == config.PAD_6_NOTE: # P6: Select Base Name / OK Version
                 if self.browsing_mode == "base_names":
@@ -193,20 +212,27 @@ class SetListScreen(BaseScreen):
                     else: logger.info("P6: No base names to select.")
                 elif self.browsing_mode == "versions":
                     if self.versions_for_selected_base and self.current_version_index != -1:
-                        self.active_set_filename = self.versions_for_selected_base[self.current_version_index]
-                        name = self.active_set_filename.replace(config.MSET_FILE_EXTENSION,"")
-                        logger.info(f"Version OK'd: {self.active_set_filename}")
-                        self.midi_handler.update_display("Selected:", name[:config.SCREEN_LINE_2_MAX_CHARS])
-                        time.sleep(0.75) # Brief confirmation
+                        newly_selected_filename = self.versions_for_selected_base[self.current_version_index]
+                        if self.active_set_filename == newly_selected_filename:
+                            logger.info(f"Version {newly_selected_filename} re-confirmed as active.")
+                        else:
+                            self.active_set_filename = newly_selected_filename
+                            logger.info(f"Version OK'd: {self.active_set_filename}")
                     else: logger.info("P6: No version to OK.")
                 self.display_update_pending = True
             
-            elif message.note == config.PAD_5_NOTE: # P5: Back (from versions to base)
+            elif message.note == config.PAD_5_NOTE: # P5: Back
                 if self.browsing_mode == "versions":
-                    self.browsing_mode = "base_names"
-                    self.active_set_filename = None
-                    self.selected_base_name = None # Clear selected base when going back
-                    logger.info("P5: Back to base names. Mode: base_names.")
+                    if self.active_set_filename is not None:
+                        # If a version is "active", P5 deactivates it first
+                        logger.info(f"Deactivating set '{self.active_set_filename}'. Still in version browser.")
+                        self.active_set_filename = None
+                    else:
+                        # No version is active, so P5 goes back to base name browsing
+                        logger.info("P5: Back to base names. Mode: base_names.")
+                        self.browsing_mode = "base_names"
+                        self.selected_base_name = None 
+                        # current_base_name_index remains, so user is back at the base they were viewing
                     self.display_update_pending = True
             
             elif message.note == config.PAD_4_NOTE: # P4: Rename
@@ -214,14 +240,14 @@ class SetListScreen(BaseScreen):
                     logger.info(f"Rename action for: {self.active_set_filename}")
                     from .rename_set_screen import RenameSetScreen
                     self.screen_manager.change_screen(RenameSetScreen(self.screen_manager, self.midi_handler, self.set_manager, self.active_set_filename))
-                    return # Screen changed
+                    return 
                 else:
                     logger.info("P4: Rename pressed, but no active set selected.")
                     self.midi_handler.update_display("Rename Fail:", "No Set OK'd")
                     time.sleep(1)
                     self.display_update_pending = True
             return
-
+            
     def update(self):
         if not self.active: return
         if self.awaiting_delete_confirm and (time.time() - self.first_del_press_time > self.delete_confirm_timeout):
