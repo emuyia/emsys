@@ -51,11 +51,7 @@ class CreateSetScreen(BaseNameEditorScreen): # Changed inheritance
         new_filename = self.get_current_full_filename() # Use helper
         new_path = os.path.join(config.SETS_DIR_PATH, new_filename)
 
-        # Check if the character part of the name is empty (all 'a's if that's your placeholder for empty)
-        # Or, more robustly, check if the user actually changed any character from a default "empty" marker.
-        # For now, let's assume any 4-char string is valid unless it's a specific "empty" pattern.
-        # The current logic just checks if the resulting name part (without version) is empty.
-        if not self.get_current_name_string().strip('a'): # Example: if all chars are 'a', it's considered empty
+        if not self.get_current_name_string().strip('a'): 
              logger.warning("Cannot create set: Name part appears empty or default.")
              self.midi_handler.update_display("Create Failed:", "Name Empty")
              time.sleep(2)
@@ -66,12 +62,15 @@ class CreateSetScreen(BaseNameEditorScreen): # Changed inheritance
             logger.warning(f"Cannot create set: Target file '{new_filename}' already exists.")
             self.midi_handler.update_display("Create Failed:", "Name exists")
             time.sleep(2)
-            self.display_update_pending = True # Stay on create screen
+            self.display_update_pending = True 
         else:
             try:
+                # Define the default content
+                default_content = "md A01 mnm A01 rep 1 len 32 tin 0 bpm 150 bpmr 0 poly 0 seq 0 seqto 1;\n" # Added newline at the end
+                
                 with open(new_path, 'w') as f:
-                    # Ensure default content is written as per TODO
-                    f.write("md a01 mnm a01 rep 1 len 32 tin 0 bpm 120 bpmr 0 poly 0 seq 0 seqto 1;\n")
+                    f.write(default_content) # Write the default content
+                                    
                 logger.info(f"Successfully created new set '{new_filename}' with default segment.")
                 self.set_manager.load_set_files() 
                 self.midi_handler.update_display("Created:", new_filename_base[:config.SCREEN_LINE_2_MAX_CHARS-9])
@@ -80,14 +79,14 @@ class CreateSetScreen(BaseNameEditorScreen): # Changed inheritance
                 from .set_list_screen import SetListScreen
                 self.screen_manager.change_screen(
                     SetListScreen(self.screen_manager, self.midi_handler, self.set_manager, 
-                                  target_filename=new_filename) # Target the new filename
+                                  target_filename=new_filename) 
                 )
                 return 
             except OSError as e:
                 logger.error(f"Error creating file: {e}")
                 self.midi_handler.update_display("Create Error", str(e)[:config.SCREEN_LINE_2_MAX_CHARS])
                 time.sleep(2)
-                self.display_update_pending = True # Stay on create screen
+                self.display_update_pending = True 
 
     def activate(self):
         # Reset to default name every time this screen is activated
