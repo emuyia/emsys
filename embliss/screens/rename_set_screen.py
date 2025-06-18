@@ -15,33 +15,30 @@ class RenameSetScreen(BaseScreen):
         self.set_manager = set_manager
         self.original_filename = original_filename
         
-        self.chars = ['A', 'A', 'A', 'A']
+        self.chars = ['a', 'a', 'a', 'a'] # Initialize with lowercase
         self.version = 0
         
-        # Define these before _parse_original_filename is called
-        self.alphabet = string.ascii_uppercase # A-Z
+        self.alphabet = string.ascii_lowercase # Use lowercase alphabet
         self.max_version = 63
 
-        self._parse_original_filename() # Now self.max_version exists
+        self._parse_original_filename() 
 
-        # For display throttling
         self.last_actual_display_time = 0
-        self.display_update_pending = True # Update display on activation
-        self.display_refresh_interval = 0.075  # Min interval for display updates
+        self.display_update_pending = True 
+        self.display_refresh_interval = 0.075  
 
     def _parse_original_filename(self):
         name_part = self.original_filename
         if name_part.endswith(config.MSET_FILE_EXTENSION):
             name_part = name_part[:-len(config.MSET_FILE_EXTENSION)]
         
-        # Regex to find trailing digits (version) and preceding characters
         match = re.match(r'([a-zA-Z]{1,4})(\d*)$', name_part)
         if match:
-            char_part_str = match.group(1).upper()
+            char_part_str = match.group(1).lower() # Convert to lowercase
             version_str = match.group(2)
 
             for i in range(min(len(char_part_str), 4)):
-                self.chars[i] = char_part_str[i]
+                self.chars[i] = char_part_str[i] # Already lowercase
             
             if version_str:
                 try:
@@ -52,33 +49,30 @@ class RenameSetScreen(BaseScreen):
                 except ValueError:
                     logger.warning(f"Could not parse version from '{version_str}'. Defaulting to 0.")
                     self.version = 0
-            else: # No version number in filename, default to 0
+            else: 
                 self.version = 0
         else:
             logger.warning(f"Could not parse '{name_part}' into chars and version. Using defaults.")
-            # Keep default self.chars = ['A', 'A', 'A', 'A'] and self.version = 0
+            # self.chars will remain ['a', 'a', 'a', 'a']
 
         logger.info(f"Parsed for rename: Chars={self.chars}, Version={self.version}")
 
 
-    def _value_to_char(self, value): # For sliders 0-127
+    def _value_to_char(self, value): 
         index = int((value / 127) * (len(self.alphabet) - 1))
-        return self.alphabet[max(0, min(index, len(self.alphabet) - 1))]
+        return self.alphabet[max(0, min(index, len(self.alphabet) - 1))] # Will return lowercase
 
-    def _value_to_version(self, value): # For knob 0-127
-        # Map 0-127 to 0-63
+    def _value_to_version(self, value): 
         return int((value / 127) * self.max_version)
 
     def display(self):
         if not self.active: return
 
-        name_str = "".join(self.chars)
-        line1 = f"{name_str}{self.version:02d}" # e.g., ABCD07, STMC10
+        name_str = "".join(self.chars).lower() # Ensure lowercase, though chars should already be
+        line1 = f"{name_str}{self.version:02d}" 
         line1 = line1[:config.SCREEN_LINE_1_MAX_CHARS]
         
-        line2 = "S1-4:Ch K8:V P7:Sv" # Sliders 1-4:Chars, Knob8:Version, Pad7:Save
-        # Could add P8:Back if space allows, or assume it's known
-        # line2 = "P7:Save P8:Back"
+        line2 = "S1-4:Ch K8:V P7:Sv" 
         line2 = line2[:config.SCREEN_LINE_2_MAX_CHARS]
 
         self.midi_handler.update_display(line1, line2)
@@ -91,6 +85,7 @@ class RenameSetScreen(BaseScreen):
         
         changed = False
         if message.type == 'control_change':
+            # Sliders will use _value_to_char which now returns lowercase
             if message.control == config.SLIDER_1_CC:
                 self.chars[0] = self._value_to_char(message.value)
                 changed = True
@@ -112,17 +107,17 @@ class RenameSetScreen(BaseScreen):
                 logger.info(f"Rename edit: Chars={self.chars}, Version={self.version}. Update pending.")
 
         elif message.type == 'note_on':
-            if message.note == config.PAD_7_NOTE: # Save
+            if message.note == config.PAD_7_NOTE: 
                 self._save_changes()
-            elif message.note == config.PAD_8_NOTE: # Back/Cancel
+            elif message.note == config.PAD_5_NOTE: 
                 logger.info("Rename cancelled. Returning to SetListScreen.")
-                from .set_list_screen import SetListScreen # Local import
+                from .set_list_screen import SetListScreen 
                 self.screen_manager.change_screen(
                     SetListScreen(self.screen_manager, self.midi_handler, self.set_manager)
                 )
 
     def _save_changes(self):
-        new_name_base = "".join(self.chars) + str(self.version)
+        new_name_base = "".join(self.chars).lower() + str(self.version) # Ensure lowercase for saving
         new_filename = new_name_base + config.MSET_FILE_EXTENSION
         
         old_path = os.path.join(config.SETS_DIR_PATH, self.original_filename)
@@ -140,7 +135,7 @@ class RenameSetScreen(BaseScreen):
             try:
                 os.rename(old_path, new_path)
                 logger.info(f"Successfully renamed '{self.original_filename}' to '{new_filename}'")
-                self.set_manager.load_set_files() # Refresh the list in SetManager
+                self.set_manager.load_set_files() 
                 self.midi_handler.update_display(new_name_base, "Saved!")
                 time.sleep(1)
             except OSError as e:
@@ -148,8 +143,7 @@ class RenameSetScreen(BaseScreen):
                 self.midi_handler.update_display("Save Error", str(e)[:config.SCREEN_LINE_2_MAX_CHARS])
                 time.sleep(2)
 
-        # Return to SetListScreen regardless of save outcome for now
-        from .set_list_screen import SetListScreen # Local import
+        from .set_list_screen import SetListScreen 
         self.screen_manager.change_screen(
             SetListScreen(self.screen_manager, self.midi_handler, self.set_manager)
         )
@@ -163,10 +157,8 @@ class RenameSetScreen(BaseScreen):
             self.display()
 
     def activate(self):
-        super().activate() # Calls self.display() which sets last_actual_display_time
-        self.display_update_pending = True # Ensure display updates on activation
+        super().activate() 
+        self.display_update_pending = True 
 
     def deactivate(self):
         super().deactivate()
-        # Optional: Clear display or show a neutral message if needed when leaving this screen
-        # self.midi_handler.update_display(" ", " ")

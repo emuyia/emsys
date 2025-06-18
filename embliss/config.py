@@ -44,11 +44,11 @@ ENCODER_VALUE_DOWN = 62 # Relative value when turned "down" or "left"
 PAD_1_NOTE = 36
 PAD_2_NOTE = 37
 PAD_3_NOTE = 38
-PAD_4_NOTE = 39
-PAD_5_NOTE = 40
-PAD_6_NOTE = 41 # << This will be our new select button
-PAD_7_NOTE = 42 # << Will be Save for rename
-PAD_8_NOTE = 43 # << Will be Back/Cancel for rename
+PAD_4_NOTE = 39 # This is the 'RELOAD/LOAD', 'RESET' or 'RENAME' button in most contexts
+PAD_5_NOTE = 40 # this is the 'NO' or 'STOP' button in most contexts
+PAD_6_NOTE = 41 # this is the 'YES' or 'PLAY' button in most contexts
+PAD_7_NOTE = 42 # This is the 'SAVE' or 'RECORD' button in most contexts
+PAD_8_NOTE = 43 # This is a secondary function button (called 'Tap')
 
 # --- Shift Button (used as a modifier for pads) ---
 SHIFT_BUTTON_CC = 27 # This is the "Shift" button on the Minilab 3 itself

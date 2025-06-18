@@ -64,7 +64,7 @@ class SetListScreen(BaseScreen):
                 logger.info(f"Set index changed to: {self.current_set_index}. Display update pending.")
 
 
-        elif message.type == 'note_on' and message.note == config.PAD_6_NOTE: # Changed from PAD_1_NOTE
+        elif message.type == 'note_on' and message.note == config.PAD_4_NOTE: # Changed from PAD_1_NOTE
             if self.set_names and self.current_set_index != -1:
                 selected_set_name = self.set_names[self.current_set_index]
                 original_filename = self.set_manager.set_files[self.current_set_index] # Get full filename
