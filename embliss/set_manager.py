@@ -75,6 +75,45 @@ class SetManager:
         print(f"Versions for base '{base_name}' (sorted naturally): {sorted_versions}")
         return sorted_versions
 
+    def get_segments_from_file(self, filename):
+        segments = []
+        filepath = os.path.join(self.sets_dir, filename)
+        if not os.path.exists(filepath):
+            print(f"File not found: {filepath}")
+            return segments
+
+        try:
+            with open(filepath, 'r') as f:
+                content = f.read()
+            
+            # Segments are separated by semicolons. Clean up whitespace.
+            segment_strings = [s.strip() for s in content.split(';') if s.strip()]
+
+            for seg_str in segment_strings:
+                segment_data = {}
+                
+                # Regex to find 'key value' pairs
+                md_match = re.search(r'md\s+([A-Za-z0-9]+)', seg_str)
+                mnm_match = re.search(r'mnm\s+([A-Za-z0-9]+)', seg_str)
+                trk_match = re.search(r'trk\s+([A-Za-z0-9]+)', seg_str)
+
+                if md_match:
+                    segment_data['md'] = md_match.group(1)
+                if mnm_match:
+                    segment_data['mnm'] = mnm_match.group(1)
+                if trk_match:
+                    segment_data['trk'] = trk_match.group(1)
+                
+                # Only add if it contains some recognizable data
+                if segment_data:
+                    segments.append(segment_data)
+
+        except Exception as e:
+            print(f"Error reading or parsing {filename}: {e}")
+
+        print(f"Found {len(segments)} segments in {filename}: {segments}")
+        return segments
+
 
 if __name__ == '__main__':
     manager = SetManager()

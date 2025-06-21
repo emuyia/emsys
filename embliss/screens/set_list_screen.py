@@ -214,7 +214,18 @@ class SetListScreen(BaseScreen):
                     if self.versions_for_selected_base and self.current_version_index != -1:
                         newly_selected_filename = self.versions_for_selected_base[self.current_version_index]
                         if self.active_set_filename == newly_selected_filename:
-                            logger.info(f"Version {newly_selected_filename} re-confirmed as active.")
+                            # If already active, pressing P6 again opens the segment viewer
+                            logger.info(f"Opening segment viewer for {newly_selected_filename}")
+                            from .segment_list_screen import SegmentListScreen
+                            self.screen_manager.change_screen(
+                                SegmentListScreen(
+                                    self.screen_manager,
+                                    self.midi_handler,
+                                    self.set_manager,
+                                    self.active_set_filename
+                                )
+                            )
+                            return # Important to return after changing screen
                         else:
                             self.active_set_filename = newly_selected_filename
                             logger.info(f"Version OK'd: {self.active_set_filename}")
