@@ -55,11 +55,11 @@ class SetListScreen(BaseScreen):
             if not self.versions_for_selected_base:
                 self.current_version_index = -1
             else:
-                self.current_version_index = 0
+                self.current_version_index = len(self.versions_for_selected_base) - 1  # Start at largest
         else:
             self.versions_for_selected_base = []
             self.current_version_index = -1
-        self.active_set_filename = None # Clear active set when loading new versions
+        self.active_set_filename = None # Clear active set when loading
 
     def display(self):
         if not self.active: return
