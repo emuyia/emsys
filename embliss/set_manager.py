@@ -2,6 +2,9 @@ import os
 import glob
 import re 
 from . import config
+import logging
+
+logger = logging.getLogger(__name__)
 
 class SetManager:
     def __init__(self):
@@ -114,6 +117,57 @@ class SetManager:
         print(f"Found {len(segments)} segments in {filename}: {segments}")
         return segments
 
+    def update_segment_track(self, filename, segment_index, new_trk_name):
+        """Updates the 'trk' parameter for a specific segment in a .mset file."""
+        filepath = os.path.join(config.SETS_DIR_PATH, filename)
+        if not os.path.exists(filepath):
+            logger.error(f"File not found for update: {filepath}")
+            return False
+
+        try:
+            with open(filepath, 'r') as f:
+                content = f.read()
+            
+            segment_strings = [s.strip() for s in content.split(';') if s.strip()]
+
+            if not (0 <= segment_index < len(segment_strings)):
+                logger.error(f"Segment index {segment_index} out of bounds for {filename}")
+                return False
+
+            target_segment = segment_strings[segment_index]
+            
+            # This pattern specifically finds the 'trk' parameter and its value
+            trk_pattern = re.compile(r'\s*\btrk\s+[a-zA-Z0-9]+\b')
+            
+            if new_trk_name:
+                # Case 1: Set or Update the track name
+                sanitized_name = "".join(filter(str.isalpha, new_trk_name.lower()))[:4]
+                if trk_pattern.search(target_segment):
+                    # The parameter exists, so replace it
+                    modified_segment = trk_pattern.sub(f" trk {sanitized_name}", target_segment, count=1)
+                else:
+                    # The parameter does not exist, so append it
+                    modified_segment = f"{target_segment.strip()} trk {sanitized_name}"
+            else:
+                # Case 2: Unset (remove) the track name
+                # We find the pattern and replace it with an empty string, deleting it.
+                modified_segment = trk_pattern.sub('', target_segment, count=1)
+
+            # Clean up any extra whitespace from the modification
+            segment_strings[segment_index] = modified_segment.strip()
+            
+            # Rebuild the file content, ensuring each line ends with a semicolon
+            new_content = ";\n".join(segment_strings) + ";\n"
+
+            with open(filepath, 'w') as f:
+                f.write(new_content)
+            
+            logger.info(f"Successfully updated segment {segment_index} in {filename}.")
+            return True
+
+        except Exception as e:
+            logger.error(f"Failed to update segment in {filename}: {e}", exc_info=True)
+            return False
 
 if __name__ == '__main__':
     manager = SetManager()

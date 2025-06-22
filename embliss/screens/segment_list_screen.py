@@ -12,6 +12,7 @@ class SegmentListScreen(BaseScreen):
         self.set_filename = set_filename
         self.segments = []
         self.current_segment_index = -1
+        self.selected_segment_index = None # To track the selected segment
 
         # For refresh-rate based display updates
         self.last_actual_display_time = 0
@@ -30,37 +31,59 @@ class SegmentListScreen(BaseScreen):
         else:
             self.current_segment_index = -1
         
+        self.selected_segment_index = None # Always start with nothing selected
         self.display_update_pending = True
         self.display() # Initial display call
 
     def _process_segments_for_display(self, segments):
         """
-        Analyzes segments to count track occurrences and adds a formatted
-        track string to each segment dictionary for easy display.
+        Analyzes segments for display, implementing "fall-through" logic for
+        track names and numbering occurrences correctly.
         """
-        trk_totals = {}
+        # Pass 1: Determine the effective display_trk for all segments and get final counts.
+        display_trks = []
+        last_known_trk = None
         for segment in segments:
-            trk_val = segment.get('trk')
-            if trk_val:
-                trk_totals[trk_val] = trk_totals.get(trk_val, 0) + 1
+            explicit_trk = segment.get('trk')
+            if explicit_trk:
+                last_known_trk = explicit_trk
+                display_trks.append(explicit_trk)
+            elif last_known_trk:
+                display_trks.append(last_known_trk)
+            else:
+                display_trks.append(None)
+        
+        # Now, count the totals from the generated list of what will be displayed.
+        trk_display_totals = {}
+        for trk in display_trks:
+            if trk:
+                trk_display_totals[trk] = trk_display_totals.get(trk, 0) + 1
 
-        trk_current_counts = {}
+        # Pass 2: Build the formatted strings using the correct totals and continuous numbering.
         processed_segments = []
-        for segment in segments:
+        trk_current_counts = {}
+        for i, segment in enumerate(segments):
             new_segment = segment.copy()
-            trk_val = new_segment.get('trk')
-            
-            if trk_val:
-                total = trk_totals.get(trk_val, 0)
-                if total > 1:
-                    current_count = trk_current_counts.get(trk_val, 0) + 1
-                    trk_current_counts[trk_val] = current_count
-                    new_segment['formatted_trk'] = f"{trk_val} #{current_count}"
-                else:
-                    new_segment['formatted_trk'] = trk_val
+            # We already know what will be displayed from Pass 1
+            display_trk = display_trks[i]
+            # A track is inherited if it has a display name that is not its own explicit name
+            is_inherited = (display_trk is not None and segment.get('trk') != display_trk)
+
+            if display_trk:
+                total = trk_display_totals.get(display_trk, 0)
+                current_count = trk_current_counts.get(display_trk, 0) + 1
+                trk_current_counts[display_trk] = current_count
+                
+                # Add occurrence number if the track appears more than once in total
+                trk_str = f"{display_trk} #{current_count}" if total > 1 else display_trk
+                
+                # Add parentheses for inherited tracks
+                new_segment['formatted_trk'] = f"({trk_str})" if is_inherited else trk_str
             else:
                 new_segment['formatted_trk'] = ''
             
+            # Also store the original track name for the editor
+            new_segment['trk'] = segment.get('trk', '')
             processed_segments.append(new_segment)
         
         self.segments = processed_segments
@@ -81,10 +104,16 @@ class SegmentListScreen(BaseScreen):
             md_val = current_segment.get('md', '---')
             mnm_val = current_segment.get('mnm', '---')
             formatted_trk_val = current_segment.get('formatted_trk', '')
+            is_selected = (self.current_segment_index == self.selected_segment_index)
 
-            # Trimmed display: "1/16 A01/B12"
-            line1 = f"{self.current_segment_index + 1}/{total_segments} {md_val}/{mnm_val}"
-            line2 = f"trk: {formatted_trk_val}"
+            line1_content = f"{self.current_segment_index + 1}/{total_segments} {md_val}/{mnm_val}"
+            
+            if is_selected:
+                line1 = f">{line1_content}<"
+                line2 = "P4:EditTrk P5:Back"
+            else:
+                line1 = line1_content
+                line2 = f"trk: {formatted_trk_val}"
 
         line1 = line1[:config.SCREEN_LINE_1_MAX_CHARS]
         line2 = line2[:config.SCREEN_LINE_2_MAX_CHARS]
@@ -106,21 +135,52 @@ class SegmentListScreen(BaseScreen):
                     self.current_segment_index = (self.current_segment_index - 1 + len(self.segments)) % len(self.segments)
                 
                 if prev_idx != self.current_segment_index:
-                    self.display_update_pending = True # Set flag instead of calling display()
+                    # Deselect if user scrolls away from a selected item
+                    if self.selected_segment_index is not None:
+                        self.selected_segment_index = None
+                    self.display_update_pending = True
             return
 
-        if message.type == 'note_on' and message.note == config.PAD_5_NOTE:
-            logger.info("Back to Set List Screen from Segment List.")
-            from .set_list_screen import SetListScreen
-            self.screen_manager.change_screen(
-                SetListScreen(
-                    self.screen_manager, 
-                    self.midi_handler, 
-                    self.set_manager,
-                    target_filename=self.set_filename
-                )
-            )
-            return
+        if message.type == 'note_on':
+            if message.note == config.PAD_6_NOTE: # Select
+                if self.segments and self.current_segment_index != -1:
+                    if self.selected_segment_index != self.current_segment_index:
+                        self.selected_segment_index = self.current_segment_index
+                        logger.info(f"Selected segment {self.selected_segment_index}")
+                        self.display_update_pending = True
+                return
+
+            elif message.note == config.PAD_4_NOTE: # Edit Track (Rename)
+                if self.selected_segment_index is not None and self.selected_segment_index == self.current_segment_index:
+                    logger.info(f"Edit track for segment {self.current_segment_index}")
+                    from .edit_segment_track_screen import EditSegmentTrackScreen
+                    segment_data = self.segments[self.current_segment_index]
+                    original_trk = segment_data.get('trk', '')
+                    self.screen_manager.change_screen(
+                        EditSegmentTrackScreen(
+                            self.screen_manager, self.midi_handler, self.set_manager,
+                            self.set_filename, self.current_segment_index, original_trk
+                        )
+                    )
+                    return
+                else:
+                    logger.info("Pad 4 (Edit) pressed but no segment is selected.")
+
+            elif message.note == config.PAD_5_NOTE: # Back / Cancel
+                if self.selected_segment_index is not None:
+                    logger.info("Deselecting segment.")
+                    self.selected_segment_index = None
+                    self.display_update_pending = True
+                else:
+                    logger.info("Back to Set List Screen from Segment List.")
+                    from .set_list_screen import SetListScreen
+                    self.screen_manager.change_screen(
+                        SetListScreen(
+                            self.screen_manager, self.midi_handler, self.set_manager,
+                            target_filename=self.set_filename
+                        )
+                    )
+                return
 
     def update(self):
         """Called periodically by the screen manager to handle non-input-driven updates."""
