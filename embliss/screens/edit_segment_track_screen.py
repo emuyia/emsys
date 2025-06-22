@@ -68,7 +68,10 @@ class EditSegmentTrackScreen(BaseNameEditorScreen):
                 logger.info("Track edit cancelled. Returning to SegmentListScreen.")
                 from .segment_list_screen import SegmentListScreen 
                 self.screen_manager.change_screen(
-                    SegmentListScreen(self.screen_manager, self.midi_handler, self.set_manager, self.set_filename)
+                    SegmentListScreen(
+                        self.screen_manager, self.midi_handler, self.set_manager, 
+                        self.set_filename, restore_index=self.segment_index
+                    )
                 )
 
     def _save_changes(self, unset=False):
@@ -100,5 +103,8 @@ class EditSegmentTrackScreen(BaseNameEditorScreen):
 
         from .segment_list_screen import SegmentListScreen 
         self.screen_manager.change_screen(
-            SegmentListScreen(self.screen_manager, self.midi_handler, self.set_manager, self.set_filename)
+            SegmentListScreen(
+                self.screen_manager, self.midi_handler, self.set_manager, 
+                self.set_filename, restore_index=self.segment_index
+            )
         )

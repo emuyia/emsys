@@ -6,13 +6,14 @@ from .. import config
 logger = logging.getLogger(__name__)
 
 class SegmentListScreen(BaseScreen):
-    def __init__(self, screen_manager, midi_handler, set_manager, set_filename):
+    def __init__(self, screen_manager, midi_handler, set_manager, set_filename, restore_index=None):
         super().__init__(screen_manager, midi_handler)
         self.set_manager = set_manager
         self.set_filename = set_filename
         self.segments = []
         self.current_segment_index = -1
         self.selected_segment_index = None # To track the selected segment
+        self.restore_index = restore_index # Store the index to restore
 
         # For refresh-rate based display updates
         self.last_actual_display_time = 0
@@ -27,11 +28,18 @@ class SegmentListScreen(BaseScreen):
         self._process_segments_for_display(raw_segments)
 
         if self.segments:
-            self.current_segment_index = 0
+            if self.restore_index is not None and 0 <= self.restore_index < len(self.segments):
+                # If a restore index is provided, use it
+                self.current_segment_index = self.restore_index
+                self.selected_segment_index = self.restore_index # Also pre-select it
+            else:
+                # Otherwise, start at the beginning
+                self.current_segment_index = 0
+                self.selected_segment_index = None
         else:
             self.current_segment_index = -1
+            self.selected_segment_index = None
         
-        self.selected_segment_index = None # Always start with nothing selected
         self.display_update_pending = True
         self.display() # Initial display call
 
