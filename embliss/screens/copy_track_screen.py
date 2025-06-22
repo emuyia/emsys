@@ -1,0 +1,124 @@
+import logging
+import time
+from .base_screen import BaseScreen
+from .. import config
+
+logger = logging.getLogger(__name__)
+
+class CopyTrackScreen(BaseScreen):
+    """A screen for selecting a destination set to copy a track to."""
+    def __init__(self, screen_manager, midi_handler, set_manager, source_filename, source_track_name, original_screen):
+        super().__init__(screen_manager, midi_handler)
+        self.set_manager = set_manager
+        self.source_filename = source_filename
+        self.source_track_name = source_track_name
+        self.original_screen = original_screen
+
+        # Logic for browsing sets, similar to SetListScreen
+        self.browsing_mode = "base_names"
+        self.base_names = []
+        self.current_base_name_index = -1
+        self.selected_base_name = None
+        self.versions_for_selected_base = []
+        self.current_version_index = -1
+        
+        self.display_update_pending = False
+        self.last_actual_display_time = 0
+        self.display_refresh_interval = 0.075
+
+    def activate(self):
+        self.active = True
+        logger.info(f"Activating CopyTrackScreen to copy track '{self.source_track_name}'")
+        self._load_base_names()
+        self.display_update_pending = True
+        self.display()
+
+    def _load_base_names(self):
+        self.set_manager.load_set_files()
+        self.base_names = self.set_manager.get_unique_base_names()
+        self.current_base_name_index = 0 if self.base_names else -1
+
+    def _load_versions_for_selected_base(self):
+        if self.selected_base_name:
+            self.versions_for_selected_base = self.set_manager.get_versions_for_base_name(self.selected_base_name)
+            self.current_version_index = 0 if self.versions_for_selected_base else -1
+        else:
+            self.versions_for_selected_base = []
+            self.current_version_index = -1
+
+    def display(self):
+        if not self.active: return
+        line1 = f"Copy '{self.source_track_name}'"
+        line2 = ""
+
+        if self.browsing_mode == "base_names":
+            if self.current_base_name_index == -1:
+                line2 = "No sets found"
+            else:
+                base_name = self.base_names[self.current_base_name_index]
+                line2 = f"To: {base_name}.. P4:Sel"
+        
+        elif self.browsing_mode == "versions":
+            if self.current_version_index == -1:
+                line2 = "No versions"
+            else:
+                filename = self.versions_for_selected_base[self.current_version_index]
+                set_name = filename.replace(config.MSET_FILE_EXTENSION, "")
+                line2 = f"To: {set_name} P4:Copy"
+
+        self.midi_handler.update_display(line1[:16], line2[:15])
+        self.last_actual_display_time = time.time()
+        self.display_update_pending = False
+
+    def handle_midi_input(self, message):
+        if not self.active: return
+
+        if message.type == 'control_change' and message.control == config.ENCODER_CC:
+            if self.browsing_mode == "base_names" and self.base_names:
+                if message.value == config.ENCODER_VALUE_UP: self.current_base_name_index = (self.current_base_name_index + 1) % len(self.base_names)
+                elif message.value == config.ENCODER_VALUE_DOWN: self.current_base_name_index = (self.current_base_name_index - 1 + len(self.base_names)) % len(self.base_names)
+            elif self.browsing_mode == "versions" and self.versions_for_selected_base:
+                if message.value == config.ENCODER_VALUE_UP: self.current_version_index = (self.current_version_index + 1) % len(self.versions_for_selected_base)
+                elif message.value == config.ENCODER_VALUE_DOWN: self.current_version_index = (self.current_version_index - 1 + len(self.versions_for_selected_base)) % len(self.versions_for_selected_base)
+            self.display_update_pending = True
+
+        if message.type == 'note_on':
+            if message.note == config.PAD_4_NOTE: # Select Base Name or Confirm Copy
+                if self.browsing_mode == "base_names" and self.current_base_name_index != -1:
+                    self.selected_base_name = self.base_names[self.current_base_name_index]
+                    self._load_versions_for_selected_base()
+                    self.browsing_mode = "versions"
+                elif self.browsing_mode == "versions" and self.current_version_index != -1:
+                    destination_filename = self.versions_for_selected_base[self.current_version_index]
+                    self._perform_copy(destination_filename)
+                self.display_update_pending = True
+            
+            elif message.note == config.PAD_5_NOTE: # Go Back or Cancel
+                if self.browsing_mode == "versions":
+                    self.browsing_mode = "base_names"
+                    self.selected_base_name = None
+                else:
+                    self.screen_manager.change_screen(self.original_screen)
+                self.display_update_pending = True
+
+    def _perform_copy(self, destination_filename):
+        logger.info(f"Attempting to copy track '{self.source_track_name}' from {self.source_filename} to {destination_filename}")
+        
+        success, message = self.set_manager.copy_track_to_set(
+            source_filename=self.source_filename,
+            track_name_to_copy=self.source_track_name,
+            dest_filename=destination_filename
+        )
+
+        if success:
+            self.midi_handler.update_display("Track Copied", "Success!"); time.sleep(1.5)
+        else:
+            self.midi_handler.update_display("Copy Failed", message[:15]); time.sleep(2)
+        
+        self.original_screen.activate() # Re-activate original screen
+        self.screen_manager.change_screen(self.original_screen)
+
+    def update(self):
+        if not self.active: return
+        if self.display_update_pending and (time.time() - self.last_actual_display_time >= self.display_refresh_interval):
+            self.display()

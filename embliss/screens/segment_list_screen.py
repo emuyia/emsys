@@ -11,6 +11,7 @@ class SegmentListScreen(BaseScreen):
         self.set_manager = set_manager
         self.set_filename = set_filename
         self.segments = []
+        self.display_trks = [] # To store the effective track name for each segment
         self.current_segment_index = -1
         self.selected_segment_index = None # To track the selected segment
         self.restore_index = restore_index # Store the index to restore
@@ -94,6 +95,7 @@ class SegmentListScreen(BaseScreen):
             new_segment['trk'] = segment.get('trk', '')
             processed_segments.append(new_segment)
         
+        self.display_trks = display_trks # Store the calculated list
         self.segments = processed_segments
 
     def display(self):
@@ -118,7 +120,7 @@ class SegmentListScreen(BaseScreen):
             
             if is_selected:
                 line1 = f">{line1_content}<"
-                line2 = "P4:EditTrk P5:Back"
+                line2 = "P3:Manage P4:Edit" # Updated help text
             else:
                 line1 = line1_content
                 line2 = f"trk: {formatted_trk_val}"
@@ -156,6 +158,22 @@ class SegmentListScreen(BaseScreen):
                         self.selected_segment_index = self.current_segment_index
                         logger.info(f"Selected segment {self.selected_segment_index}")
                         self.display_update_pending = True
+                return
+
+            elif message.note == config.PAD_3_NOTE: # Manage Track
+                if self.selected_segment_index is not None and self.selected_segment_index == self.current_segment_index:
+                    source_track_name = self.display_trks[self.current_segment_index]
+                    if source_track_name:
+                        logger.info(f"Entering track management for track: '{source_track_name}'")
+                        from .track_manage_screen import TrackManageScreen
+                        self.screen_manager.change_screen(
+                            TrackManageScreen(
+                                self.screen_manager, self.midi_handler, self.set_manager,
+                                self.set_filename, source_track_name, self.current_segment_index
+                            )
+                        )
+                    else:
+                        logger.warning("Pad 3 pressed on a segment with no track to manage.")
                 return
 
             elif message.note == config.PAD_4_NOTE: # Edit Track (Rename)

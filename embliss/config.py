@@ -56,11 +56,11 @@ SHIFT_BUTTON_CC = 27 # This is the "Shift" button on the Minilab 3 itself
 # --- Pads with Shift (CCs) ---
 # Note: Minilab3 sends CCs for pads 4-8 when Shift is held. Pads 1-3 might have fixed Shift functions.
 # We'll use the ones you specified:
-SHIFT_PAD_4_CC = 105 # Corresponds to Pad 5 + Shift
-SHIFT_PAD_5_CC = 106 # Corresponds to Pad 6 + Shift
-SHIFT_PAD_6_CC = 107 # Corresponds to Pad 7 + Shift
-SHIFT_PAD_7_CC = 108 # Corresponds to Pad 8 + Shift
-SHIFT_PAD_8_CC = 109 # Corresponds to Pad 9 + Shift
+SHIFT_PAD_4_CC = 105 # Corresponds to Pad 4 + Shift
+SHIFT_PAD_5_CC = 106 # Corresponds to Pad 5 + Shift
+SHIFT_PAD_6_CC = 107 # Corresponds to Pad 6 + Shift
+SHIFT_PAD_7_CC = 108 # Corresponds to Pad 7 + Shift
+SHIFT_PAD_8_CC = 109 # Corresponds to Pad 8 + Shift
 # CC 109 was mentioned, often associated with the "Program" button/encoder press with shift.
 # Let's map it if you intend to use it, e.g. for a specific function key.
 # For now, we'll stick to the pad-related CCs you listed.
