@@ -116,14 +116,14 @@ class SegmentListScreen(BaseScreen):
             formatted_trk_val = current_segment.get('formatted_trk', '')
             is_selected = (self.current_segment_index == self.selected_segment_index)
 
-            line1_content = f"{self.current_segment_index + 1}/{total_segments} {md_val}/{mnm_val}"
-            
+            line1_content = f"{self.current_segment_index + 1}/{total_segments}"
+
             if is_selected:
-                line1 = f">{line1_content}<"
-                line2 = "P3:Manage P4:Edit" # Updated help text
+                line1 = f"{line1_content} >{formatted_trk_val if formatted_trk_val else 'trk?'}<"
+                line2 = "P3:Edit P4:Titl" # Updated help text
             else:
-                line1 = line1_content
-                line2 = f"trk: {formatted_trk_val}"
+                line1 = f"{line1_content} {formatted_trk_val if formatted_trk_val else 'trk?'}"
+                line2 = f"{md_val}/{mnm_val}"
 
         line1 = line1[:config.SCREEN_LINE_1_MAX_CHARS]
         line2 = line2[:config.SCREEN_LINE_2_MAX_CHARS]

@@ -42,7 +42,7 @@ class TrackManageScreen(BaseScreen):
         line2 = ""
 
         if self.delete_confirm_active:
-            line2 = "Del? P5=N P6=Y"
+            line2 = "Del? P5:N P6:Y"
         elif self.current_target_index == -1:
             line2 = "No other tracks"
         else:

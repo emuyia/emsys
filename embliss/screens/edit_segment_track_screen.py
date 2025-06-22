@@ -29,7 +29,7 @@ class EditSegmentTrackScreen(BaseNameEditorScreen):
         line1 = f"Edit Trk: {name_str}"
         line1 = line1[:config.SCREEN_LINE_1_MAX_CHARS]
         
-        line2 = "P4:Unset P7:Save" # Updated help text
+        line2 = "P4:Uns P6:OK" # Updated help text
         line2 = line2[:config.SCREEN_LINE_2_MAX_CHARS]
 
         self.midi_handler.update_display(line1, line2)
@@ -59,7 +59,7 @@ class EditSegmentTrackScreen(BaseNameEditorScreen):
             return
 
         if message.type == 'note_on':
-            if message.note == config.PAD_7_NOTE: # Save
+            if message.note == config.PAD_6_NOTE: # Save
                 self._save_changes()
             elif message.note == config.PAD_4_NOTE: # Unset
                 logger.info("Unset track command received.")

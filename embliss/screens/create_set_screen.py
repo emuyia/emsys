@@ -22,7 +22,7 @@ class CreateSetScreen(BaseNameEditorScreen): # Changed inheritance
         line1 = f"New: {name_str}{self.version:02d}"
         line1 = line1[:config.SCREEN_LINE_1_MAX_CHARS]
         
-        line2 = "S1-4:Ch K8:V P7:Cr" # P7: Create
+        line2 = "Input: S1-4, K8" # P7: Create
         line2 = line2[:config.SCREEN_LINE_2_MAX_CHARS]
 
         self.midi_handler.update_display(line1, line2)
@@ -37,7 +37,7 @@ class CreateSetScreen(BaseNameEditorScreen): # Changed inheritance
             return
 
         if message.type == 'note_on':
-            if message.note == config.PAD_7_NOTE: # Create
+            if message.note == config.PAD_6_NOTE: # Create
                 self._create_set_file()
             elif message.note == config.PAD_5_NOTE: # Back/Cancel
                 logger.info("Create new set cancelled. Returning to SetListScreen.")
@@ -66,7 +66,7 @@ class CreateSetScreen(BaseNameEditorScreen): # Changed inheritance
         else:
             try:
                 # Define the default content
-                default_content = "md A01 mnm A01 rep 1 len 32 tin 0 bpm 150 bpmr 0 poly 0 seq 0 seqto 1;\n" # Added newline at the end
+                default_content = "md A01 mnm A01 rep 1 len 32 tin 0 bpm 150 bpmr 0 poly 0;\n" # Added newline at the end
                 
                 with open(new_path, 'w') as f:
                     f.write(default_content) # Write the default content

@@ -68,19 +68,19 @@ class SetListScreen(BaseScreen):
         if self.awaiting_delete_confirm and self.delete_target_filename:
             target_name_only = self.delete_target_filename.replace(config.MSET_FILE_EXTENSION, "")
             line1 = f"Del {target_name_only[:config.SCREEN_LINE_1_MAX_CHARS-4]}?" # e.g., "Del setname?"
-            line2 = "S+P6:Confirm" # Shift + Pad 6 (SHIFT_PAD_5_CC)
+            line2 = "P6:Yes" # Shift + Pad 6 (SHIFT_PAD_5_CC)
         
         elif self.browsing_mode == "base_names":
             if not self.base_names or self.current_base_name_index == -1:
-                line1, line2 = "No sets found", "S+P7:New?"
+                line1, line2 = "No sets found", "S+P6:New"
             else:
                 total_bases = len(self.base_names)
                 current_base = self.base_names[self.current_base_name_index]
                 line1 = f"{self.current_base_name_index + 1}/{total_bases}: {current_base}"
                 if self.shift_held:
-                    line2 = "S+P7:New" # Shift + Pad 7 (SHIFT_PAD_6_CC) for New
+                    line2 = "P6:New" # Shift + Pad 7 (SHIFT_PAD_6_CC) for New
                 else:
-                    line2 = "Enc:Scroll P6:Sel" # Pad 6 (Note 41) to Select base
+                    line2 = "P6:Sel" # Pad 6 (Note 41) to Select base
         
         elif self.browsing_mode == "versions":
             base_display_name = self.selected_base_name if self.selected_base_name else "???"
@@ -103,12 +103,12 @@ class SetListScreen(BaseScreen):
                 
                 if is_active_set:
                     if self.shift_held:
-                        line2 = "S+P5:Iter S+P6:Del" # S+P5(Iter), S+P6(Del)
+                        line2 = "P5:x P6:+ P7:=> " # S+P5(Iter), S+P6(Del)
                     else:
                         line2 = "P4:Ren P5:Back" # P4(Ren), P5(Back)
                 else:
                     # Just browsing versions, not yet "OK'd" one
-                    line2 = "Enc:Scroll P6:OK P5:Back" # P6(OK), P5(Back)
+                    line2 = "P6:Sel P5:Back" # P6(OK), P5(Back)
         
         # Ensure overall line length for line1 (already handled by specific truncations above)
         # line1 = line1[:config.SCREEN_LINE_1_MAX_CHARS] 

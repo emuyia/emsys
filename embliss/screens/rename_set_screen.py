@@ -56,7 +56,7 @@ class RenameSetScreen(BaseNameEditorScreen): # Changed inheritance
         line1 = f"{name_str}{self.version:02d}" 
         line1 = line1[:config.SCREEN_LINE_1_MAX_CHARS]
         
-        line2 = "S1-4:Ch K8:V P7:Sv" # P7: Save
+        line2 = "Input: S1-4, K8" # P7: Save
         line2 = line2[:config.SCREEN_LINE_2_MAX_CHARS]
 
         self.midi_handler.update_display(line1, line2)
@@ -73,7 +73,7 @@ class RenameSetScreen(BaseNameEditorScreen): # Changed inheritance
 
         # Handle screen-specific controls (Save, Back/Cancel)
         if message.type == 'note_on':
-            if message.note == config.PAD_7_NOTE: 
+            if message.note == config.PAD_6_NOTE: 
                 self._save_changes()
             elif message.note == config.PAD_5_NOTE:
                 logger.info("Rename cancelled. Returning to SetListScreen.")

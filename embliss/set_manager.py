@@ -177,29 +177,37 @@ class SetManager:
         logger.debug(f"Destination '{dest_filename}' used MD banks: {sorted(list(used_md_banks))}")
         logger.debug(f"Destination '{dest_filename}' used MNM banks: {sorted(list(used_mnm_banks))}")
 
+        bank_mappings = []
         new_segments = []
         next_free_md = 0
         next_free_mnm = 0
 
         for seg_str in source_track_group.segments:
             new_seg_str = seg_str
-            if re.search(r'\bmd\s+[A-H]\d{2}\b', new_seg_str):
+            
+            md_match = re.search(r'\bmd\s+([A-H]\d{2})\b', new_seg_str)
+            if md_match:
+                original_md_bank = md_match.group(1)
                 while next_free_md in used_md_banks:
                     next_free_md += 1
                 if next_free_md >= 128: return False, "No MD Banks"
                 
-                new_bank_str = self._format_bank(next_free_md)
-                new_seg_str = re.sub(r'(\bmd\s+)[A-H]\d{2}\b', r'\g<1>' + new_bank_str, new_seg_str, 1)
+                new_md_bank_str = self._format_bank(next_free_md)
+                new_seg_str = re.sub(r'(\bmd\s+)[A-H]\d{2}\b', r'\g<1>' + new_md_bank_str, new_seg_str, 1)
                 used_md_banks.add(next_free_md)
+                bank_mappings.append({'type': 'md', 'source': original_md_bank, 'dest': new_md_bank_str})
 
-            if re.search(r'\bmnm\s+[A-H]\d{2}\b', new_seg_str):
+            mnm_match = re.search(r'\bmnm\s+([A-H]\d{2})\b', new_seg_str)
+            if mnm_match:
+                original_mnm_bank = mnm_match.group(1)
                 while next_free_mnm in used_mnm_banks:
                     next_free_mnm += 1
                 if next_free_mnm >= 128: return False, "No MNM Banks"
 
-                new_bank_str = self._format_bank(next_free_mnm)
-                new_seg_str = re.sub(r'(\bmnm\s+)[A-H]\d{2}\b', r'\g<1>' + new_bank_str, new_seg_str, 1)
+                new_mnm_bank_str = self._format_bank(next_free_mnm)
+                new_seg_str = re.sub(r'(\bmnm\s+)[A-H]\d{2}\b', r'\g<1>' + new_mnm_bank_str, new_seg_str, 1)
                 used_mnm_banks.add(next_free_mnm)
+                bank_mappings.append({'type': 'mnm', 'source': original_mnm_bank, 'dest': new_mnm_bank_str})
             
             new_segments.append(new_seg_str)
 
@@ -229,7 +237,7 @@ class SetManager:
                 f.write(final_content)
             
             logger.info(f"Successfully copied track '{track_name_to_copy}' to '{dest_filename}'")
-            return True, "Success"
+            return True, bank_mappings
         except Exception as e:
             logger.error(f"Failed to write copied track to '{dest_filename}': {e}", exc_info=True)
             return False, "File Write Err"

@@ -2,6 +2,7 @@ import logging
 import time
 from .base_screen import BaseScreen
 from .. import config
+from .copy_instructions_screen import CopyInstructionsScreen
 
 logger = logging.getLogger(__name__)
 
@@ -56,7 +57,7 @@ class CopyTrackScreen(BaseScreen):
                 line2 = "No sets found"
             else:
                 base_name = self.base_names[self.current_base_name_index]
-                line2 = f"To: {base_name}.. P4:Sel"
+                line2 = f"To: {base_name}.. P6:Sel"
         
         elif self.browsing_mode == "versions":
             if self.current_version_index == -1:
@@ -64,7 +65,7 @@ class CopyTrackScreen(BaseScreen):
             else:
                 filename = self.versions_for_selected_base[self.current_version_index]
                 set_name = filename.replace(config.MSET_FILE_EXTENSION, "")
-                line2 = f"To: {set_name} P4:Copy"
+                line2 = f"To: {set_name} P6:Copy"
 
         self.midi_handler.update_display(line1[:16], line2[:15])
         self.last_actual_display_time = time.time()
@@ -83,7 +84,7 @@ class CopyTrackScreen(BaseScreen):
             self.display_update_pending = True
 
         if message.type == 'note_on':
-            if message.note == config.PAD_4_NOTE: # Select Base Name or Confirm Copy
+            if message.note == config.PAD_6_NOTE: # Select Base Name or Confirm Copy
                 if self.browsing_mode == "base_names" and self.current_base_name_index != -1:
                     self.selected_base_name = self.base_names[self.current_base_name_index]
                     self._load_versions_for_selected_base()
@@ -104,19 +105,33 @@ class CopyTrackScreen(BaseScreen):
     def _perform_copy(self, destination_filename):
         logger.info(f"Attempting to copy track '{self.source_track_name}' from {self.source_filename} to {destination_filename}")
         
-        success, message = self.set_manager.copy_track_to_set(
+        success, result = self.set_manager.copy_track_to_set(
             source_filename=self.source_filename,
             track_name_to_copy=self.source_track_name,
             dest_filename=destination_filename
         )
 
         if success:
-            self.midi_handler.update_display("Track Copied", "Success!"); time.sleep(1.5)
+            # result is the list of mappings
+            if result: # Check if there are any mappings to display
+                self.midi_handler.update_display("Copy Complete!", "..."); time.sleep(2)
+                self.screen_manager.change_screen(
+                    CopyInstructionsScreen(
+                        self.screen_manager,
+                        self.midi_handler,
+                        mapping_data=result,
+                        original_screen=self.original_screen
+                    )
+                )
+            else: # No mappings, just show success and return
+                self.midi_handler.update_display("Track Copied", "No banks mapped"); time.sleep(2)
+                self.original_screen.activate()
+                self.screen_manager.change_screen(self.original_screen)
         else:
-            self.midi_handler.update_display("Copy Failed", message[:15]); time.sleep(2)
-        
-        self.original_screen.activate() # Re-activate original screen
-        self.screen_manager.change_screen(self.original_screen)
+            # result is the error message string
+            self.midi_handler.update_display("Copy Failed", result[:15]); time.sleep(2)
+            self.original_screen.activate()
+            self.screen_manager.change_screen(self.original_screen)
 
     def update(self):
         if not self.active: return
