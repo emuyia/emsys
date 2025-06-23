@@ -34,7 +34,7 @@ class CopyInstructionsScreen(BaseScreen):
         
         if not self.mapping_data:
             line1 = "Ready to Save"
-            line2 = "P5:Cancel P6:Save"
+            line2 = "P5:C P6:S"
         else:
             item = self.mapping_data[self.current_index]
             current_type = item['type']

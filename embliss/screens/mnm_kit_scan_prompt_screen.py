@@ -1,6 +1,6 @@
 import logging
 from .base_screen import BaseScreen
-from .copy_instructions_screen import CopyInstructionsScreen
+from .connect_mnm_to_c6_screen import ConnectMnmToC6Screen
 from .. import config
 from .. import mnm_sysex_manager
 
@@ -25,7 +25,7 @@ class MnmKitScanPromptScreen(BaseScreen):
     def display(self):
         if not self.active: return
         if self.status == "prompt":
-            line1 = "Load Dest on MnM"
+            line1 = "Ld MM Dest Snap"
             line2 = "P5:C P6:Scan"
         elif self.status == "scanning":
             line1 = "Scanning MnM..."
@@ -49,8 +49,8 @@ class MnmKitScanPromptScreen(BaseScreen):
             self.display()
             return
 
-        # On success, transition to the final instructions screen
-        instructions_screen = CopyInstructionsScreen(
+        # On success, transition to the connect to c6 screen
+        connect_to_c6_screen = ConnectMnmToC6Screen(
             self.screen_manager,
             self.midi_handler,
             self.mapping_data,
@@ -60,7 +60,7 @@ class MnmKitScanPromptScreen(BaseScreen):
             destination_filename=self.destination_filename,
             mnm_kit_map=mnm_kit_map
         )
-        self.screen_manager.change_screen(instructions_screen)
+        self.screen_manager.change_screen(connect_to_c6_screen)
 
     def handle_midi_input(self, message):
         if not self.active or message.type != 'note_on':
