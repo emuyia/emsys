@@ -105,10 +105,18 @@ class MidiHandler:
             logger.warning("Could not update display because SysEx data construction failed.")
             
     def get_message(self, block=False):
-        """Gets a MIDI message from the input port."""
+        """
+        Gets a MIDI message from the input port, ignoring system real-time messages.
+        """
         if self.in_port and not self.in_port.closed:
-            return self.in_port.poll() # Non-blocking
-            # For blocking, use: return self.in_port.receive(block=True)
+            while True:
+                msg = self.in_port.poll()
+                if msg is None:
+                    # No more messages in the queue
+                    return None
+                # Ignore system real-time messages to avoid spamming the application.
+                if msg.type not in ('clock', 'start', 'continue', 'stop', 'active_sensing', 'reset'):
+                    return msg
         return None
 
     def ensure_ports_open(self):
