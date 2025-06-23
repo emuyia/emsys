@@ -17,7 +17,7 @@ cd emsys
 
 - `em_clock.py` creates the central realtime MIDI clock.
 - `em_midisetup.py` maintains all necessary virtual MIDI connections.
-- `em_pd_controller.py` starts the emsys Pd patch in CLI mode, and allows management the patch via a MiniLab 3 MIDI controller (Shift + Tap + Yes/No to start or stop the patch, at any time). You may also launch the set manager program, embliss, with Shift + Tap + Pad 7.
+- `em_pd_controller.py` manages 'em' apps (emsys, embliss). The emsys Pd patch is run in CLI mode, and allows management the patch via a MiniLab 3 MIDI controller (Shift + Tap + Yes/No to start or stop the patch, at any time). You may also launch the set manager program, embliss (Shift + Tap + Pad 7).
 
 Set up the Python environment:
 ```
@@ -65,7 +65,7 @@ Optional: Change `env.defaults.dev` to `1` if you intend to use emsys with plugd
 #### Running emsys
 `main.pd` is the entry point for emsys. It can be run in plugdata or Pure Data on macOS and Linux, however it is primarily intended for a headless Linux system running Pure Data in CLI, such as a Raspberry Pi.
 
-`serv/em_pd_controller.py` should be used to run emsys on boot using the corresponding systemd service, `serv/em_pd_controller.service`. Otherwise, `main.pd` can be opened directly.
+`serv/em_pd_controller.py` should be used to manage emsys on boot using the corresponding systemd service, `serv/em_pd_controller.service`. Otherwise, `main.pd` can be opened directly.
 
 If `em_midisetup.py` is not in use, you will need to configure MIDI devices manually in plugdata or Pd, and then reopen `main.pd`.
 
@@ -74,8 +74,9 @@ If `em_midisetup.py` is not in use, you will need to configure MIDI devices manu
 ## Usage
 #### Managing emsys state
 - On boot, emsys will launch. It can be managed with the following inputs on the MiniLab:
-    - Shift+Tap+YES: Start patch
-    - Shift+Tap+NO: Stop patch
+    - Shift+Tap+YES: Start emsys patch
+    - Shift+Tap+Pad7: Start embliss
+    - Shift+Tap+NO: Stop all apps
     - Shift+Tap+Reload: Reboot system
 
 WIP
