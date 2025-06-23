@@ -24,7 +24,7 @@ class MidiClockGen:
             if sys.platform == 'win32':
                 midi_output = mido.open_output(out_port_name)
             else:
-                midi_output = mido.open_output(out_port_name, virtual=True)
+                midi_output = mido.open_output(out_port_name, virtual=True, client_name='em_clock_out')
 
             clock_tick = mido.Message('clock')
             while run.value:
@@ -61,7 +61,7 @@ def midi_bpm_listener(shared_bpm, run_code, clock_running, pulse_rate, in_port_n
         if sys.platform == 'win32':
             midi_input = mido.open_input(in_port_name)
         else:
-            midi_input = mido.open_input(in_port_name, virtual=True)
+            midi_input = mido.open_input(in_port_name, virtual=True, client_name='em_clock_in')
 
         while run_code.value:
             for msg in midi_input.iter_pending():

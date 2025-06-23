@@ -30,8 +30,8 @@ def connect_ports(connections, src_client, src_port, dest_client, dest_port):
 while True:
     # Cache all client numbers
     client_cache = {
-        "CLK_OUT_CLIENT": get_client_number_cache("RtMidiOut Client", input=True),
-        "CLK_IN_CLIENT": get_client_number_cache("RtMidiIn Client", input=False),
+        "CLK_OUT_CLIENT": get_client_number_cache("em_clock_out", input=True),
+        "CLK_IN_CLIENT": get_client_number_cache("em_clock_in", input=False),
         "PS_CLIENT": get_client_number_cache("pisound"),
         "MCL_CLIENT": get_client_number_cache("MegaCMD"),
         "ML3_CLIENT": get_client_number_cache("Minilab3"),
