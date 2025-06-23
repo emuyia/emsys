@@ -8,11 +8,15 @@ logger = logging.getLogger(__name__)
 
 class MnmKitScanPromptScreen(BaseScreen):
     """A screen to prompt the user to initiate the MnM kit scan."""
-    def __init__(self, screen_manager, midi_handler, mapping_data, original_screen):
+    def __init__(self, screen_manager, midi_handler, mapping_data, original_screen, source_filename, track_name_to_copy, destination_filename):
         super().__init__(screen_manager, midi_handler)
         self.mapping_data = mapping_data
         self.original_screen = original_screen
         self.status = "prompt" # 'prompt', 'scanning', 'failed'
+        # Store the plan details
+        self.source_filename = source_filename
+        self.track_name_to_copy = track_name_to_copy
+        self.destination_filename = destination_filename
 
     def activate(self):
         self.active = True
@@ -51,6 +55,9 @@ class MnmKitScanPromptScreen(BaseScreen):
             self.midi_handler,
             self.mapping_data,
             self.original_screen,
+            source_filename=self.source_filename,
+            track_name_to_copy=self.track_name_to_copy,
+            destination_filename=self.destination_filename,
             mnm_kit_map=mnm_kit_map
         )
         self.screen_manager.change_screen(instructions_screen)

@@ -104,9 +104,10 @@ class CopyTrackScreen(BaseScreen):
                 self.display_update_pending = True
 
     def _perform_copy(self, destination_filename):
-        logger.info(f"Attempting to copy track '{self.source_track_name}' from {self.source_filename} to {destination_filename}")
+        logger.info(f"Planning to copy track '{self.source_track_name}' from {self.source_filename} to {destination_filename}")
         
-        success, result = self.set_manager.copy_track_to_set(
+        # Use the new "plan" method instead of the old "copy" method.
+        success, result = self.set_manager.plan_track_copy(
             source_filename=self.source_filename,
             track_name_to_copy=self.source_track_name,
             dest_filename=destination_filename
@@ -114,40 +115,30 @@ class CopyTrackScreen(BaseScreen):
 
         if success:
             # result is the list of mappings
-            if result: # Check if there are any mappings to display
-                self.midi_handler.update_display("Copy Complete!", "..."); time.sleep(1)
-                
-                # --- MODIFICATION: Go to the new prompt screen ---
-                # Check if there are any 'mnm' mappings that require a scan
-                has_mnm_mappings = any(item['type'] == 'mnm' for item in result)
+            self.midi_handler.update_display("Plan Created!", "..."); time.sleep(1)
+            
+            # Pass the plan details (filenames, track name) to the next screen.
+            plan_details = {
+                "screen_manager": self.screen_manager,
+                "midi_handler": self.midi_handler,
+                "mapping_data": result,
+                "original_screen": self.original_screen,
+                "source_filename": self.source_filename,
+                "track_name_to_copy": self.source_track_name,
+                "destination_filename": destination_filename
+            }
 
-                if has_mnm_mappings:
-                    # Go to the prompt screen to start the kit scan
-                    self.screen_manager.change_screen(
-                        MnmKitScanPromptScreen(
-                            self.screen_manager,
-                            self.midi_handler,
-                            mapping_data=result,
-                            original_screen=self.original_screen
-                        )
-                    )
-                else:
-                    # If no mnm mappings, go directly to instructions (original behavior)
-                    self.screen_manager.change_screen(
-                        CopyInstructionsScreen(
-                            self.screen_manager,
-                            self.midi_handler,
-                            mapping_data=result,
-                            original_screen=self.original_screen
-                        )
-                    )
-            else: # No mappings, just show success and return
-                self.midi_handler.update_display("Track Copied", "No banks mapped"); time.sleep(2)
-                self.original_screen.activate()
-                self.screen_manager.change_screen(self.original_screen)
+            has_mnm_mappings = any(item['type'] == 'mnm' for item in result)
+
+            if has_mnm_mappings:
+                # Go to the prompt screen to start the kit scan
+                self.screen_manager.change_screen(MnmKitScanPromptScreen(**plan_details))
+            else:
+                # If no mnm mappings, go directly to instructions
+                self.screen_manager.change_screen(CopyInstructionsScreen(**plan_details, mnm_kit_map=None))
         else:
             # result is the error message string
-            self.midi_handler.update_display("Copy Failed", result[:15]); time.sleep(2)
+            self.midi_handler.update_display("Plan Failed", result[:15]); time.sleep(2)
             self.original_screen.activate()
             self.screen_manager.change_screen(self.original_screen)
 

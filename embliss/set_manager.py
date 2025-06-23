@@ -161,11 +161,20 @@ class SetManager:
         slot = (numeric_val % 16) + 1
         return f"{bank_char}{slot:02d}"
 
-    def copy_track_to_set(self, source_filename, track_name_to_copy, dest_filename):
-        """Copies a track group from one set to another, remapping banks."""
+    def plan_track_copy(self, source_filename, track_name_to_copy, dest_filename):
+        """
+        Performs a dry run of copying a track. Checks for errors and calculates
+        bank mappings without writing to the destination file.
+        """
         if source_filename == dest_filename:
             logger.warning("Source and destination files cannot be the same.")
             return False, "Src=Dest"
+
+        # Check if track already exists in destination
+        dest_groups = self.get_track_groups(dest_filename)
+        if any(g.name == track_name_to_copy for g in dest_groups):
+            logger.error(f"Track '{track_name_to_copy}' already exists in '{dest_filename}'.")
+            return False, "Track Exists"
 
         source_groups = self.get_track_groups(source_filename)
         source_track_group = next((g for g in source_groups if g.name == track_name_to_copy), None)
@@ -174,10 +183,50 @@ class SetManager:
             return False, "Src Trk Not Fnd"
 
         used_md_banks, used_mnm_banks = self._get_used_banks(dest_filename)
-        logger.debug(f"Destination '{dest_filename}' used MD banks: {sorted(list(used_md_banks))}")
-        logger.debug(f"Destination '{dest_filename}' used MNM banks: {sorted(list(used_mnm_banks))}")
-
+        
         bank_mappings = []
+        next_free_md = 0
+        next_free_mnm = 0
+
+        # This loop is for validation and creating the mapping list
+        for seg_str in source_track_group.segments:
+            md_match = re.search(r'\bmd\s+([A-H]\d{2})\b', seg_str)
+            if md_match:
+                original_md_bank = md_match.group(1)
+                while next_free_md in used_md_banks:
+                    next_free_md += 1
+                if next_free_md >= 128: return False, "No MD Banks"
+                
+                new_md_bank_str = self._format_bank(next_free_md)
+                used_md_banks.add(next_free_md) # Add to used banks for this dry run
+                bank_mappings.append({'type': 'md', 'source': original_md_bank, 'dest': new_md_bank_str})
+
+            mnm_match = re.search(r'\bmnm\s+([A-H]\d{2})\b', seg_str)
+            if mnm_match:
+                original_mnm_bank = mnm_match.group(1)
+                while next_free_mnm in used_mnm_banks:
+                    next_free_mnm += 1
+                if next_free_mnm >= 128: return False, "No MNM Banks"
+
+                new_mnm_bank_str = self._format_bank(next_free_mnm)
+                used_mnm_banks.add(next_free_mnm) # Add to used banks for this dry run
+                bank_mappings.append({'type': 'mnm', 'source': original_mnm_bank, 'dest': new_mnm_bank_str})
+        
+        logger.info(f"Successfully planned copy of track '{track_name_to_copy}' to '{dest_filename}'")
+        return True, bank_mappings
+
+    def commit_track_copy(self, source_filename, track_name_to_copy, dest_filename):
+        """
+        Copies a track group from one set to another, remapping banks and
+        writing the changes to the destination file.
+        """
+        source_groups = self.get_track_groups(source_filename)
+        source_track_group = next((g for g in source_groups if g.name == track_name_to_copy), None)
+        if not source_track_group:
+            return False, "Src Trk Not Fnd"
+
+        used_md_banks, used_mnm_banks = self._get_used_banks(dest_filename)
+        
         new_segments = []
         next_free_md = 0
         next_free_mnm = 0
@@ -187,7 +236,6 @@ class SetManager:
             
             md_match = re.search(r'\bmd\s+([A-H]\d{2})\b', new_seg_str)
             if md_match:
-                original_md_bank = md_match.group(1)
                 while next_free_md in used_md_banks:
                     next_free_md += 1
                 if next_free_md >= 128: return False, "No MD Banks"
@@ -195,11 +243,9 @@ class SetManager:
                 new_md_bank_str = self._format_bank(next_free_md)
                 new_seg_str = re.sub(r'(\bmd\s+)[A-H]\d{2}\b', r'\g<1>' + new_md_bank_str, new_seg_str, 1)
                 used_md_banks.add(next_free_md)
-                bank_mappings.append({'type': 'md', 'source': original_md_bank, 'dest': new_md_bank_str})
 
             mnm_match = re.search(r'\bmnm\s+([A-H]\d{2})\b', new_seg_str)
             if mnm_match:
-                original_mnm_bank = mnm_match.group(1)
                 while next_free_mnm in used_mnm_banks:
                     next_free_mnm += 1
                 if next_free_mnm >= 128: return False, "No MNM Banks"
@@ -207,7 +253,6 @@ class SetManager:
                 new_mnm_bank_str = self._format_bank(next_free_mnm)
                 new_seg_str = re.sub(r'(\bmnm\s+)[A-H]\d{2}\b', r'\g<1>' + new_mnm_bank_str, new_seg_str, 1)
                 used_mnm_banks.add(next_free_mnm)
-                bank_mappings.append({'type': 'mnm', 'source': original_mnm_bank, 'dest': new_mnm_bank_str})
             
             new_segments.append(new_seg_str)
 
@@ -215,29 +260,24 @@ class SetManager:
         dest_filepath = os.path.join(self.sets_dir, dest_filename)
         
         try:
-            # Read the entire destination content first
             dest_content = ""
             if os.path.exists(dest_filepath):
                 with open(dest_filepath, 'r') as f:
                     dest_content = f.read()
 
-            # Ensure the existing content ends with a newline and semicolon for clean appending
             dest_content = dest_content.strip()
             if dest_content and not dest_content.endswith(';'):
                 dest_content += ';'
             
-            # Join the new segments and append
             new_part = ";\n".join(new_segments)
             
-            # Combine old and new content
             final_content = dest_content + "\n" + new_part + ";\n" if dest_content else new_part + ";\n"
 
-            # Write the full, corrected content back to the file
             with open(dest_filepath, 'w') as f:
                 f.write(final_content)
             
-            logger.info(f"Successfully copied track '{track_name_to_copy}' to '{dest_filename}'")
-            return True, bank_mappings
+            logger.info(f"Successfully committed copy of track '{track_name_to_copy}' to '{dest_filename}'")
+            return True, "Success"
         except Exception as e:
             logger.error(f"Failed to write copied track to '{dest_filename}': {e}", exc_info=True)
             return False, "File Write Err"
