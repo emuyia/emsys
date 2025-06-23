@@ -68,7 +68,7 @@ class SetListScreen(BaseScreen):
         if self.awaiting_delete_confirm and self.delete_target_filename:
             target_name_only = self.delete_target_filename.replace(config.MSET_FILE_EXTENSION, "")
             line1 = f"Del {target_name_only[:config.SCREEN_LINE_1_MAX_CHARS-4]}?" # e.g., "Del setname?"
-            line2 = "P6:Yes" # Shift + Pad 6 (SHIFT_PAD_5_CC)
+            line2 = "P5:Confirm" # Shift + Pad 5 (SHIFT_PAD_5_CC)
         
         elif self.browsing_mode == "base_names":
             if not self.base_names or self.current_base_name_index == -1:
