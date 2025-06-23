@@ -5,7 +5,6 @@ import logging
 logger = logging.getLogger(__name__)
 
 # --- Constants ---
-PORT_KEYWORD = 'pisound'
 SYSEX_HEADER = [0x00, 0x20, 0x3c, 0x03, 0x00]
 CMD_SET_STATUS = 0x71
 CMD_REQUEST_STATUS = 0x70
@@ -36,8 +35,8 @@ def get_kit_map():
     Returns a dictionary like {'A01': 7, 'A02': 7, ...} or None on failure.
     """
     kit_map = {}
-    in_port_name = _find_midi_port(PORT_KEYWORD, 'input')
-    out_port_name = _find_midi_port(PORT_KEYWORD, 'output')
+    in_port_name = _find_midi_port('pisound', 'input')
+    out_port_name = _find_midi_port('MegaCMD', 'output')
 
     if not in_port_name or not out_port_name:
         logger.error("Could not find required MIDI ports for kit scan.")
