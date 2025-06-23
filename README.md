@@ -17,7 +17,7 @@ cd emsys
 
 - `em_clock.py` creates the central realtime MIDI clock.
 - `em_midisetup.py` maintains all necessary virtual MIDI connections.
-- `em_pd_controller.py` manages 'em' apps (emsys, embliss). The emsys Pd patch is run in CLI mode, and allows management the patch via a MiniLab 3 MIDI controller (Shift + Tap + Yes/No to start or stop the patch, at any time). You may also launch the set manager program, embliss (Shift + Tap + Pad 7).
+- `em_pd_controller.py` allows for managing apps (such as emsys) using the MiniLab 3 MIDI controller as an interface.
 
 Set up the Python environment:
 ```
@@ -47,8 +47,7 @@ If you intend to run emsys from boot on a Linux device, it is recommended to all
 ```
 sudo systemctl daemon-reload
 sudo systemctl enable serv/em_pd_controller.service serv/em_clock.service serv/em_midisetup.service
-sudo systemctl enable serv/em_clock.service
-sudo systemctl enable serv/em_midisetup.service
+sudo systemctl start em_pd_controller em_clock em_midisetup
 ```
 
 #### boot.conf
@@ -56,10 +55,10 @@ sudo systemctl enable serv/em_midisetup.service
 1. Rename or copy `serv/boot.conf.example` to `serv/boot.conf`.
 2. Rename or copy `sets/init.mset.example` to `sets/init.mset`.
 
-Optional: Change `env.defaults.dev` to `1` if you intend to use emsys with plugdata. This tells emsys to assume that all connected MIDI devices are on Port 1 (this can be adjusted later).
+Optional: Changing `env.defaults.dev` to `1` tells emsys to assume that all connected MIDI devices are on Port 1 (for compatibility with some versions of plugdata).
 
 #### Running emsys
-`main.pd` is the entry point for emsys. It can be run in plugdata or Pure Data on macOS and Linux, however it is primarily intended for a headless Linux system running Pure Data in CLI, such as a Raspberry Pi.
+`main.pd` is the entry point for emsys. It is primarily intended for a headless Linux system running Pure Data in CLI, such as a Raspberry Pi, but can be run on any OS (provided you can perform virtual MIDI routing).
 
 `serv/em_pd_controller.py` should be used to manage emsys on boot using the corresponding systemd service, `serv/em_pd_controller.service`. Otherwise, `main.pd` can be opened directly.
 
@@ -67,12 +66,13 @@ If `em_midisetup.py` is not in use, you will need to configure MIDI devices manu
 
 > Note: `main.pd` contains a rudimentary emulation of the ML3 controls & screens. It can be used for most functions but should not be relied on in production.
 
-## Usage
+## Usage (WIP)
 #### Managing emsys state
-- On boot, emsys will launch. It can be managed with the following inputs on the MiniLab:
-    - Shift+Tap+YES: Start emsys patch
+- On boot, em_pd_controller will launch. It can be used to boot available apps (emsys, embliss) with the following inputs on the MiniLab:
+    - Shift+Tap+YES: Start emsys
     - Shift+Tap+Pad7: Start embliss
     - Shift+Tap+NO: Stop all apps
     - Shift+Tap+Reload: Reboot system
-
-WIP
+- There are additional Pisound button controls for managing system state:
+    - Hold 1s: Reboot system
+    - Hold 3s: Shutdown system
