@@ -3,5 +3,5 @@
 *.pd linguist-language=Pure Data
 *.pd linguist-detectable=true
 *.sh linguist-detectable=false
-*.py linguist-detectable=false
+*.py linguist-detectable=true
 *.vbs linguist-detectable=false
