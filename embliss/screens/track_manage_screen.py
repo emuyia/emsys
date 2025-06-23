@@ -38,7 +38,7 @@ class TrackManageScreen(BaseScreen):
     def display(self):
         if not self.active: return
         
-        line1 = f"<{self.source_track_name}>"
+        line1 = f"<{self.source_track_name}> S+P4:Trsf"
         line2 = ""
 
         if self.delete_confirm_active:

@@ -3,6 +3,7 @@ import time
 from .base_screen import BaseScreen
 from .. import config
 from .copy_instructions_screen import CopyInstructionsScreen
+from .mnm_kit_scan_prompt_screen import MnmKitScanPromptScreen
 
 logger = logging.getLogger(__name__)
 
@@ -57,7 +58,7 @@ class CopyTrackScreen(BaseScreen):
                 line2 = "No sets found"
             else:
                 base_name = self.base_names[self.current_base_name_index]
-                line2 = f"To: {base_name}.. P6:Sel"
+                line2 = f"To: {base_name}.. P6:Y"
         
         elif self.browsing_mode == "versions":
             if self.current_version_index == -1:
@@ -65,7 +66,7 @@ class CopyTrackScreen(BaseScreen):
             else:
                 filename = self.versions_for_selected_base[self.current_version_index]
                 set_name = filename.replace(config.MSET_FILE_EXTENSION, "")
-                line2 = f"To: {set_name} P6:Copy"
+                line2 = f"To: {set_name} P6:Y"
 
         self.midi_handler.update_display(line1[:16], line2[:15])
         self.last_actual_display_time = time.time()
@@ -114,15 +115,32 @@ class CopyTrackScreen(BaseScreen):
         if success:
             # result is the list of mappings
             if result: # Check if there are any mappings to display
-                self.midi_handler.update_display("Copy Complete!", "..."); time.sleep(2)
-                self.screen_manager.change_screen(
-                    CopyInstructionsScreen(
-                        self.screen_manager,
-                        self.midi_handler,
-                        mapping_data=result,
-                        original_screen=self.original_screen
+                self.midi_handler.update_display("Copy Complete!", "..."); time.sleep(1)
+                
+                # --- MODIFICATION: Go to the new prompt screen ---
+                # Check if there are any 'mnm' mappings that require a scan
+                has_mnm_mappings = any(item['type'] == 'mnm' for item in result)
+
+                if has_mnm_mappings:
+                    # Go to the prompt screen to start the kit scan
+                    self.screen_manager.change_screen(
+                        MnmKitScanPromptScreen(
+                            self.screen_manager,
+                            self.midi_handler,
+                            mapping_data=result,
+                            original_screen=self.original_screen
+                        )
                     )
-                )
+                else:
+                    # If no mnm mappings, go directly to instructions (original behavior)
+                    self.screen_manager.change_screen(
+                        CopyInstructionsScreen(
+                            self.screen_manager,
+                            self.midi_handler,
+                            mapping_data=result,
+                            original_screen=self.original_screen
+                        )
+                    )
             else: # No mappings, just show success and return
                 self.midi_handler.update_display("Track Copied", "No banks mapped"); time.sleep(2)
                 self.original_screen.activate()

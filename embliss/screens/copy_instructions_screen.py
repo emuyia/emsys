@@ -7,12 +7,13 @@ logger = logging.getLogger(__name__)
 
 class CopyInstructionsScreen(BaseScreen):
     """A screen to display bank mapping instructions after a track copy."""
-    def __init__(self, screen_manager, midi_handler, mapping_data, original_screen):
+    def __init__(self, screen_manager, midi_handler, mapping_data, original_screen, mnm_kit_map=None):
         super().__init__(screen_manager, midi_handler)
         # Sort the data: md first, then mnm
         mapping_data.sort(key=lambda x: x['type'])
         self.mapping_data = mapping_data
         self.original_screen = original_screen
+        self.mnm_kit_map = mnm_kit_map or {} # Store the kit map
         self.current_index = 0
         self.display_update_pending = False
         self.last_actual_display_time = 0
@@ -41,7 +42,20 @@ class CopyInstructionsScreen(BaseScreen):
             current_in_type = sum(1 for i in self.mapping_data[:self.current_index + 1] if i['type'] == current_type)
 
             line1 = f"transfer {current_type} {current_in_type}/{total_for_type}:"
-            line2 = f"{item['source']}->{item['dest']}"
+            
+            # --- MODIFIED SECTION ---
+            # If the transfer is for the Monomachine and we have a kit map,
+            # look up the destination kit and format the string accordingly.
+            if current_type == 'mnm' and self.mnm_kit_map:
+                dest_pattern = item['dest']
+                # Use .get() for a safe lookup, providing '???' if not found.
+                kit_number = self.mnm_kit_map.get(dest_pattern, '???')
+                # Format the kit number, handling the case where it might be a string '???'
+                kit_str = f"{kit_number:03d}" if isinstance(kit_number, int) else kit_number
+                line2 = f"{item['source']}->{item['dest']}/k{kit_str}"
+            else:
+                # Fallback to the original format for 'md' or if no kit map exists
+                line2 = f"{item['source']}->{item['dest']}"
 
         self.midi_handler.update_display(line1[:16], line2[:15])
         self.last_actual_display_time = time.time()
