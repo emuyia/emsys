@@ -3,7 +3,7 @@ import time
 from .base_screen import BaseScreen
 from .. import config
 from .copy_instructions_screen import CopyInstructionsScreen
-from .connect_mnm_to_embliss_screen import ConnectMnmToEmblissScreen
+from .mnm_kit_scan_prompt_screen import MnmKitScanPromptScreen
 
 logger = logging.getLogger(__name__)
 
@@ -131,8 +131,8 @@ class CopyTrackScreen(BaseScreen):
             has_mnm_mappings = any(item['type'] == 'mnm' for item in result)
 
             if has_mnm_mappings:
-                # Go to the prompt screen to connect to embliss first
-                self.screen_manager.change_screen(ConnectMnmToEmblissScreen(**plan_details))
+                # Go to the prompt screen to start the kit scan
+                self.screen_manager.change_screen(MnmKitScanPromptScreen(**plan_details))
             else:
                 # If no mnm mappings, go directly to instructions
                 self.screen_manager.change_screen(CopyInstructionsScreen(**plan_details, mnm_kit_map=None))
