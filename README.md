@@ -17,7 +17,7 @@ cd emsys
 
 - `em_clock.py` creates the central realtime MIDI clock.
 - `em_midisetup.py` maintains all necessary virtual MIDI connections.
-- `em_pd_controller.py` starts the emsys Pd patch in CLI mode, and allows management the patch via a MiniLab 3 MIDI controller (Shift + Tap + Yes/No to start or stop the patch, at any time).
+- `em_pd_controller.py` starts the emsys Pd patch in CLI mode, and allows management the patch via a MiniLab 3 MIDI controller (Shift + Tap + Yes/No to start or stop the patch, at any time). You may also launch the set manager program, embliss, with Shift + Tap + Pad 7.
 
 Set up the Python environment:
 ```
