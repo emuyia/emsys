@@ -198,6 +198,7 @@ class SetManager:
                 if next_free_md >= 128: return False, "No MD Banks"
                 
                 new_md_bank_str = self._format_bank(next_free_md)
+                logger.info(f"MD bank mapping: {original_md_bank} -> {new_md_bank_str}") # DEBUG LOGGING
                 used_md_banks.add(next_free_md) # Add to used banks for this dry run
                 bank_mappings.append({'type': 'md', 'source': original_md_bank, 'dest': new_md_bank_str})
 
@@ -209,6 +210,7 @@ class SetManager:
                 if next_free_mnm >= 128: return False, "No MNM Banks"
 
                 new_mnm_bank_str = self._format_bank(next_free_mnm)
+                logger.info(f"MNM bank mapping: {original_mnm_bank} -> {new_mnm_bank_str}") # DEBUG LOGGING
                 used_mnm_banks.add(next_free_mnm) # Add to used banks for this dry run
                 bank_mappings.append({'type': 'mnm', 'source': original_mnm_bank, 'dest': new_mnm_bank_str})
         

@@ -36,7 +36,7 @@ def get_kit_map():
     """
     kit_map = {}
     in_port_name = _find_midi_port('pisound', 'input')
-    out_port_name = _find_midi_port('MegaCMD', 'output')
+    out_port_name = _find_midi_port('pisound', 'output')
 
     if not in_port_name or not out_port_name:
         logger.error("Could not find required MIDI ports for kit scan.")
@@ -67,6 +67,7 @@ def get_kit_map():
                     if msg and msg.type == 'sysex' and msg.data[0:7] == tuple(SYSEX_HEADER + [CMD_STATUS_RESPONSE, PARAM_KIT]):
                         kit_number = msg.data[7] + 1
                         pattern_name = _pattern_index_to_name(i)
+                        logger.info(f"Mapped pattern {pattern_name} to kit {kit_number}") # DEBUG LOGGING
                         kit_map[pattern_name] = kit_number
                         response_found = True
                         break # Exit the while loop
