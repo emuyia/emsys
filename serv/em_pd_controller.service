@@ -12,7 +12,6 @@ StandardError=inherit
 Restart=always
 
 [Install]
-WantedBy=default.target
+WantedBy=multi-user.target
 
-# ln -s /home/patch/repos/emsys/serv/em_pd_controller.service /home/patch/.config/systemd/user/em_pd_controller.service
-# systemctl --user daemon-reload && systemctl --user enable em_pd_controller.service
+# sudo systemctl daemon-reload && sudo systemctl enable /home/patch/repos/emsys/serv/em_pd_controller.service

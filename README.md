@@ -45,14 +45,10 @@ If you intend to run emsys from boot on a Linux device, it is recommended to all
 1. First edit the `.service` files in `serv` so that `WorkingDirectory` and `ExecStart` have correct paths.
 2. Then run:
 ```
-# Reload systemctl, then enable services
-systemctl --user daemon-reload
-systemctl --user enable serv/em_clock.service
-systemctl --user enable serv/em_midisetup.service
-
-# For the Pd controller we need broader permissions (e.g., for disk writes):
 sudo systemctl daemon-reload
-sudo systemctl enable serv/em_pd_controller.service
+sudo systemctl enable serv/em_pd_controller.service serv/em_clock.service serv/em_midisetup.service
+sudo systemctl enable serv/em_clock.service
+sudo systemctl enable serv/em_midisetup.service
 ```
 
 #### boot.conf
