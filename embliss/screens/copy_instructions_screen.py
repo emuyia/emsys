@@ -15,6 +15,24 @@ class CopyInstructionsScreen(BaseScreen):
         self.mnm_kit_map = mnm_kit_map or {}
         self.current_index = 0
         
+        # --- NEW: Generate intelligent kit suggestions ---
+        self.suggested_mnm_kits = {}
+        if self.mnm_kit_map:
+            explicitly_used_kits = set(self.mnm_kit_map.values())
+            mnm_dest_patterns = [item['dest'] for item in self.mapping_data if item['type'] == 'mnm']
+            
+            next_free_kit = 1
+            for dest_pattern in mnm_dest_patterns:
+                while next_free_kit in explicitly_used_kits:
+                    next_free_kit += 1
+                
+                if next_free_kit <= 128:
+                    self.suggested_mnm_kits[dest_pattern] = next_free_kit
+                    explicitly_used_kits.add(next_free_kit) # Reserve for next item in this plan
+                else:
+                    self.suggested_mnm_kits[dest_pattern] = '???' # No free kits
+        # --- END NEW ---
+
         # Store the final copy plan details
         self.source_filename = source_filename
         self.track_name_to_copy = track_name_to_copy
@@ -45,7 +63,7 @@ class CopyInstructionsScreen(BaseScreen):
             
             if current_type == 'mnm' and self.mnm_kit_map:
                 dest_pattern = item['dest']
-                kit_number = self.mnm_kit_map.get(dest_pattern, '???')
+                kit_number = self.suggested_mnm_kits.get(dest_pattern, '???') # Use suggested kit
                 kit_str = f"{kit_number:03d}" if isinstance(kit_number, int) else kit_number
                 line2 = f"{item['source']}>{item['dest']}/k{kit_str}"
             else:
